@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ben Adovasio</title>
+  <meta name="description" content="Landing page for Benjamin Adovasio's homelab services." />
+  <meta property="og:title" content="Ben Adovasio" />
+  <meta property="og:description" content="Quick links to self‑hosted services and tools." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23212529'/><text x='50' y='58' font-size='52' text-anchor='middle' fill='%23ffffff' font-family='Arial, Helvetica, sans-serif'>B</text></svg>">
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg2: #111827;
+      --card: #111827;
+      --muted: #94a3b8;
+      --text: #e5e7eb;
+      --accent: #60a5fa;
+      --accent-2: #34d399;
+      --ring: #1f2937;
+      --radius: 16px;
+    }
+    :root.light {
+      --bg: #f8fafc;
+      --bg2: #e2e8f0;
+      --card: #ffffff;
+      --muted: #475569;
+      --text: #0f172a;
+      --accent: #2563eb;
+      --accent-2: #059669;
+      --ring: #e2e8f0;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font: 16px/1.45 ui-sans-serif, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      /* Subtle gradient background (your request) */
+      background:
+        radial-gradient(900px 700px at 80% -10%, rgba(96,165,250,.12), transparent),
+        radial-gradient(800px 600px at -8% 28%, rgba(52,211,153,.10), transparent),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 32px 20px 56px; }
+    header { display:flex; align-items:center; gap:16px; margin-bottom: 24px; }
+    .brand {
+      width:52px; height:52px; border-radius:14px; background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      display:grid; place-items:center; color:white; font-weight:800; font-size: 22px; letter-spacing:.5px; box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    h1 { font-size: clamp(22px, 3vw, 30px); margin: 0; }
+    .sub { color: var(--muted); margin-top: 4px; font-size: 14px; }
+    .header-actions { margin-left:auto; display:flex; gap: 8px; }
+    button.icon {
+      border:1px solid var(--ring); background: color-mix(in oklab, var(--card), black 6%);
+      color: var(--text); border-radius: 12px; padding: 10px; cursor: pointer;
+    }
+    button.icon:hover { filter: brightness(1.08); }
+    .search {
+      position: relative; margin: 14px 0 22px;
+    }
+    .search input{
+      width:100%; padding: 14px 44px; border-radius: 14px; border:1px solid var(--ring); background: var(--card);
+      color: var(--text); outline: none; box-shadow: 0 8px 30px rgba(0,0,0,.20);
+    }
+    .search svg{ position:absolute; left: 12px; top: 50%; transform: translateY(-50%); opacity:.7 }
+
+    .grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:16px; }
+    .card {
+      border: 1px solid var(--ring); background: color-mix(in oklab, var(--card), black 4%);
+      border-radius: var(--radius); padding:16px; display:flex; gap:12px; align-items:flex-start; transition: transform .15s ease, box-shadow .15s ease, border-color .2s ease;
+    }
+    .card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,.25); border-color: color-mix(in oklab, var(--ring), var(--accent) 40%); }
+    .card .icon {
+      width: 38px; height:38px; border-radius: 12px; display:grid; place-items:center; background: linear-gradient(135deg, color-mix(in oklab, var(--accent), white 10%), color-mix(in oklab, var(--accent-2), white 10%));
+      color: white; flex: 0 0 auto;
+    }
+    .card h3 { margin: 0 0 6px; font-size: 16px; }
+    .card p { margin: 0 0 10px; color: var(--muted); font-size: 14px; min-height: 38px; }
+    .meta { display:flex; gap:8px; align-items:center; flex-wrap: wrap; }
+    .tag { font-size: 12px; color: var(--text); background: color-mix(in oklab, var(--card), white 6%); border:1px solid var(--ring); padding: 6px 8px; border-radius: 999px; }
+    .visit { margin-left:auto; text-decoration:none; font-weight: 600; font-size: 13px; color: var(--accent); }
+    .visit:hover { text-decoration: underline; }
+
+    .section { margin-top: 30px; }
+    .section h2{ font-size: 14px; color: var(--muted); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 10px; }
+
+    footer { margin-top: 36px; color: var(--muted); font-size: 13px; display:flex; gap:10px; align-items:center; justify-content: space-between; }
+    .status-dot { width:8px; height:8px; border-radius: 999px; background: #9ca3af; display:inline-block; margin-right:6px; }
+    .status-up { background: #10b981; }
+    .status-down { background: #ef4444; }
+
+    .kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; border:1px solid var(--ring); background: color-mix(in oklab, var(--card), black 6%); padding: 2px 6px; border-radius: 6px; }
+
+    @media (prefers-color-scheme: light){ :root:not(.force) { filter:none; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand" aria-hidden="true">B</div>
+      <div>
+        <h1>Ben Adovasio</h1>
+        <div class="sub">Quick links to self-hosted services • <span id="count"></span> endpoints</div>
+      </div>
+      <div class="header-actions">
+        <button class="icon" title="Toggle theme" id="themeToggle" aria-label="Toggle theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon" title="Edit JSON" id="editBtn" aria-label="Edit services JSON">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="filter" type="search" placeholder="Filter services…  (try: cloud, print, grafana, vpn)" autocomplete="off" />
+    </div>
+
+    <!-- NEW: Statuspage.io summary viewer (keeps prior layout intact) -->
+    <section class="section" id="status">
+      <h2>Status</h2>
+      <div class="grid" id="grid-status">
+        <div class="card" id="overall-card">
+          <div class="icon" aria-hidden="true">⚡</div>
+          <div>
+            <h3 id="overall-text">Overall Status</h3>
+            <p id="overall-desc" class="muted">Loading from Statuspage…</p>
+            <div class="meta">
+              <span class="tag" id="incident-count">Incidents: 0</span>
+              <span class="tag" id="maint-count">Maintenances: 0</span>
+            </div>
+          </div>
+          <span id="overall-indicator" class="visit" style="margin-left:auto;">OK</span>
+        </div>
+        <div id="status-components" class="grid" style="grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap:16px; width:100%"></div>
+      </div>
+    </section>
+
+    <section class="section" id="core">
+      <h2>Core</h2>
+      <div class="grid" id="grid-core"></div>
+    </section>
+
+    <section class="section" id="infrastructure">
+      <h2>Infrastructure</h2>
+      <div class="grid" id="grid-infra"></div>
+    </section>
+
+    <section class="section" id="observability">
+      <h2>Observability</h2>
+      <div class="grid" id="grid-obs"></div>
+    </section>
+
+    <section class="section" id="tools">
+      <h2>Tools</h2>
+      <div class="grid" id="grid-tools"></div>
+    </section>
+
+    <footer>
+      <div>Tip: press <span class="kbd">/</span> to focus search, <span class="kbd">t</span> to toggle theme.</div>
+      <div><span class="status-dot status-up"></span><span id="statusHint">Static page — status badges optional</span></div>
+    </footer>
+  </div>
+
+  <script>
+    // ---- Configuration (same as "before") ----
+    const SERVICES = {
+      core: [
+        { name: "VPN Portal", url: "https://vpn-portal.adovasio.com", desc: "VPN Access Portal", icon: "shield", tags: ["public"] },
+        { name: "Smart Home", url: "https://smart.adovasio.com", desc: "Home Assistant", icon: "home", tags: ["public"] },
+        { name: "Print", url: "https://print.adovasio.com", desc: "PaperCut", icon: "printer", tags: ["public"] },
+        { name: "Vault", url: "http://vault.adovasio.local", desc: "Bitwarden (Local Only)", icon: "lock", tags: ["lan-only"] },
+        { name: "Cloud", url: "https://cloud.adovasio.com", desc: "Nextcloud", icon: "cloud", tags: ["public"] },
+        { name: "Status", url: "https://adovasio.statuspage.io", desc: "Service Status Page", icon: "heartbeat", tags: ["external"] }
+      ],
+      infra: [],
+      observability: [],
+      tools: []
+    };
+
+    // Statuspage config (you gave me the page id)
+    const STATUSPAGE_ID = 'qzblys3lm8jb';
+
+    // Persistable JSON editor (simple prompt)
+    const editBtn = document.getElementById('editBtn');
+    editBtn.addEventListener('click', () => {
+      const current = JSON.stringify(SERVICES, null, 2);
+      const updated = prompt('Edit SERVICES JSON and click OK to apply (changes not saved server-side):', current);
+      if (!updated) return;
+      try {
+        const next = JSON.parse(updated);
+        window.__services = next; // store override until reload
+        render();
+      } catch (e){ alert('Invalid JSON: ' + e.message); }
+    });
+
+    // Theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const setTheme = (mode) => {
+      document.documentElement.classList.toggle('light', mode === 'light');
+      document.documentElement.classList.toggle('force', true);
+      localStorage.setItem('theme', mode);
+    }
+    themeToggle.addEventListener('click', () => {
+      const next = (localStorage.getItem('theme') || 'dark') === 'dark' ? 'light' : 'dark';
+      setTheme(next);
+    });
+    document.addEventListener('keydown', (e)=>{
+      if (e.key.toLowerCase() === 't') themeToggle.click();
+      if (e.key === '/') { e.preventDefault(); document.getElementById('filter').focus(); }
+    });
+    setTheme(localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches ? 'light':'dark'));
+
+    // Icons (tiny inline SVGs)
+    const ICONS = {
+      cloud: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19H7a5 5 0 1 1 2-9.584 6 6 0 0 1 11 3.084A4 4 0 0 1 17.5 19Z"/></svg>',
+      printer: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a3 3 0 0 1 3-3h14a3 3 0 0 1 3 3v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>',
+      mail: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="m22 6-10 7L2 6"/></svg>',
+      home: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 10 9-7 9 7"/><path d="M9 22V12h6v10"/></svg>',
+      server: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/><path d="M7 8h.01M7 18h.01"/></svg>',
+      shield: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+      switch: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10M17 7v10M3 12h18"/></svg>',
+      camera: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l2-3h6l2 3h3a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+      chart: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 13v5M12 9v9M17 5v13"/></svg>',
+      heartbeat: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 7 4-14 3 7h4"/></svg>',
+      github: '<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .7 12.4c0 5.2 3.4 9.6 8.2 11.1.6.1.8-.3.8-.6v-2c-3.3.7-4-1.4-4-1.4-.5-1.3-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.9 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.4-5.5-6.1 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.6.1-3.3 0 0 1-.3 3.3 1.2a11.3 11.3 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 3 .1 3.3.8.8 1.2 1.9 1.2 3.2 0 4.7-2.9 5.8-5.6 6.1.4.3.7 1 .7 2v3c0 .3.2.7.8.6 4.7-1.5 8.2-5.9 8.2-11.1A11.5 11.5 0 0 0 12 .5Z"/></svg>',
+      db: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v6c0 1.7 4 3 9 3s9-1.3 9-3V5"/><path d="M3 11v6c0 1.7 4 3 9 3s9-1.3 9-3v-6"/></svg>',
+      proxmox: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 3 7 9-7 9"/><path d="m21 3-7 9 7 9"/></svg>',
+      docs: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg>',
+      lock: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'
+    };
+
+    const el = (tag, cls) => { const e=document.createElement(tag); if(cls) e.className=cls; return e; };
+
+    function card(service){
+      const a = el('a', 'card'); a.href = service.url; a.target = '_blank'; a.rel = 'noopener';
+      const ico = el('div', 'icon'); ico.innerHTML = ICONS[service.icon] || ICONS.home; a.appendChild(ico);
+      const wrap = el('div');
+      const h3 = el('h3'); h3.textContent = service.name; wrap.appendChild(h3);
+      const p = el('p'); p.textContent = service.desc || ''; wrap.appendChild(p);
+      const meta = el('div', 'meta');
+      (service.tags||[]).forEach(t => { const span = el('span', 'tag'); span.textContent = t; meta.appendChild(span); });
+      const visit = el('span'); visit.innerHTML = 'Open →'; visit.className = 'visit'; meta.appendChild(visit);
+      wrap.appendChild(meta);
+      a.appendChild(wrap);
+      return a;
+    }
+
+    function render(){
+      const data = window.__services || SERVICES;
+      const mapping = [
+        ['core','grid-core', data.core],
+        ['infrastructure','grid-infra', data.infra],
+        ['observability','grid-obs', data.observability],
+        ['tools','grid-tools', data.tools]
+      ];
+      let total = 0;
+      mapping.forEach(([sectionId, gridId, list]) => {
+        const section = document.getElementById(sectionId);
+        const root = document.getElementById(gridId);
+        root.innerHTML = '';
+        (list||[]).forEach(s => { total++; root.appendChild(card(s)); });
+        // Hide section entirely if empty
+        section.style.display = (list && list.length) ? '' : 'none';
+      });
+      document.getElementById('count').textContent = total;
+      applyFilter(document.getElementById('filter').value);
+    }
+
+    function applyFilter(q){
+      q = (q || '').trim().toLowerCase();
+      const sectionMaps = [
+        ['core','grid-core'],
+        ['infrastructure','grid-infra'],
+        ['observability','grid-obs'],
+        ['tools','grid-tools']
+      ];
+      sectionMaps.forEach(([sectionId, gridId]) => {
+        const section = document.getElementById(sectionId);
+        const cards = document.querySelectorAll(`#${gridId} .card`);
+        let visible = 0;
+        cards.forEach(c => {
+          const text = c.innerText.toLowerCase();
+          const match = text.includes(q);
+          c.style.display = match ? '' : 'none';
+          if (match) visible++;
+        });
+        section.style.display = visible ? '' : 'none';
+      });
+    }
+
+    document.getElementById('filter').addEventListener('input', (e)=> applyFilter(e.target.value));
+
+    // ==== Statuspage viewer ====
+    async function fetchStatuspage(){
+      if(!STATUSPAGE_ID) return null;
+      async function get(path){ const r=await fetch(`https://${STATUSPAGE_ID}.statuspage.io/api/v2/${path}`, {cache:'no-store'}); if(!r.ok) throw new Error(path+': '+r.status); return r.json(); }
+      try{
+        const [summary, components, incidents, upcoming] = await Promise.all([
+          get('summary.json'),
+          get('components.json'),
+          get('incidents/unresolved.json'),
+          get('scheduled-maintenances/upcoming.json')
+        ]);
+        return { summary, components, incidents, upcoming };
+      }catch(e){ console.warn('Statuspage fetch failed:', e.message); return null; }
+    }
+
+    function renderStatuspanel(sp){
+      const text = document.getElementById('overall-text');
+      const desc = document.getElementById('overall-desc');
+      const ind = document.getElementById('overall-indicator');
+      const incTag = document.getElementById('incident-count');
+      const mTag = document.getElementById('maint-count');
+      const compRoot = document.getElementById('status-components');
+      if(!sp){ desc.textContent = 'Status unavailable.'; return; }
+      const indicator = sp.summary?.status?.indicator || 'none';
+      const human = sp.summary?.status?.description || 'All Systems Operational';
+      const outcome = indicator==='none'?'OK':indicator.toUpperCase();
+      text.textContent = 'Overall Status';
+      desc.textContent = human;
+      ind.textContent = outcome;
+      ind.style.color = (indicator==='none')? '#10b981' : (indicator==='minor' ? '#f59e0b' : '#ef4444');
+      incTag.textContent = `Incidents: ${(sp.incidents||[]).length}`;
+      mTag.textContent = `Maintenances: ${(sp.upcoming||[]).length}`;
+      // components
+      compRoot.innerHTML = '';
+      (sp.components||[]).forEach(c => {
+        const div = document.createElement('div');
+        div.className = 'card';
+        const ico = document.createElement('div'); ico.className='icon'; ico.textContent='🧩';
+        const wrap = document.createElement('div');
+        const h3 = document.createElement('h3'); h3.textContent=c.name; wrap.appendChild(h3);
+        const p = document.createElement('p'); p.textContent=(c.description||''); wrap.appendChild(p);
+        const meta = document.createElement('div'); meta.className='meta';
+        const st = document.createElement('span'); st.className='tag'; st.textContent=c.status.replace('_',' ');
+        meta.appendChild(st); wrap.appendChild(meta);
+        div.appendChild(ico); div.appendChild(wrap);
+        const right = document.createElement('span'); right.className='visit'; right.textContent=c.status.toUpperCase(); div.appendChild(right);
+        compRoot.appendChild(div);
+      });
+    }
+
+    async function hydrateStatus(){
+      const sp = await fetchStatuspage();
+      renderStatuspanel(sp);
+    }
+
+    // Initial render
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => { render(); hydrateStatus(); });
+    } else { render(); hydrateStatus(); }
+
+    // --- Tests ---
+    (function tests(){
+      try {
+        console.assert(typeof render === 'function', 'render() should be defined');
+        console.assert(document.querySelectorAll('#grid-core .card, #grid-infra .card, #grid-obs .card, #grid-tools .card').length >= 1, 'service cards should render');
+        console.assert(document.getElementById('overall-card'), 'status overall card present');
+      } catch(e){ console.warn('Tests issue:', e); }
+    })();
+  </script>
+</body>
+</html>
