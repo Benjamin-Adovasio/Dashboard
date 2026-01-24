@@ -1,55 +1,138 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Adovasio Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+:root {
+  --bg: #0b1220;
+  --panel: #111827;
+  --card: #0f172a;
+  --text: #e5e7eb;
+  --muted: #94a3b8;
+  --accent: #60a5fa;
+  --accent2: #34d399;
+  --radius: 18px;
+  --ease: cubic-bezier(.22,1,.36,1);
+}
 
-  <meta name="description" content="Private infrastructure dashboard for Adovasio services" />
+* { box-sizing: border-box; }
 
-  <link rel="stylesheet" href="/assets/css/main.css?v=1">
-  <link rel="stylesheet" href="/assets/css/animations.css?v=1">
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont;
+}
 
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%230b1220'/><text x='50' y='60' text-anchor='middle' font-size='54' fill='white' font-family='Arial'>A</text></svg>">
-</head>
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(70% 60% at 80% 0%, rgba(96,165,250,.12), transparent 40%),
+    radial-gradient(60% 55% at 0% 30%, rgba(52,211,153,.10), transparent 45%);
+  z-index: -1;
+  transform: translateY(var(--bg-shift, 0));
+}
 
-<body>
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+}
 
-<div class="container">
+header {
+  margin-bottom: 48px;
+}
 
-  <header data-animate>
-    <div>
-      <h1>Adovasio</h1>
-      <p class="subtitle">
-        Infrastructure Control Plane · <span id="count">0</span> services
-      </p>
-    </div>
-  </header>
+h1 {
+  font-size: 34px;
+  margin: 0;
+}
 
-  <section class="section" data-animate>
-    <h2>Core Services</h2>
-    <div class="grid" id="grid-core"></div>
-  </section>
+.subtitle {
+  color: var(--muted);
+  margin-top: 6px;
+}
 
-  <section class="section" data-animate>
-    <h2>Infrastructure</h2>
-    <div class="grid" id="grid-infra"></div>
-  </section>
+.section {
+  margin-top: 48px;
+  position: relative;
+}
 
-  <section class="section" data-animate>
-    <h2>Observability</h2>
-    <div class="grid" id="grid-obs"></div>
-  </section>
+.section::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 0;
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  opacity: .6;
+}
 
-  <footer data-animate>
-    <span>© Benjamin Adovasio</span>
-    <span class="muted">Sophos-secured · Private network</span>
-  </footer>
+h2 {
+  font-size: 14px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
 
-</div>
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
 
-<script defer src="/assets/js/app.js?v=1"></script>
-<script defer src="/assets/js/animations.js?v=1"></script>
-</body>
-</html>
+.card {
+  background: linear-gradient(180deg, var(--card), #0b1220);
+  border-radius: var(--radius);
+  padding: 18px;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+  transition:
+    transform .35s var(--ease),
+    box-shadow .35s var(--ease);
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    600px circle at var(--x,50%) var(--y,50%),
+    rgba(96,165,250,.16),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity .3s;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 35px 90px rgba(0,0,0,.55);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.card p {
+  margin: 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+footer {
+  margin-top: 72px;
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 13px;
+}
