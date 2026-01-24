@@ -77,10 +77,20 @@ nav a:hover {
    ========================================================= */
 
 .hero {
-  height: 100vh;
   position: sticky;
   top: 0;
+  height: 100vh;
+
+  /* background stays here */
+  background:
+    radial-gradient(60% 40% at 50% 0%, rgba(37,99,235,.25), transparent 60%),
+    linear-gradient(var(--bg), #020617);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 
 .hero-inner {
   max-width: 900px;
