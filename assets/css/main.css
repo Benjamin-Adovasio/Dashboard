@@ -273,7 +273,8 @@ nav a:hover {
   }
 }
 
-/* SERVICES BAR */
+
+/* SERVICES BAR (hidden until scroll) */
 .services-bar {
   position: sticky;
   top: 56px;
@@ -281,6 +282,20 @@ nav a:hover {
   background: rgba(11,18,32,.75);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(255,255,255,.06);
+
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+
+  transition:
+    transform .45s cubic-bezier(.2,.6,.2,1),
+    opacity .35s ease;
+}
+
+.services-bar.visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .services-bar-inner {
