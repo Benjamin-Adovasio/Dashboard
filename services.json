@@ -1,0 +1,43 @@
+{
+  "public": [
+    {
+      "name": "Status",
+      "url": "https://adovasio.statuspage.io",
+      "desc": "Service status",
+      "icon": "heartbeat",
+      "tags": ["public"]
+    }
+  ],
+  "secure": [
+    {
+      "name": "VPN Portal",
+      "url": "https://vpn.adovasio.com:4445",
+      "desc": "Remote access",
+      "icon": "shield",
+      "tags": ["secure"]
+    },
+    {
+      "name": "Cloud",
+      "url": "https://cloud.adovasio.com",
+      "desc": "Nextcloud",
+      "icon": "cloud",
+      "tags": ["secure"]
+    },
+    {
+      "name": "Print",
+      "url": "https://print.adovasio.com",
+      "desc": "PaperCut",
+      "icon": "printer",
+      "tags": ["secure"]
+    }
+  ],
+  "infrastructure": [
+    {
+      "name": "SSO",
+      "url": "https://sso.adovasio.com",
+      "desc": "Authentication",
+      "icon": "lock",
+      "tags": ["infra"]
+    }
+  ]
+}
