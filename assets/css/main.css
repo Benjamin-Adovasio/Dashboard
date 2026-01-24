@@ -1,3 +1,7 @@
+/* =========================================================
+   ROOT THEME
+   ========================================================= */
+
 :root {
   --bg: #0b1220;
   --panel: #111827;
@@ -8,7 +12,13 @@
   --radius: 20px;
 }
 
-* { box-sizing: border-box; }
+/* =========================================================
+   BASE RESET
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+}
 
 html, body {
   margin: 0;
@@ -19,13 +29,16 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* HEADER */
+/* =========================================================
+   HEADER (Apple-style translucent)
+   ========================================================= */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 100;
   backdrop-filter: saturate(180%) blur(12px);
-  background: rgba(11,18,32,.7);
+  background: rgba(11, 18, 32, 0.72);
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 
@@ -41,6 +54,7 @@ html, body {
 .logo {
   font-weight: 600;
   font-size: 18px;
+  letter-spacing: -0.01em;
 }
 
 nav a {
@@ -48,16 +62,23 @@ nav a {
   text-decoration: none;
   margin-left: 24px;
   font-size: 14px;
-  opacity: .85;
+  opacity: 0.85;
 }
 
-nav a:hover { opacity: 1; }
+nav a:hover {
+  opacity: 1;
+}
 
-/* HERO */
+/* =========================================================
+   HERO SECTION
+   ========================================================= */
+
 .hero {
   min-height: 100vh;
   display: grid;
   place-items: center;
+  position: relative;
+  z-index: 1;
   background:
     radial-gradient(60% 40% at 50% 0%, rgba(37,99,235,.25), transparent 60%),
     linear-gradient(var(--bg), #020617);
@@ -73,7 +94,7 @@ nav a:hover { opacity: 1; }
   font-size: clamp(42px, 7vw, 84px);
   line-height: 1.05;
   margin-bottom: 24px;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .hero p {
@@ -83,6 +104,10 @@ nav a:hover { opacity: 1; }
   margin: 0 auto 40px;
 }
 
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
 .btn-primary {
   display: inline-block;
   background: var(--accent);
@@ -91,9 +116,49 @@ nav a:hover { opacity: 1; }
   border-radius: 999px;
   font-weight: 500;
   text-decoration: none;
+  transition: background .25s ease;
 }
 
-/* SECTIONS */
+.btn-primary:hover {
+  background: #1d4ed8;
+}
+
+/* =========================================================
+   SERVICES STAGE (Apple scroll narrative)
+   ========================================================= */
+
+.services-stage {
+  min-height: 120vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+  background:
+    radial-gradient(60% 40% at 50% 20%, rgba(37,99,235,.25), transparent 60%),
+    linear-gradient(#020617, var(--bg));
+}
+
+.stage-inner {
+  max-width: 1100px;
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.stage-inner h2 {
+  font-size: 48px;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.stage-sub {
+  color: var(--muted);
+  margin-bottom: 64px;
+}
+
+/* =========================================================
+   GENERIC CONTENT SECTIONS
+   ========================================================= */
+
 .content-section {
   padding: 120px 24px;
   max-width: 1100px;
@@ -111,6 +176,7 @@ nav a:hover { opacity: 1; }
 .section-header h2 {
   font-size: 40px;
   margin: 0 0 12px;
+  letter-spacing: -0.02em;
 }
 
 .section-header p {
@@ -118,13 +184,91 @@ nav a:hover { opacity: 1; }
   max-width: 520px;
 }
 
-/* GRID */
+/* =========================================================
+   GRID LAYOUTS
+   ========================================================= */
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
   gap: 24px;
 }
 
+.grid.large {
+  grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+}
+
+/* =========================================================
+   CARDS (Clickable, Apple-style depth)
+   ========================================================= */
+
 .card {
-  background: linear-gradient(180deg, rgba(255,255,255,.03), transparent);
-  border-radius: var(--radius
+  background: linear-gradient(180deg, rgba(255,255,255,.035), transparent);
+  border-radius: var(--radius);
+  cursor: pointer;
+  position: relative;
+  padding: 28px;
+  border: 1px solid rgba(255,255,255,.06);
+  box-shadow: 0 1px 0 rgba(255,255,255,.04) inset;
+  transition:
+    transform .4s cubic-bezier(.2,.6,.2,1),
+    box-shadow .4s cubic-bezier(.2,.6,.2,1);
+  transform-style: preserve-3d;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.card::after {
+  content: "Open →";
+  position: absolute;
+  bottom: 20px;
+  right: 24px;
+  font-size: 13px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  color: var(--accent);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02) perspective(800px);
+  box-shadow: 0 30px 60px rgba(0,0,0,.45);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+  padding: 48px 24px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* =========================================================
+   ACCESSIBILITY / MOTION SAFETY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
