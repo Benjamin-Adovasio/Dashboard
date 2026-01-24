@@ -1,43 +1,15 @@
 {
-  "public": [
-    {
-      "name": "Status",
-      "url": "https://adovasio.statuspage.io",
-      "desc": "Service status",
-      "icon": "heartbeat",
-      "tags": ["public"]
-    }
-  ],
-  "secure": [
-    {
-      "name": "VPN Portal",
-      "url": "https://vpn.adovasio.com:4445",
-      "desc": "Remote access",
-      "icon": "shield",
-      "tags": ["secure"]
-    },
-    {
-      "name": "Cloud",
-      "url": "https://cloud.adovasio.com",
-      "desc": "Nextcloud",
-      "icon": "cloud",
-      "tags": ["secure"]
-    },
-    {
-      "name": "Print",
-      "url": "https://print.adovasio.com",
-      "desc": "PaperCut",
-      "icon": "printer",
-      "tags": ["secure"]
-    }
+  "core": [
+    { "name": "VPN Portal", "url": "https://vpn.adovasio.com", "desc": "Secure remote access" },
+    { "name": "Nextcloud", "url": "https://cloud.adovasio.com", "desc": "Private cloud storage" },
+    { "name": "SSO", "url": "https://sso.adovasio.com", "desc": "Authentication gateway" },
+    { "name": "Print", "url": "https://print.adovasio.com", "desc": "PaperCut management" }
   ],
   "infrastructure": [
-    {
-      "name": "SSO",
-      "url": "https://sso.adovasio.com",
-      "desc": "Authentication",
-      "icon": "lock",
-      "tags": ["infra"]
-    }
+    { "name": "Firewall", "url": "#", "desc": "Sophos perimeter security" },
+    { "name": "Hypervisor", "url": "#", "desc": "Virtual machine cluster" }
+  ],
+  "observability": [
+    { "name": "Status", "url": "https://adovasio.statuspage.io", "desc": "Service health" }
   ]
 }
