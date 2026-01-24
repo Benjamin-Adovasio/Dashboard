@@ -110,9 +110,7 @@ nav a:hover {
   height: 100vh;
 
   /* background stays here */
-  background:
-    radial-gradient(60% 40% at 50% 0%, rgba(37,99,235,.25), transparent 60%),
-    linear-gradient(var(--bg), #020617);
+  background: transparent !important;
 
   display: flex;
   align-items: center;
@@ -175,9 +173,7 @@ nav a:hover {
   place-items: center;
   position: relative;
   z-index: 2;
-  background:
-    radial-gradient(60% 40% at 50% 20%, rgba(37,99,235,.28), transparent 60%),
-    linear-gradient(#020617, var(--bg));
+  background: transparent !important;
 }
 
 .stage-inner {
