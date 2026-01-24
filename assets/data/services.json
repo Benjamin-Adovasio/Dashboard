@@ -1,15 +1,32 @@
 {
   "core": [
-    { "name": "VPN Portal", "url": "https://vpn.adovasio.com", "desc": "Secure remote access" },
-    { "name": "Nextcloud", "url": "https://cloud.adovasio.com", "desc": "Private cloud storage" },
-    { "name": "SSO", "url": "https://sso.adovasio.com", "desc": "Authentication gateway" },
-    { "name": "Print", "url": "https://print.adovasio.com", "desc": "PaperCut management" }
-  ],
-  "infrastructure": [
-    { "name": "Firewall", "url": "#", "desc": "Sophos perimeter security" },
-    { "name": "Hypervisor", "url": "#", "desc": "Virtual machine cluster" }
-  ],
-  "observability": [
-    { "name": "Status", "url": "https://adovasio.statuspage.io", "desc": "Service health" }
+    {
+      "id": "vpn",
+      "name": "VPN Portal",
+      "desc": "Secure remote access to the Adovasio network",
+      "url": "https://vpn.adovasio.com",
+      "icon": "shield"
+    },
+    {
+      "id": "cloud",
+      "name": "Nextcloud",
+      "desc": "Private cloud storage and collaboration",
+      "url": "https://cloud.adovasio.com",
+      "icon": "cloud"
+    },
+    {
+      "id": "print",
+      "name": "Print",
+      "desc": "PaperCut print management",
+      "url": "https://print.adovasio.com",
+      "icon": "printer"
+    },
+    {
+      "id": "sso",
+      "name": "SSO",
+      "desc": "Single sign-on authentication gateway",
+      "url": "https://sso.adovasio.com",
+      "icon": "key"
+    }
   ]
 }
