@@ -2,14 +2,14 @@
   "core": [
     {
       "id": "vpn",
-      "name": "VPN Portal",
-      "desc": "Secure remote access to the Adovasio network",
-      "url": "https://vpn.adovasio.com",
+      "name": "Adovasio VPN",
+      "desc": "Secured with 2048-bit encryption",
+      "url": "https://vpn.adovasio.com:4445",
       "icon": "shield"
     },
     {
       "id": "cloud",
-      "name": "Nextcloud",
+      "name": "NextCloud",
       "desc": "Private cloud storage and collaboration",
       "url": "https://cloud.adovasio.com",
       "icon": "cloud"
@@ -17,14 +17,14 @@
     {
       "id": "print",
       "name": "Print",
-      "desc": "PaperCut print management",
+      "desc": "Remote and local printing",
       "url": "https://print.adovasio.com",
       "icon": "printer"
     },
     {
       "id": "sso",
-      "name": "SSO",
-      "desc": "Single sign-on authentication gateway",
+      "name": "Adovasio SSO",
+      "desc": "Single sign-on for all services",
       "url": "https://sso.adovasio.com",
       "icon": "key"
     }
