@@ -360,3 +360,46 @@ nav a:hover {
   max-width: 1100px;
   margin: 0 auto;
 }
+
+.section-chapter::before {
+  content: '';
+  position: absolute;
+  top: -120px;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+
+  background: radial-gradient(
+    60% 30% at 50% 100%,
+    rgba(255,255,255,0.05),
+    transparent 70%
+  );
+}
+
+
+
+.section-header {
+  margin-bottom: 64px;
+}
+
+.section-header h2 {
+  font-size: clamp(40px, 5vw, 56px);
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+}
+
+.section-header p {
+  font-size: 18px;
+  color: var(--muted);
+  max-width: 520px;
+}
+
+
+.section-chapter .card {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.01)
+  );
+}
