@@ -12,32 +12,40 @@ document.addEventListener('DOMContentLoaded', () => {
   const title = document.getElementById('hero-title');
   const sub   = document.getElementById('hero-sub');
 
-  const hasHero = hero && title && sub;
+  if (!hero || !title || !sub) return;
 
   /* ==========================
      HERO SCROLL CONFIG
      ========================== */
 
-  // Longer scroll range = more cinematic
-  const HERO_SCROLL_RANGE = window.innerHeight * 1.8;
+  // Total scroll distance for hero narrative
+  const HERO_SCROLL_RANGE = window.innerHeight * 3;
+
+  // When the hero starts exiting
+  const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.75;
+
+  // How long the exit takes
+  const HERO_EXIT_RANGE = window.innerHeight * 1;
 
   /* ==========================
      SCROLL HANDLER
      ========================== */
 
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
+  window.addEventListener(
+    'scroll',
+    () => {
+      const scrollY = window.scrollY;
 
-    /* ----------------------------------
-       HERO MORPH (Apple-style)
-       ---------------------------------- */
-    if (hasHero) {
+      /* ----------------------------------
+         PHASE 1 — HERO MORPH
+         ---------------------------------- */
+
       const raw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
 
-      // Cubic ease-out (slow → dramatic → settle)
+      // Apple-style easing (slow → dramatic → settle)
       const ease = 1 - Math.pow(1 - raw, 4);
 
-      // HERO container fade
+      // HERO fade
       hero.style.opacity = 1 - ease * 0.6;
 
       // TITLE: camera push + depth
@@ -50,14 +58,36 @@ document.addEventListener('DOMContentLoaded', () => {
       title.style.opacity = 1 - ease * 0.25;
       title.style.filter  = `blur(${ease * 3}px)`;
 
-      // SUBTITLE exits faster (supporting role)
+      // SUBTITLE exits faster
       sub.style.transform = `translateY(${ease * 110}px)`;
-      sub.style.opacity  = 1 - ease * 1.4;
-    }
-  }, { passive: true });
+      sub.style.opacity  = Math.max(1 - ease * 1.4, 0);
+
+      /* ----------------------------------
+         PHASE 2 — HERO EXIT (PUSHED AWAY)
+         ---------------------------------- */
+
+      if (scrollY > HERO_EXIT_START) {
+        const exitRaw = Math.min(
+          (scrollY - HERO_EXIT_START) / HERO_EXIT_RANGE,
+          1
+        );
+
+        // Strong but smooth exit
+        const exitEase = exitRaw * exitRaw;
+
+        hero.style.transform = `
+          translateY(${-exitEase * 100}vh)
+          scale(${1 - exitEase * 0.05})
+        `;
+      } else {
+        hero.style.transform = 'translateY(0)';
+      }
+    },
+    { passive: true }
+  );
 
   /* =========================================================
-     SERVICE CARD MORPHING (scroll-driven focus)
+     SERVICE CARD MORPHING (SCROLL FOCUS)
      ========================================================= */
 
   const serviceCards = document.querySelectorAll('.service-card');
@@ -81,5 +111,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     serviceCards.forEach(card => morphObserver.observe(card));
   }
-
 });
