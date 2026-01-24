@@ -8,6 +8,13 @@
       "icon": "shield"
     },
     {
+      "id": "sso",
+      "name": "Adovasio SSO",
+      "desc": "Single sign-on for all services",
+      "url": "https://sso.adovasio.com",
+      "icon": "key"
+    },
+    {
       "id": "cloud",
       "name": "NextCloud",
       "desc": "Private cloud storage and collaboration",
@@ -22,11 +29,18 @@
       "icon": "printer"
     },
     {
-      "id": "sso",
-      "name": "Adovasio SSO",
-      "desc": "Single sign-on for all services",
-      "url": "https://sso.adovasio.com",
-      "icon": "key"
+      "id": "git",
+      "name": "Adovasio Git",
+      "desc": "Adovasio Git servee",
+      "url": "https://git.adovasio.com",
+      "icon": "cloud"
+    }
+    {
+      "id": "photos",
+      "name": "Adovasio Photo Server",
+      "desc": "Photo backup server with AI recognition",
+      "url": "https://photos.adovasio.com",
+      "icon": "camera"
     }
   ]
 }
