@@ -16,3 +16,16 @@ document.addEventListener('scroll', () => {
   sub.style.transform = `translateY(${progress * 20}px)`;
   sub.style.opacity = 1 - progress;
 });
+
+const serviceCards = document.querySelectorAll('.service-card');
+
+const morphObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      serviceCards.forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+    }
+  });
+}, { threshold: 0.6 });
+
+serviceCards.forEach(c => morphObserver.observe(c));
