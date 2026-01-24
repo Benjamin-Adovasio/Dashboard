@@ -1,41 +1,60 @@
 /* =========================================================
-   HERO SCROLL MORPH (Apple-style, dramatic)
+   APPLE-STYLE HERO + SERVICE SCROLL ORCHESTRATION
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
-  const hero = document.getElementById('hero');
+
+  /* ==========================
+     HERO ELEMENTS
+     ========================== */
+
+  const hero  = document.getElementById('hero');
   const title = document.getElementById('hero-title');
-  const sub = document.getElementById('hero-sub');
+  const sub   = document.getElementById('hero-sub');
 
-  if (hero && title && sub) {
-    window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const vh = window.innerHeight;
+  const hasHero = hero && title && sub;
 
-      // Finish animation early (feels intentional)
-      const progress = Math.min(scrollY / (vh * 0.45), 1);
+  /* ==========================
+     HERO SCROLL CONFIG
+     ========================== */
 
-      // Cubic easing (Apple-like)
-      const ease = 1 - Math.pow(1 - progress, 3);
+  // Longer scroll range = more cinematic
+  const HERO_SCROLL_RANGE = window.innerHeight * 1.8;
+
+  /* ==========================
+     SCROLL HANDLER
+     ========================== */
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    /* ----------------------------------
+       HERO MORPH (Apple-style)
+       ---------------------------------- */
+    if (hasHero) {
+      const raw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
+
+      // Cubic ease-out (slow → dramatic → settle)
+      const ease = 1 - Math.pow(1 - raw, 4);
 
       // HERO container fade
-      hero.style.opacity = 1 - ease * 0.55;
+      hero.style.opacity = 1 - ease * 0.6;
 
-      // TITLE: camera-style movement
+      // TITLE: camera push + depth
       title.style.transform = `
-        translateY(${ease * 120}px)
+        translateY(${ease * 160}px)
         scale(${1.15 - ease * 0.35})
-        perspective(1000px)
-        translateZ(${ease * -180}px)
+        perspective(1200px)
+        translateZ(${ease * -220}px)
       `;
       title.style.opacity = 1 - ease * 0.25;
-      title.style.filter = `blur(${ease * 2.5}px)`;
+      title.style.filter  = `blur(${ease * 3}px)`;
 
-      // SUBTITLE exits faster
-      sub.style.transform = `translateY(${ease * 80}px)`;
-      sub.style.opacity = 1 - ease * 1.2;
-    });
-  }
+      // SUBTITLE exits faster (supporting role)
+      sub.style.transform = `translateY(${ease * 110}px)`;
+      sub.style.opacity  = 1 - ease * 1.4;
+    }
+  }, { passive: true });
 
   /* =========================================================
      SERVICE CARD MORPHING (scroll-driven focus)
@@ -62,4 +81,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     serviceCards.forEach(card => morphObserver.observe(card));
   }
+
 });

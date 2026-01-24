@@ -38,3 +38,5 @@ function renderServicesBar(services) {
     bar.appendChild(btn);
   });
 }
+
+
