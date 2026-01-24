@@ -328,3 +328,14 @@ nav a:hover {
   fill: none;
   stroke-width: 1.8;
 }
+
+.service-card {
+  opacity: 0.5;
+  transform: scale(0.95);
+  transition: all .6s cubic-bezier(.2,.6,.2,1);
+}
+
+.service-card.active {
+  opacity: 1;
+  transform: scale(1);
+}
