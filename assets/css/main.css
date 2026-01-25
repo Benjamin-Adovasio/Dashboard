@@ -522,3 +522,35 @@ nav a.nav-signup:hover {
 .tag.minor { background: rgba(245,158,11,.15); color: #f59e0b; }
 .tag.major { background: rgba(249,115,22,.15); color: #f97316; }
 .tag.critical { background: rgba(239,68,68,.15); color: #ef4444; }
+
+
+/* =========================================================
+   PLANNED MAINTENANCE (SVG ICON)
+   ========================================================= */
+
+#status-maintenance .card {
+  position: relative;
+  padding-left: 56px;
+  border-left: 3px solid #38bdf8;
+}
+
+#status-maintenance .card::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 22px;
+  width: 20px;
+  height: 20px;
+
+  background-color: #38bdf8;
+
+  mask: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>\
+<path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l2-3h6l2 3h3a2 2 0 0 1 2 2z'/>\
+<circle cx='12' cy='13' r='4'/>\
+</svg>");
+
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+}

@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStatusSummary();
   renderStatusComponents();
   renderIncidents();
+  renderPlannedMaintenance();
 
   const obsSection = document.getElementById('observability');
   const toggle = obsSection?.querySelector('.collapse-toggle');
@@ -133,3 +134,42 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+
+async function renderPlannedMaintenance() {
+  const upcoming = await fetchStatus(
+    'scheduled-maintenances/upcoming.json'
+  );
+
+  const active = await fetchStatus(
+    'scheduled-maintenances/active.json'
+  );
+
+  const el = document.getElementById('status-maintenance');
+  if (!el) return;
+
+  const all = [
+    ...(active.scheduled_maintenances || []),
+    ...(upcoming.scheduled_maintenances || [])
+  ];
+
+  if (all.length === 0) {
+    el.innerHTML = `
+      <div class="card">
+        <h3>No Planned Maintenance</h3>
+        <p>No scheduled or active maintenance windows.</p>
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML = all.map(m => `
+    <div class="card">
+      <h3>${m.name}</h3>
+      <p>
+        ${m.status.replace('_', ' ')} ·
+        ${new Date(m.scheduled_for).toLocaleString()}
+      </p>
+    </div>
+  `).join('');
+}
