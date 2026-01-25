@@ -403,3 +403,51 @@ nav a:hover {
     rgba(255,255,255,0.01)
   );
 }
+
+
+.signup-stage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.signup-inner {
+  max-width: 900px;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: none;
+}
+
+.signup-stage h2 {
+  font-size: clamp(42px, 6vw, 72px);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.signup-stage p {
+  color: var(--muted);
+  font-size: 20px;
+  max-width: 600px;
+  margin: 0 auto 40px;
+}
+
+.signup-btn {
+  display: inline-block;
+  padding: 18px 44px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #2563eb, #60a5fa);
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  text-decoration: none;
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 20px 50px rgba(37,99,235,0.35);
+}
