@@ -90,24 +90,44 @@
 </section>
 
 <section class="section-chapter infrastructure">
-<section id="observability" class="content-section alt">
-  <div class="section-header">
-    <h2>Observability</h2>
-    <p>Availability and service health.</p>
-  </div>
-  <div class="grid" id="grid-obs"></div>
-  <section class="content-section" id="observability">
-  <div class="section-header">
-    <h2>Observability</h2>
-    <p>Live service health, incidents, and maintenance windows.</p>
-  </div>
 
-  <div class="grid" id="status-summary"></div>
-  <div class="grid" id="status-components"></div>
-  <div class="grid" id="status-incidents"></div>
+  <section
+    id="observability"
+    class="content-section alt collapsible"
+  >
+
+    <!-- Header (always visible) -->
+    <div class="section-header collapsible-header">
+      <div>
+        <h2>Observability</h2>
+        <p>Availability, incidents, and service health.</p>
+      </div>
+
+      <button
+        class="collapse-toggle"
+        aria-expanded="true"
+        aria-controls="observability-body"
+      >
+        <span class="label">Hide</span>
+        <span class="chevron">⌄</span>
+      </button>
+    </div>
+
+    <!-- Collapsible body (ALL grids live here) -->
+    <div class="collapsible-body" id="observability-body">
+
+      <div class="grid" id="grid-obs"></div>
+
+      <div class="grid" id="status-summary"></div>
+      <div class="grid" id="status-components"></div>
+      <div class="grid" id="status-incidents"></div>
+
+    </div>
+
+  </section>
+
 </section>
-</section>
-</section>
+
 
 <footer class="site-footer">
   <span>© Benjamin Adovasio</span>
