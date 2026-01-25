@@ -15,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ==========================
      SIGNUP ELEMENTS
      ========================== */
-
-  const signupStage = document.getElementById('signup-stage');
-  const signupInner = document.querySelector('.signup-inner');
+    
+    const signupStage = document.getElementById('signup-stage');
+    const signupInner = document.querySelector('.signup-inner');
 
   if (!hero || !title || !sub) return;
 
@@ -88,32 +88,32 @@ document.addEventListener('DOMContentLoaded', () => {
         hero.style.transform = 'translateY(0)';
       }
 
-      /* ----------------------------------
-         PHASE 3 — SIGNUP STAGE REVEAL
-         ---------------------------------- */
+/* ----------------------------------
+   SIGNUP STAGE REVEAL (Hero handoff)
+   ---------------------------------- */
 
-      if (signupStage && signupInner) {
-        const stageTop = signupStage.offsetTop;
+if (signupStage && signupInner) {
+  const stageTop = signupStage.offsetTop;
+  const vh = window.innerHeight;
 
-        const revealStart = stageTop - vh * 0.9;
-        const revealEnd   = stageTop - vh * 0.25;
+  // Scroll window where animation happens
+  const revealStart = stageTop - vh * 0.9;
+  const revealEnd   = stageTop - vh * 0.25;
 
-        const revealRaw = Math.min(
-          Math.max((scrollY - revealStart) / (revealEnd - revealStart), 0),
-          1
-        );
-
-        const revealEase = 1 - Math.pow(1 - revealRaw, 3);
-
-        signupInner.style.opacity = revealEase;
-        signupInner.style.transform = `
-          translateY(${(1 - revealEase) * 80}px)
-          scale(${0.95 + revealEase * 0.05})
-        `;
-      }
-    },
-    { passive: true }
+  const raw = Math.min(
+    Math.max((scrollY - revealStart) / (revealEnd - revealStart), 0),
+    1
   );
+
+  // Apple-style easing
+  const ease = 1 - Math.pow(1 - raw, 3);
+
+  signupInner.style.opacity = ease;
+  signupInner.style.transform = `
+    translateY(${(1 - ease) * 90}px)
+    scale(${0.94 + ease * 0.06})
+  `;
+}
 
   /* =========================================================
      SERVICE CARD MORPHING (SCROLL FOCUS)
