@@ -451,3 +451,73 @@ nav a:hover {
   transform: translateY(-2px) scale(1.03);
   box-shadow: 0 20px 50px rgba(37,99,235,0.35);
 }
+
+
+/* =========================================================
+   SIGNUP STAGE (Hero Continuation)
+   ========================================================= */
+
+.signup-stage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 2;
+
+  /* Seamless background continuation */
+  background:
+    radial-gradient(
+      60% 40% at 50% 10%,
+      rgba(37,99,235,0.22),
+      transparent 60%
+    ),
+    linear-gradient(#020617, var(--bg));
+}
+
+.signup-inner {
+  max-width: 900px;
+  padding: 0 24px;
+  text-align: center;
+
+  /* Required for scroll animation */
+  opacity: 0;
+  transform: translateY(80px) scale(0.95);
+  will-change: transform, opacity;
+}
+
+.signup-inner h2 {
+  font-size: clamp(36px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 20px;
+}
+
+.signup-inner p {
+  font-size: 20px;
+  color: var(--muted);
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.signup-btn {
+  display: inline-block;
+  padding: 16px 36px;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+
+  background: var(--accent);
+  color: white;
+
+  transition:
+    transform .35s cubic-bezier(.2,.6,.2,1),
+    box-shadow .35s ease,
+    background .25s ease;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(37,99,235,.35);
+  background: #1d4ed8;
+}
