@@ -102,15 +102,16 @@ nav a:hover {
 
 nav a.nav-signup {
   opacity: 1;
-  padding: 8px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,.28);
-  background: rgba(255,255,255,.08);
+  padding: 9px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.45);
+  background: rgba(255,255,255,.14);
+  box-shadow: 0 6px 18px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.25);
 }
 
 nav a.nav-signup:hover {
-  background: rgba(255,255,255,.16);
-  border-color: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.22);
+  border-color: rgba(255,255,255,.6);
 }
 
 /* =========================================================
