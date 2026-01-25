@@ -41,3 +41,72 @@ function renderServicesBar(services) {
 }
 
 
+const STATUSPAGE_ID = 'qzblys3lm8jb';
+const STATUS_BASE = `https://${STATUSPAGE_ID}.statuspage.io/api/v2`;
+
+async function fetchStatus(endpoint) {
+  const res = await fetch(`${STATUS_BASE}/${endpoint}`, {
+    cache: 'no-store'
+  });
+  if (!res.ok) throw new Error(endpoint);
+  return res.json();
+}
+
+async function renderStatusSummary() {
+  const data = await fetchStatus('status.json');
+
+  const indicator = data.status.indicator; // none, minor, major, critical
+  const description = data.status.description;
+
+  const el = document.getElementById('status-summary');
+  el.innerHTML = `
+    <div class="card">
+      <h3>Overall Status</h3>
+      <p>${description}</p>
+      <span class="tag ${indicator}">${indicator.toUpperCase()}</span>
+    </div>
+  `;
+}
+
+
+async function renderStatusComponents() {
+  const data = await fetchStatus('components.json');
+  const el = document.getElementById('status-components');
+
+  el.innerHTML = data.components.map(c => `
+    <div class="card">
+      <h3>${c.name}</h3>
+      <p>Status: ${c.status.replace('_', ' ')}</p>
+    </div>
+  `).join('');
+}
+
+
+async function renderIncidents() {
+  const data = await fetchStatus('incidents/unresolved.json');
+  const el = document.getElementById('status-incidents');
+
+  if (data.incidents.length === 0) {
+    el.innerHTML = `
+      <div class="card">
+        <h3>No Active Incidents</h3>
+        <p>All systems are operating normally.</p>
+      </div>
+    `;
+    return;
+  }
+
+  el.innerHTML = data.incidents.map(i => `
+    <div class="card">
+      <h3>${i.name}</h3>
+      <p>${i.status.toUpperCase()} — ${i.impact}</p>
+    </div>
+  `).join('');
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderStatusSummary();
+  renderStatusComponents();
+  renderIncidents();
+});
