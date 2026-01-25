@@ -100,6 +100,19 @@ nav a:hover {
   opacity: 1;
 }
 
+nav a.nav-signup {
+  opacity: 1;
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.28);
+  background: rgba(255,255,255,.08);
+}
+
+nav a.nav-signup:hover {
+  background: rgba(255,255,255,.16);
+  border-color: rgba(255,255,255,.4);
+}
+
 /* =========================================================
    HERO SECTION
    ========================================================= */
