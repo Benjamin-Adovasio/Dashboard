@@ -109,4 +109,27 @@ document.addEventListener('DOMContentLoaded', () => {
   renderStatusSummary();
   renderStatusComponents();
   renderIncidents();
+
+  const obsSection = document.getElementById('observability');
+  const toggle = obsSection?.querySelector('.collapse-toggle');
+  const icon = obsSection?.querySelector('.collapse-icon');
+  const body = document.getElementById('observability-body');
+
+  if (toggle && body && icon && obsSection) {
+    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+    body.hidden = !isExpanded;
+    icon.textContent = isExpanded ? '−' : '+';
+    obsSection.classList.toggle('is-expanded', isExpanded);
+    obsSection.classList.toggle('is-collapsed', !isExpanded);
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') === 'true';
+      const nextExpanded = !expanded;
+      toggle.setAttribute('aria-expanded', String(nextExpanded));
+      body.hidden = !nextExpanded;
+      icon.textContent = nextExpanded ? '−' : '+';
+      obsSection.classList.toggle('is-expanded', nextExpanded);
+      obsSection.classList.toggle('is-collapsed', !nextExpanded);
+    });
+  }
 });

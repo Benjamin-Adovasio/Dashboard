@@ -409,6 +409,49 @@ nav a.nav-signup:hover {
   max-width: 520px;
 }
 
+.collapse-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.collapse-title {
+  font-size: clamp(40px, 5vw, 56px);
+  letter-spacing: -0.02em;
+}
+
+.collapse-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  font-size: 22px;
+  line-height: 1;
+  border: 1px solid rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.08);
+  transition: transform 200ms ease, background 200ms ease, border-color 200ms ease;
+}
+
+.collapse-toggle:hover .collapse-icon {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.5);
+}
+
+.is-collapsed .collapsible-body {
+  display: none;
+}
+
+.is-expanded .collapse-icon {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.6);
+}
+
 
 .section-chapter .card {
   background: linear-gradient(

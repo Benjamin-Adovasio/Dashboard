@@ -90,18 +90,25 @@
 </section>
 
 <section class="section-chapter infrastructure">
-<section id="observability" class="content-section alt">
-  <div class="grid" id="grid-obs"></div>
-  <section class="content-section" id="observability">
+<section id="observability" class="content-section alt is-expanded">
   <div class="section-header">
-    <h2>Observability</h2>
+    <button
+      class="collapse-toggle"
+      type="button"
+      aria-expanded="true"
+      aria-controls="observability-body"
+    >
+      <span class="collapse-title">Observability</span>
+      <span class="collapse-icon" aria-hidden="true">+</span>
+    </button>
     <p>Live service health, incidents, and maintenance windows.</p>
   </div>
 
-  <div class="grid" id="status-summary"></div>
-  <div class="grid" id="status-components"></div>
-  <div class="grid" id="status-incidents"></div>
-</section>
+  <div class="collapsible-body" id="observability-body">
+    <div class="grid" id="status-summary"></div>
+    <div class="grid" id="status-components"></div>
+    <div class="grid" id="status-incidents"></div>
+  </div>
 </section>
 </section>
 
