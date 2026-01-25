@@ -31,10 +31,10 @@
     {
       "id": "git",
       "name": "Adovasio Git",
-      "desc": "Adovasio Git servee",
+      "desc": "Adovasio Git server",
       "url": "https://git.adovasio.com",
       "icon": "cloud"
-    }
+    },
     {
       "id": "photos",
       "name": "Adovasio Photo Server",
