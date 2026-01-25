@@ -1,41 +1,39 @@
 /* =========================================================
-   APPLE-STYLE HERO + SIGNUP + SERVICE SCROLL ORCHESTRATION
+   APPLE-STYLE HERO + SIGNUP + SERVICES SCROLL ORCHESTRATION
    ========================================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
 
   /* ==========================
-     HERO ELEMENTS
+     ELEMENT REFERENCES
      ========================== */
 
-  const hero  = document.getElementById('hero');
-  const title = document.getElementById('hero-title');
-  const sub   = document.getElementById('hero-sub');
+  const hero        = document.getElementById('hero');
+  const heroTitle   = document.getElementById('hero-title');
+  const heroSub     = document.getElementById('hero-sub');
+
+  const signupStage = document.getElementById('signup-stage');
+  const signupInner = document.querySelector('.signup-inner');
+
+  const serviceCards = document.querySelectorAll('.service-card');
+
+  if (!hero || !heroTitle || !heroSub) return;
 
   /* ==========================
-     SIGNUP ELEMENTS
-     ========================== */
-    
-    const signupStage = document.getElementById('signup-stage');
-    const signupInner = document.querySelector('.signup-inner');
-
-  if (!hero || !title || !sub) return;
-
-  /* ==========================
-     HERO SCROLL CONFIG
+     SCROLL CONFIGURATION
      ========================== */
 
-  // Total scroll distance for hero narrative
+  // Long cinematic hero duration (Apple-style)
   const HERO_SCROLL_RANGE = window.innerHeight * 3;
 
-  // When the hero starts exiting
+  // When hero begins exiting
   const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.75;
 
   // How long the exit takes
-  const HERO_EXIT_RANGE = window.innerHeight * 1;
+  const HERO_EXIT_RANGE = window.innerHeight * 1.2;
 
   /* ==========================
-     SCROLL HANDLER
+     MAIN SCROLL HANDLER
      ========================== */
 
   window.addEventListener(
@@ -44,33 +42,30 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollY = window.scrollY;
       const vh = window.innerHeight;
 
-      /* ----------------------------------
-         PHASE 1 — HERO MORPH
-         ---------------------------------- */
+      /* =====================================================
+         PHASE 1 — HERO MORPH (slow + dramatic)
+         ===================================================== */
 
-      const raw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
-      const ease = 1 - Math.pow(1 - raw, 4);
+      const heroRaw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
+      const heroEase = 1 - Math.pow(1 - heroRaw, 4);
 
-      // HERO fade
-      hero.style.opacity = 1 - ease * 0.6;
+      hero.style.opacity = 1 - heroEase * 0.6;
 
-      // TITLE: camera push + depth
-      title.style.transform = `
-        translateY(${ease * 160}px)
-        scale(${1.15 - ease * 0.35})
+      heroTitle.style.transform = `
+        translateY(${heroEase * 160}px)
+        scale(${1.15 - heroEase * 0.35})
         perspective(1200px)
-        translateZ(${ease * -220}px)
+        translateZ(${heroEase * -220}px)
       `;
-      title.style.opacity = 1 - ease * 0.25;
-      title.style.filter  = `blur(${ease * 3}px)`;
+      heroTitle.style.opacity = 1 - heroEase * 0.25;
+      heroTitle.style.filter  = `blur(${heroEase * 3}px)`;
 
-      // SUBTITLE exits faster
-      sub.style.transform = `translateY(${ease * 110}px)`;
-      sub.style.opacity  = Math.max(1 - ease * 1.4, 0);
+      heroSub.style.transform = `translateY(${heroEase * 110}px)`;
+      heroSub.style.opacity  = Math.max(1 - heroEase * 1.4, 0);
 
-      /* ----------------------------------
-         PHASE 2 — HERO EXIT (PUSHED AWAY)
-         ---------------------------------- */
+      /* =====================================================
+         PHASE 2 — HERO EXIT (pushed upward, not covered)
+         ===================================================== */
 
       if (scrollY > HERO_EXIT_START) {
         const exitRaw = Math.min(
@@ -88,41 +83,40 @@ document.addEventListener('DOMContentLoaded', () => {
         hero.style.transform = 'translateY(0)';
       }
 
-/* ----------------------------------
-   SIGNUP STAGE REVEAL (Hero handoff)
-   ---------------------------------- */
+      /* =====================================================
+         PHASE 3 — SIGNUP STAGE REVEAL (inherits momentum)
+         ===================================================== */
 
-if (signupStage && signupInner) {
-  const stageTop = signupStage.offsetTop;
-  const vh = window.innerHeight;
+      if (signupStage && signupInner) {
+        const stageTop = signupStage.offsetTop;
 
-  // Scroll window where animation happens
-  const revealStart = stageTop - vh * 0.9;
-  const revealEnd   = stageTop - vh * 0.25;
+        const revealStart = stageTop - vh * 0.9;
+        const revealEnd   = stageTop - vh * 0.25;
 
-  const raw = Math.min(
-    Math.max((scrollY - revealStart) / (revealEnd - revealStart), 0),
-    1
+        const raw = Math.min(
+          Math.max((scrollY - revealStart) / (revealEnd - revealStart), 0),
+          1
+        );
+
+        const ease = 1 - Math.pow(1 - raw, 3);
+
+        signupInner.style.opacity = ease;
+        signupInner.style.transform = `
+          translateY(${(1 - ease) * 90}px)
+          scale(${0.94 + ease * 0.06})
+        `;
+      }
+
+    },
+    { passive: true }
   );
 
-  // Apple-style easing
-  const ease = 1 - Math.pow(1 - raw, 3);
-
-  signupInner.style.opacity = ease;
-  signupInner.style.transform = `
-    translateY(${(1 - ease) * 90}px)
-    scale(${0.94 + ease * 0.06})
-  `;
-}
-
   /* =========================================================
-     SERVICE CARD MORPHING (SCROLL FOCUS)
+     SERVICE CARD MORPHING (scroll-driven focus)
      ========================================================= */
 
-  const serviceCards = document.querySelectorAll('.service-card');
-
   if (serviceCards.length > 0) {
-    const morphObserver = new IntersectionObserver(
+    const observer = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -138,6 +132,7 @@ if (signupStage && signupInner) {
       }
     );
 
-    serviceCards.forEach(card => morphObserver.observe(card));
+    serviceCards.forEach(card => observer.observe(card));
   }
+
 });
