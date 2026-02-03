@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Adovasio Time Server</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+    body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #0b1220;
+        color: #e5e7eb;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .container {
+        text-align: center;
+    }
+
+    .clock {
+        font-size: 6rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+    }
+
+    .milliseconds {
+        font-size: 2rem;
+        vertical-align: super;
+    }
+
+    .info {
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        color: #9ca3af;
+    }
+
+    a {
+        color: #60a5fa;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="clock" id="clock">
+        --:--:--.<span class="milliseconds">---</span>
+    </div>
+
+    <div class="info">
+        Time synchronized via <strong>Adovasio NTP</strong><br>
+        Source: <code>ntp.adovasio.com</code><br>
+        <a href="https://adovasio.com">adovasio.com</a>
+    </div>
+</div>
+
+<script>
+let baseTime = 0;
+let basePerf = 0;
+
+async function syncTime() {
+    const res = await fetch('/api/time');
+    const data = await res.json();
+
+    baseTime = data.unix * 1000;
+    basePerf = performance.now();
+}
+
+function updateClock() {
+    const now = baseTime + (performance.now() - basePerf);
+    const d = new Date(now);
+
+    const hh = String(d.getUTCHours()).padStart(2, '0');
+    const mm = String(d.getUTCMinutes()).padStart(2, '0');
+    const ss = String(d.getUTCSeconds()).padStart(2, '0');
+    const ms = String(d.getUTCMilliseconds()).padStart(3, '0');
+
+    document.getElementById('clock').innerHTML =
+        `${hh}:${mm}:${ss}.<span class="milliseconds">${ms}</span>`;
+
+    requestAnimationFrame(updateClock);
+}
+
+syncTime().then(updateClock);
+setInterval(syncTime, 10_000); // resync every 10s
+</script>
+
+</body>
+</html>
