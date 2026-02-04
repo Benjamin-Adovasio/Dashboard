@@ -60,22 +60,23 @@ function render() {
   const now = baseTimeMs + (performance.now() - basePerf);
   const d = new Date(now);
 
-  const fmt = new Intl.DateTimeFormat("en-US", {
-    timeZone: currentTZ,
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false
-  });
+const fmt = new Intl.DateTimeFormat("en-US", {
+  timeZone: currentTZ,
+  hour: "numeric",
+  minute: "2-digit",
+  second: "2-digit",
+  hour12: true
+});
 
-  const parts = fmt.formatToParts(d);
-  const hh = parts.find(p => p.type === "hour").value;
-  const mm = parts.find(p => p.type === "minute").value;
-  const ss = parts.find(p => p.type === "second").value;
-  const ms = String(d.getMilliseconds()).padStart(3, "0");
+const parts = fmt.formatToParts(d);
+const hh = parts.find(p => p.type === "hour").value;
+const mm = parts.find(p => p.type === "minute").value;
+const ss = parts.find(p => p.type === "second").value;
+const ap = parts.find(p => p.type === "dayPeriod").value;
+const ms = String(d.getMilliseconds()).padStart(3, "0");
 
-  document.getElementById("clock").innerHTML =
-    `${hh}:${mm}:${ss}.<span class="ms">${ms}</span>`;
+document.getElementById("clock").innerHTML =
+  `${hh}:${mm}:${ss} ${ap}.<span class="ms">${ms}</span>`;
 
   requestAnimationFrame(render);
 }
