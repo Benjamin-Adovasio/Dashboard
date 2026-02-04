@@ -41,6 +41,13 @@
       "desc": "Photo backup server with AI recognition",
       "url": "https://photos.adovasio.com",
       "icon": "camera"
+    },
+        {
+      "id": "time",
+      "name": "Adovasio Time Server",
+      "desc": "Adovasio hosted level 2 NTP time server",
+      "url": "https://time.adovasio.com",
+      "icon": "clock"
     }
   ]
 }
