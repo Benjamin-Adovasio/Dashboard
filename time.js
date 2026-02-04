@@ -76,7 +76,7 @@ const ap = parts.find(p => p.type === "dayPeriod").value;
 const ms = String(d.getMilliseconds()).padStart(3, "0");
 
 document.getElementById("clock").innerHTML =
-  `${hh}:${mm}:${ss}<span class="ap"> ${ap}</span><span class="dot">.</span><span class="ms">${ms}</span>`;
+  `${hh}:${mm}:${ss}<span class="dot">.</span><span class="ms">${ms}</span><span class="ap"> ${ap}</span>`;
 
 
 
