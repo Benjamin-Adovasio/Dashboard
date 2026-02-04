@@ -1,121 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Adovasio Time</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<style>
-    html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-    }
-
-    body {
-        background-color: #0b1220;
-        color: #e5e7eb;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .container {
-        text-align: center;
-    }
-
-    .clock {
-        font-size: 6rem;
-        font-weight: 700;
-        letter-spacing: 0.05em;
-        white-space: nowrap;
-    }
-
-    .ms {
-        font-size: 2rem;
-        vertical-align: super;
-    }
-
-    .info {
-        margin-top: 1.5rem;
-        font-size: 0.95rem;
-        color: #9ca3af;
-        line-height: 1.5;
-    }
-
-    a {
-        color: #60a5fa;
-        text-decoration: none;
-    }
-
-    a:hover {
-        text-decoration: underline;
-    }
-</style>
+  <meta charset="UTF-8">
+  <title>Adovasio Time</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/time.css">
 </head>
 <body>
 
-<div class="container">
+  <div class="container">
     <div class="clock" id="clock">
-        --:--:--.<span class="ms">---</span>
+      --:--:--.<span class="ms">---</span>
+    </div>
+
+    <div class="controls">
+      <label for="tz">Time zone:</label>
+      <select id="tz"></select>
     </div>
 
     <div class="info">
-        Authoritative time provided by <strong>Adovasio Time</strong><br>
-        Backed by system NTP synchronization<br>
-        <a href="https://adovasio.com">adovasio.com</a>
+      Authoritative time provided by <strong>time.adovasio.com</strong><br>
+      Backend time is UTC (NTP-disciplined)<br>
+      <a href="https://adovasio.com">adovasio.com</a>
     </div>
-</div>
+  </div>
 
-<script>
-let baseTimeMs = null;
-let basePerf = 0;
-
-/**
- * Sync authoritative time from backend
- */
-async function syncTime() {
-    try {
-        const res = await fetch("/api/time", { cache: "no-store" });
-        const data = await res.json();
-
-        baseTimeMs = data.unix * 1000;
-        basePerf = performance.now();
-    } catch (e) {
-        // If backend is unreachable, do nothing and retry later
-        console.error("Time sync failed:", e);
-    }
-}
-
-/**
- * Render clock using monotonic offset
- */
-function render() {
-    if (baseTimeMs === null) {
-        requestAnimationFrame(render);
-        return;
-    }
-
-    const now = baseTimeMs + (performance.now() - basePerf);
-    const d = new Date(now);
-
-    const hh = String(d.getUTCHours()).padStart(2, "0");
-    const mm = String(d.getUTCMinutes()).padStart(2, "0");
-    const ss = String(d.getUTCSeconds()).padStart(2, "0");
-    const ms = String(d.getUTCMilliseconds()).padStart(3, "0");
-
-    document.getElementById("clock").innerHTML =
-        `${hh}:${mm}:${ss}.<span class="ms">${ms}</span>`;
-
-    requestAnimationFrame(render);
-}
-
-// Initial sync + periodic resync
-syncTime();
-setInterval(syncTime, 10000);
-render();
-</script>
-
+  <script src="/time.js" defer></script>
 </body>
 </html>
