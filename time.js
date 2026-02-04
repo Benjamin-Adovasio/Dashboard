@@ -76,7 +76,8 @@ const ap = parts.find(p => p.type === "dayPeriod").value;
 const ms = String(d.getMilliseconds()).padStart(3, "0");
 
 document.getElementById("clock").innerHTML =
-  `${hh}:${mm}:${ss} ${ap}.<span class="ms">${ms}</span>`;
+  `${hh}:${mm}:${ss} <span class="ap">${ap}</span>.<span class="ms">${ms}</span>`;
+
 
   requestAnimationFrame(render);
 }
