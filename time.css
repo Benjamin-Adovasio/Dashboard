@@ -73,3 +73,19 @@ a:hover {
   margin-left: 0.25rem;
   vertical-align: middle;
 }
+
+
+.dot {
+  margin: 0 0.05em;
+}
+
+.ap {
+  font-size: 1.5rem;
+  margin-left: 0.25rem;
+  vertical-align: middle;
+}
+
+.ms {
+  font-size: 2rem;
+  vertical-align: super;
+}
