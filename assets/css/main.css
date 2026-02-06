@@ -680,6 +680,10 @@ nav a.nav-signup:hover {
     align-items: flex-start;
   }
 
+  .mobile-hide-nav-link {
+    display: none;
+  }
+
   nav {
     width: 100%;
     flex-wrap: nowrap;
