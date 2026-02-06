@@ -554,3 +554,164 @@ nav a.nav-signup:hover {
   mask-position: center;
   mask-size: contain;
 }
+
+/* =========================================================
+   RESPONSIVE OVERRIDES (MOBILE/TABLET)
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .nav {
+    padding: 14px 18px;
+    gap: 14px;
+  }
+
+  .logo {
+    font-size: 16px;
+  }
+
+  nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  nav a {
+    margin-left: 0;
+    font-size: 13px;
+  }
+
+  nav a.nav-signup {
+    padding: 8px 12px;
+    border-radius: 12px;
+  }
+
+  .services-bar {
+    top: 52px;
+  }
+
+  .services-bar-inner {
+    padding: 12px 16px;
+    gap: 18px;
+  }
+
+  .hero {
+    height: 100svh;
+  }
+
+  .hero-inner {
+    padding: 0 18px;
+  }
+
+  .hero h1 {
+    font-size: clamp(34px, 10vw, 60px);
+    margin-bottom: 18px;
+  }
+
+  .hero p {
+    font-size: 17px;
+    margin-bottom: 28px;
+  }
+
+  .hero-spacer {
+    height: 220vh;
+  }
+
+  .stage-inner {
+    padding: 100px 18px;
+  }
+
+  .stage-inner h2 {
+    font-size: clamp(34px, 8vw, 46px);
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    padding: 22px;
+  }
+
+  .section-chapter {
+    padding: 110px 18px 90px;
+  }
+
+  .section-header {
+    margin-bottom: 40px;
+  }
+
+  .section-header h2,
+  .collapse-title {
+    font-size: clamp(32px, 8vw, 44px);
+  }
+
+  .section-header p {
+    font-size: 16px;
+  }
+
+  .signup-stage {
+    min-height: 85vh;
+  }
+
+  .signup-stage h2 {
+    font-size: clamp(34px, 9vw, 58px);
+  }
+
+  .signup-stage p {
+    font-size: 17px;
+    margin-bottom: 30px;
+  }
+
+  .signup-btn {
+    padding: 16px 30px;
+    font-size: 17px;
+  }
+
+  .site-footer {
+    padding: 48px 18px;
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 10vw, 44px);
+    line-height: 1.08;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .hero-spacer {
+    height: 180vh;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .service-card::after {
+    opacity: 1;
+  }
+
+  .signup-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
