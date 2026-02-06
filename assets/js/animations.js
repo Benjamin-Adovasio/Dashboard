@@ -18,8 +18,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const signupStage = document.getElementById('signup-stage');
   const signupInner = document.querySelector('.signup-inner');
+  const isMobileViewport =
+    window.matchMedia('(max-width: 900px)').matches ||
+    window.matchMedia('(pointer: coarse)').matches;
 
   if (!hero || !title || !sub) return;
+
+  if (isMobileViewport) {
+    hero.style.opacity = '1';
+    hero.style.transform = 'none';
+    title.style.transform = 'none';
+    title.style.opacity = '1';
+    title.style.filter = 'none';
+    sub.style.transform = 'none';
+    sub.style.opacity = '1';
+
+    if (signupInner) {
+      signupInner.style.opacity = '1';
+      signupInner.style.transform = 'none';
+    }
+
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.classList.add('active');
+    });
+
+    return;
+  }
 
   /* ==========================
      HERO SCROLL CONFIG
