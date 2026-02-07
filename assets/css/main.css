@@ -29,11 +29,12 @@ html, body {
   background: var(--bg);
   color: var(--text);
   scroll-behavior: smooth;
-  overscroll-behavior: none;
+  overscroll-behavior-y: auto;
 }
 
 html, body {
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 body {
