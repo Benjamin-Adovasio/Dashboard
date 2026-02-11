@@ -160,7 +160,7 @@ nav a.nav-signup:hover {
 }
 
 .hero-spacer {
-  height: 300vh; /* THIS controls duration */
+  height: 220vh; /* controls hero scroll runway on desktop */
 }
 
 /* =========================================================

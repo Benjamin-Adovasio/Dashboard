@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================== */
 
   // Total scroll distance for hero narrative
-  const HERO_SCROLL_RANGE = window.innerHeight * 2.4;
+  const HERO_SCROLL_RANGE = window.innerHeight * 2.9;
 
   // When the hero starts exiting
-  const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.62;
+  const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.68;
 
   // How long the exit takes
-  const HERO_EXIT_RANGE = window.innerHeight * 0.75;
+  const HERO_EXIT_RANGE = window.innerHeight * 0.55;
 
   /* ==========================
      SCROLL HANDLER
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
          ---------------------------------- */
 
       const raw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
-      const ease = 1 - Math.pow(1 - raw, 5);
+      const ease = 1 - Math.pow(1 - raw, 3);
 
       // HERO fade
       hero.style.opacity = 1 - ease * 0.75;
