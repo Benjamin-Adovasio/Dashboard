@@ -50,13 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================== */
 
   // Total scroll distance for hero narrative
-  const HERO_SCROLL_RANGE = window.innerHeight * 3;
+  const HERO_SCROLL_RANGE = window.innerHeight * 2.4;
 
   // When the hero starts exiting
-  const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.75;
+  const HERO_EXIT_START = HERO_SCROLL_RANGE * 0.62;
 
   // How long the exit takes
-  const HERO_EXIT_RANGE = window.innerHeight * 1;
+  const HERO_EXIT_RANGE = window.innerHeight * 0.75;
 
   /* ==========================
      SCROLL HANDLER
@@ -73,24 +73,24 @@ document.addEventListener('DOMContentLoaded', () => {
          ---------------------------------- */
 
       const raw = Math.min(scrollY / HERO_SCROLL_RANGE, 1);
-      const ease = 1 - Math.pow(1 - raw, 4);
+      const ease = 1 - Math.pow(1 - raw, 5);
 
       // HERO fade
-      hero.style.opacity = 1 - ease * 0.6;
+      hero.style.opacity = 1 - ease * 0.75;
 
       // TITLE: camera push + depth
       title.style.transform = `
-        translateY(${ease * 160}px)
-        scale(${1.15 - ease * 0.35})
+        translateY(${ease * 220}px)
+        scale(${1.2 - ease * 0.48})
         perspective(1200px)
-        translateZ(${ease * -220}px)
+        translateZ(${ease * -380}px)
       `;
-      title.style.opacity = 1 - ease * 0.25;
-      title.style.filter  = `blur(${ease * 3}px)`;
+      title.style.opacity = 1 - ease * 0.42;
+      title.style.filter  = `blur(${ease * 6}px)`;
 
       // SUBTITLE exits faster
-      sub.style.transform = `translateY(${ease * 110}px)`;
-      sub.style.opacity  = Math.max(1 - ease * 1.4, 0);
+      sub.style.transform = `translateY(${ease * 180}px)`;
+      sub.style.opacity  = Math.max(1 - ease * 1.85, 0);
 
       /* ----------------------------------
          PHASE 2 — HERO EXIT (PUSHED AWAY)
@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const exitEase = exitRaw * exitRaw;
 
         hero.style.transform = `
-          translateY(${-exitEase * 100}vh)
-          scale(${1 - exitEase * 0.05})
+          translateY(${-exitEase * 140}vh)
+          scale(${1 - exitEase * 0.14})
         `;
       } else {
         hero.style.transform = 'translateY(0)';
@@ -131,8 +131,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         signupInner.style.opacity = revealEase;
         signupInner.style.transform = `
-          translateY(${(1 - revealEase) * 80}px)
-          scale(${0.95 + revealEase * 0.05})
+          translateY(${(1 - revealEase) * 130}px)
+          scale(${0.9 + revealEase * 0.1})
         `;
       }
     },
