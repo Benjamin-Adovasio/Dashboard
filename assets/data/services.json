@@ -55,6 +55,13 @@
       "desc": "Joplin notes server for syncing notes across devices",
       "url": "https://notes.adovasio.com",
       "icon": "notes"
+    },
+    {
+      "id": "accounting",
+      "name": "Adovasio Accounting Server",
+      "desc": "Akaunting server for accounting",
+      "url": "https://accounting.adovasio.com",
+      "icon": "notes"
     }
   ]
 }
