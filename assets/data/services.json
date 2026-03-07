@@ -61,7 +61,7 @@
       "name": "Adovasio Accounting Server",
       "desc": "Akaunting server for accounting",
       "url": "https://accounting.adovasio.com",
-      "icon": "notes"
+      "icon": "accounting"
     },
     {
       "id": "energy",
