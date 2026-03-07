@@ -50,21 +50,21 @@
       "icon": "clock"
     },
     {
-      "id": "notes",
+      "id": "joplin",
       "name": "Adovasio Notes Server",
       "desc": "Joplin notes server for syncing notes across devices",
       "url": "https://notes.adovasio.com",
       "icon": "notes"
     },
     {
-      "id": "accounting",
+      "id": "akaunting",
       "name": "Adovasio Accounting Server",
       "desc": "Akaunting server for accounting",
       "url": "https://accounting.adovasio.com",
       "icon": "accounting"
     },
     {
-      "id": "energy",
+      "id": "cyberpower",
       "name": "Energy Monitoring",
       "desc": "CyberPower Energy Monitoring Server",
       "url": "https://energy.adovasio.com",
