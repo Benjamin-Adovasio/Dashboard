@@ -42,12 +42,19 @@
       "url": "https://photos.adovasio.com",
       "icon": "camera"
     },
-        {
+    {
       "id": "time",
       "name": "Adovasio Time Server",
       "desc": "Adovasio hosted level 2 NTP time server",
       "url": "https://time.adovasio.com",
       "icon": "clock"
+    },
+    {
+      "id": "notes",
+      "name": "Adovasio Notes Server",
+      "desc": "Joplin notes server for syncing notes across devices",
+      "url": "https://notes.adovasio.com",
+      "icon": "notes"
     }
   ]
 }
