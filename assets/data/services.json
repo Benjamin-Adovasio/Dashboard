@@ -57,13 +57,6 @@
       "icon": "notes"
     },
     {
-      "id": "akaunting",
-      "name": "Adovasio Accounting Server",
-      "desc": "Akaunting server for accounting",
-      "url": "https://accounting.adovasio.com",
-      "icon": "accounting"
-    },
-    {
       "id": "cyberpower",
       "name": "Energy Monitoring",
       "desc": "CyberPower Energy Monitoring Server",
