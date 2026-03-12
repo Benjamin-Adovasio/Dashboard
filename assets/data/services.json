@@ -3,21 +3,21 @@
     {
       "id": "vpn",
       "name": "Adovasio VPN",
-      "desc": "Secured with 2048-bit encryption",
+      "desc": "Encrypted remote access",
       "url": "https://vpn.adovasio.com:4445",
       "icon": "shield"
     },
     {
       "id": "sso",
       "name": "Adovasio SSO",
-      "desc": "Single sign-on for all services",
+      "desc": "One login across services",
       "url": "https://sso.adovasio.com",
       "icon": "key"
     },
     {
       "id": "cloud",
       "name": "NextCloud",
-      "desc": "Private cloud storage and collaboration",
+      "desc": "Private cloud storage and sharing",
       "url": "https://cloud.adovasio.com",
       "icon": "cloud"
     },
@@ -31,37 +31,39 @@
     {
       "id": "git",
       "name": "Adovasio Git",
-      "desc": "Adovasio Git server",
+      "desc": "Private Git hosting",
       "url": "https://git.adovasio.com",
       "icon": "cloud"
     },
     {
       "id": "photos",
       "name": "Adovasio Photo Server",
-      "desc": "Photo backup server with AI recognition",
+      "desc": "Photo backup and search",
       "url": "https://photos.adovasio.com",
       "icon": "camera"
     },
     {
       "id": "time",
       "name": "Adovasio Time Server",
-      "desc": "Adovasio hosted level 2 NTP time server",
+      "desc": "Hosted NTP service",
       "url": "https://time.adovasio.com",
       "icon": "clock"
     },
     {
       "id": "joplin",
       "name": "Adovasio Notes Server",
-      "desc": "Joplin notes server for syncing notes across devices",
+      "desc": "Cross-device notes sync",
       "url": "https://notes.adovasio.com",
       "icon": "notes"
     },
     {
       "id": "cyberpower",
       "name": "Energy Monitoring",
-      "desc": "CyberPower Energy Monitoring Server",
+      "desc": "Power and device monitoring",
       "url": "https://energy.adovasio.com",
       "icon": "energy"
     }
   ]
+,
+  "pad": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }

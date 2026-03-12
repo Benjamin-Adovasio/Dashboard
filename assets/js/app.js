@@ -10,14 +10,14 @@ const ICONS = {
 };
 
 const SERVICE_META = {
-  shield: { label: "Secure Access", accent: "45, 212, 191" },
-  key: { label: "Identity Layer", accent: "255, 184, 107" },
-  cloud: { label: "Cloud Platform", accent: "102, 181, 255" },
-  printer: { label: "Device Utility", accent: "255, 150, 120" },
-  camera: { label: "Backup & Media", accent: "118, 199, 255" },
-  clock: { label: "Network Timing", accent: "86, 211, 155" },
-  notes: { label: "Knowledge Sync", accent: "245, 198, 108" },
-  energy: { label: "Facility Insight", accent: "177, 217, 98" }
+  shield: { label: "Secure Access", accent: "37, 99, 235" },
+  key: { label: "Identity", accent: "96, 165, 250" },
+  cloud: { label: "Cloud", accent: "56, 189, 248" },
+  printer: { label: "Print", accent: "14, 165, 233" },
+  camera: { label: "Backup", accent: "59, 130, 246" },
+  clock: { label: "Time", accent: "147, 197, 253" },
+  notes: { label: "Notes", accent: "125, 211, 252" },
+  energy: { label: "Energy", accent: "96, 165, 250" }
 };
 
 const STATUSPAGE_ID = "qzblys3lm8jb";
@@ -46,8 +46,8 @@ async function loadServices() {
     renderServices(services);
   } catch (error) {
     renderServiceCount(0);
-    renderServices([]);
     renderServiceLaunch([]);
+    renderServices([]);
   }
 }
 
@@ -67,7 +67,7 @@ function renderServiceLaunch(services) {
     root.innerHTML = `
       <article class="status-card">
         <h3>Service list unavailable</h3>
-        <p>Refresh the page to try again.</p>
+        <p>Refresh to try again.</p>
       </article>
     `;
     return;
@@ -101,8 +101,8 @@ function renderServices(services) {
   if (services.length === 0) {
     root.innerHTML = `
       <article class="status-card">
-        <h3>Services are temporarily unavailable</h3>
-        <p>The service catalog could not be loaded right now.</p>
+        <h3>Services unavailable</h3>
+        <p>The service catalog could not be loaded.</p>
       </article>
     `;
     return;
@@ -174,7 +174,7 @@ async function renderStatusSummary() {
       <article class="status-card">
         <span class="status-kicker">Platform Status</span>
         <h3>${escapeHtml(description)}</h3>
-        <p>Current health across the Adovasio service environment.</p>
+        <p>Current health across the Adovasio platform.</p>
         <div class="status-meta">
           <span class="status-badge ${indicator}">
             ${escapeHtml(displayLabel(data.status?.indicator || "operational"))}
@@ -184,15 +184,12 @@ async function renderStatusSummary() {
       </article>
 
       <article class="status-card">
-        <span class="status-kicker">Reporting Model</span>
+        <span class="status-kicker">Reporting</span>
         <h3>${escapeHtml(data.page?.name || "Adovasio Status Page")}</h3>
-        <p>
-          Incidents, maintenance windows, and component health are surfaced here
-          so users can trust the platform without guessing.
-        </p>
+        <p>Incidents, maintenance, and component health are posted here.</p>
         <div class="status-meta">
-          <span class="status-pill">Public operational reporting</span>
-          <span class="status-pill">Live maintenance visibility</span>
+          <span class="status-pill">Public status page</span>
+          <span class="status-pill">Live maintenance updates</span>
         </div>
       </article>
     `;
@@ -219,7 +216,7 @@ async function renderStatusComponents() {
       root.innerHTML = `
         <article class="status-card">
           <h3>No components listed</h3>
-          <p>Component-level reporting is not currently available.</p>
+          <p>Component-level reporting is not available right now.</p>
         </article>
       `;
       return;
@@ -246,7 +243,7 @@ async function renderStatusComponents() {
     renderStatusError(
       root,
       "Component status unavailable",
-      "The component-level feed could not be loaded."
+      "The component feed could not be loaded."
     );
   }
 }
@@ -265,7 +262,7 @@ async function renderIncidents() {
       root.innerHTML = `
         <article class="status-card">
           <h3>No active incidents</h3>
-          <p>All systems are currently operating without open incidents.</p>
+          <p>All systems are operating normally.</p>
           <div class="status-meta">
             <span class="status-badge operational">Operational</span>
           </div>
@@ -281,10 +278,7 @@ async function renderIncidents() {
           <article class="status-card">
             <span class="status-kicker">Incident</span>
             <h3>${escapeHtml(incident.name)}</h3>
-            <p>
-              ${escapeHtml(displayLabel(incident.status || "investigating"))}
-              in progress. Last updated ${escapeHtml(formatDate(incident.updated_at))}.
-            </p>
+            <p>${escapeHtml(displayLabel(incident.status || "investigating"))}. Updated ${escapeHtml(formatDate(incident.updated_at))}.</p>
             <div class="status-meta">
               <span class="status-badge ${impactClass}">
                 ${escapeHtml(displayLabel(incident.impact || "minor"))} impact
@@ -301,7 +295,7 @@ async function renderIncidents() {
     renderStatusError(
       root,
       "Incident feed unavailable",
-      "Open incidents could not be loaded from the status feed."
+      "Open incidents could not be loaded."
     );
   }
 }
@@ -331,7 +325,7 @@ async function renderPlannedMaintenance() {
       root.innerHTML = `
         <article class="status-card">
           <h3>No planned maintenance</h3>
-          <p>There are no upcoming or active maintenance windows at the moment.</p>
+          <p>No upcoming or active maintenance windows.</p>
           <div class="status-meta">
             <span class="status-badge operational">Clear</span>
           </div>
@@ -347,9 +341,7 @@ async function renderPlannedMaintenance() {
           <article class="status-card">
             <span class="status-kicker">Maintenance</span>
             <h3>${escapeHtml(item.name)}</h3>
-            <p>
-              Scheduled for ${escapeHtml(formatDate(item.scheduled_for))}.
-            </p>
+            <p>Scheduled for ${escapeHtml(formatDate(item.scheduled_for))}.</p>
             <div class="status-meta">
               <span class="status-badge ${maintenanceStatus}">
                 ${escapeHtml(displayLabel(item.status || "under_maintenance"))}
@@ -363,7 +355,7 @@ async function renderPlannedMaintenance() {
     renderStatusError(
       root,
       "Maintenance feed unavailable",
-      "Scheduled maintenance could not be loaded right now."
+      "Scheduled maintenance could not be loaded."
     );
   }
 }
@@ -454,10 +446,10 @@ function escapeHtml(value) {
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
+    .replace(/\"/g, "&quot;")
     .replace(/'/g, "&#39;");
 }
 
 function escapeAttribute(value) {
   return escapeHtml(value);
-}
+}/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
