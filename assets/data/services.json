@@ -3,55 +3,55 @@
     {
       "id": "vpn",
       "name": "Adovasio VPN",
-      "desc": "Encrypted remote access",
+      "desc": "Remote access portal",
       "url": "https://vpn.adovasio.com:4445",
       "icon": "shield"
     },
     {
       "id": "sso",
       "name": "Adovasio SSO",
-      "desc": "One login across services",
+      "desc": "Single sign-on portal",
       "url": "https://sso.adovasio.com",
       "icon": "key"
     },
     {
       "id": "cloud",
-      "name": "NextCloud",
-      "desc": "Private cloud storage",
+      "name": "Nextcloud",
+      "desc": "Files and sync",
       "url": "https://cloud.adovasio.com",
       "icon": "cloud"
     },
     {
       "id": "print",
-      "name": "Print",
-      "desc": "Remote and local printing",
+      "name": "Adovasio Print",
+      "desc": "Printing portal",
       "url": "https://print.adovasio.com",
       "icon": "printer"
     },
     {
       "id": "git",
       "name": "Adovasio Git",
-      "desc": "Private Git hosting",
+      "desc": "Code and repo hosting",
       "url": "https://git.adovasio.com",
       "icon": "cloud"
     },
     {
       "id": "photos",
-      "name": "Adovasio Photo Server",
-      "desc": "Photo backup",
+      "name": "Adovasio Photos",
+      "desc": "Photo backup and access",
       "url": "https://photos.adovasio.com",
       "icon": "camera"
     },
     {
       "id": "time",
-      "name": "Adovasio Time Server",
+      "name": "Adovasio Time",
       "desc": "Hosted NTP service",
       "url": "https://time.adovasio.com",
       "icon": "clock"
     },
     {
       "id": "joplin",
-      "name": "Adovasio Notes Server",
+      "name": "Adovasio Notes",
       "desc": "Notes sync",
       "url": "https://notes.adovasio.com",
       "icon": "notes"

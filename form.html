@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Request a Quote | Adovasio Technology LLC</title>
+  <title>Contact | Adovasio Technology LLC</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Request a quote for secure infrastructure and managed services from Adovasio Technology LLC."
+    content="Email info@adovasio.com for 1099 contract IT work, wire runs, on-site installs, and questions about Adovasio websites and hosted tools."
   />
   <link rel="icon" href="/assets/images/adovasio-round-icon.png" type="image/png" />
   <link rel="apple-touch-icon" href="/assets/images/adovasio-round-icon.png" />
@@ -101,6 +101,24 @@
       font-weight: 700;
     }
 
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .mail-link {
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(96, 165, 250, 0.34);
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.9), rgba(96, 165, 250, 0.9));
+      color: #f8fbff;
+      font-weight: 800;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.24);
+    }
+
     .page {
       display: grid;
       grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
@@ -109,7 +127,7 @@
     }
 
     .intro,
-    .form-shell {
+    .contact-shell {
       border-radius: 32px;
       border: 1px solid var(--line);
       box-shadow: var(--shadow);
@@ -166,16 +184,87 @@
       flex: none;
     }
 
-    .form-shell {
+    .contact-shell {
       padding: 18px;
       background: linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(231, 238, 247, 0.94));
     }
 
-    .form-frame {
-      overflow: hidden;
+    .contact-card {
+      display: grid;
+      gap: 18px;
+      height: 100%;
+      padding: 28px;
       border-radius: 24px;
       background: #f8fbff;
-      min-height: 720px;
+      color: #0f172a;
+    }
+
+    .contact-card h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+    }
+
+    .contact-card p {
+      margin: 0;
+      color: #475569;
+      line-height: 1.65;
+    }
+
+    .contact-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 12px;
+    }
+
+    .contact-list li {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      background: rgba(37, 99, 235, 0.06);
+      color: #1e293b;
+      line-height: 1.55;
+    }
+
+    .contact-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .contact-button,
+    .contact-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+
+    .contact-button {
+      background: linear-gradient(135deg, #2563eb, #60a5fa);
+      color: #f8fbff;
+      box-shadow: 0 18px 40px rgba(37, 99, 235, 0.24);
+    }
+
+    .contact-secondary {
+      border: 1px solid rgba(148, 163, 184, 0.32);
+      background: rgba(15, 23, 42, 0.04);
+      color: #0f172a;
+    }
+
+    .contact-note {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: #dbeafe;
+      color: #1d4ed8;
+      font-weight: 700;
     }
 
     @media (max-width: 860px) {
@@ -194,21 +283,31 @@
         flex-wrap: wrap;
       }
 
+      .topbar-actions,
+      .mail-link,
+      .back-link {
+        width: 100%;
+      }
+
       .brand,
       .brand-logo-shell,
       .brand-logo {
         width: 100%;
       }
 
-      .back-link {
-        width: 100%;
-        text-align: center;
-      }
-
       .intro,
-      .form-shell {
+      .contact-shell {
         padding: 20px;
         border-radius: 26px;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+      }
+
+      .contact-button,
+      .contact-secondary {
+        width: 100%;
       }
     }
   </style>
@@ -227,31 +326,46 @@
           />
         </span>
       </a>
-      <a class="back-link" href="index.html">Back to homepage</a>
+      <div class="topbar-actions">
+        <a class="mail-link" href="mailto:info@adovasio.com?subject=Quote%20Request">
+          Email info@adovasio.com
+        </a>
+        <a class="back-link" href="index.html">Back to homepage</a>
+      </div>
     </header>
 
     <main class="page">
       <section class="intro">
-        <p class="eyebrow">Request a Quote</p>
-        <h1>Tell us what you need.</h1>
-        <p>Remote access, private cloud, backup, monitoring, routers, or managed support.</p>
+        <p class="eyebrow">Contact</p>
+        <h1>Email info@adovasio.com for a quote.</h1>
+        <p>Adovasio focuses on 1099 contract IT work like wire runs, low-voltage installs, equipment setup, and practical hands-on help.</p>
         <ul>
-          <li>VPN, SSO, and secure access</li>
-          <li>Cloud, backup, notes, print, and Git</li>
-          <li>Remote routers and ongoing management</li>
+          <li>Wire runs, patching, and basic low-voltage work</li>
+          <li>Routers, access points, cameras, printers, and workstation installs</li>
+          <li>Questions about any Adovasio website, portal, or hosted tool</li>
         </ul>
       </section>
 
-      <section class="form-shell">
-        <div class="form-frame">
-          <script
-            type="text/javascript"
-            data-origin="www.abcsubmit.com"
-            src="//www.abcsubmit.com/embed/id_1jgb18ui0_efp/request-service.js"
-            data-role="abcsubmit-form-embed"
-            data-document-id="id_1jgb18ui0_efp"
-            data-embed-params="utm=abcsubmit"
-          ></script>
+      <section class="contact-shell">
+        <div class="contact-card">
+          <p class="eyebrow">Fastest Contact</p>
+          <h2>Use email instead of a web form.</h2>
+          <p>Email is the main quote path for this site. Send the job scope, timeline, and location to info@adovasio.com.</p>
+          <ul class="contact-list">
+            <li><strong>Email:</strong> info@adovasio.com</li>
+            <li><strong>Best for:</strong> 1099 contract IT work, wire runs, installs, and hosted site questions</li>
+            <li><strong>Helpful details:</strong> site name, work needed, deadline, and where the job is located</li>
+          </ul>
+          <div class="contact-actions">
+            <a
+              class="contact-button"
+              href="mailto:info@adovasio.com?subject=Quote%20Request"
+            >
+              Email info@adovasio.com
+            </a>
+            <a class="contact-secondary" href="index.html#services">View Website Directory</a>
+          </div>
+          <div class="contact-note">Quotes and project requests go to info@adovasio.com.</div>
         </div>
       </section>
     </main>

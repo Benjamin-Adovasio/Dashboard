@@ -10,14 +10,14 @@ const ICONS = {
 };
 
 const SERVICE_META = {
-  shield: { label: "Secure Access", accent: "37, 99, 235" },
+  shield: { label: "Access", accent: "37, 99, 235" },
   key: { label: "Identity", accent: "96, 165, 250" },
-  cloud: { label: "Cloud", accent: "56, 189, 248" },
+  cloud: { label: "Hosted Tool", accent: "56, 189, 248" },
   printer: { label: "Print", accent: "14, 165, 233" },
-  camera: { label: "Backup", accent: "59, 130, 246" },
+  camera: { label: "Media", accent: "59, 130, 246" },
   clock: { label: "Time", accent: "147, 197, 253" },
   notes: { label: "Notes", accent: "125, 211, 252" },
-  energy: { label: "Energy", accent: "96, 165, 250" }
+  energy: { label: "Monitoring", accent: "96, 165, 250" }
 };
 
 const STATUSPAGE_ID = "qzblys3lm8jb";
@@ -66,7 +66,7 @@ function renderServiceLaunch(services) {
   if (services.length === 0) {
     root.innerHTML = `
       <article class="status-card">
-        <h3>Service list unavailable</h3>
+        <h3>Website list unavailable</h3>
         <p>Refresh to try again.</p>
       </article>
     `;
@@ -101,8 +101,8 @@ function renderServices(services) {
   if (services.length === 0) {
     root.innerHTML = `
       <article class="status-card">
-        <h3>Services unavailable</h3>
-        <p>The service catalog could not be loaded.</p>
+        <h3>Website directory unavailable</h3>
+        <p>The website directory could not be loaded.</p>
       </article>
     `;
     return;
@@ -129,7 +129,7 @@ function renderServices(services) {
           <p>${escapeHtml(service.desc || "")}</p>
           <div class="service-footer">
             <span class="service-domain">${escapeHtml(formatServiceHost(service.url))}</span>
-            <span class="service-arrow">Open service</span>
+            <span class="service-arrow">Visit site</span>
           </div>
         </a>
       `;
@@ -172,9 +172,9 @@ async function renderStatusSummary() {
 
     root.innerHTML = `
       <article class="status-card">
-        <span class="status-kicker">Platform Status</span>
+        <span class="status-kicker">Hosted Status</span>
         <h3>${escapeHtml(description)}</h3>
-        <p>Current platform health.</p>
+        <p>Current availability for listed sites.</p>
         <div class="status-meta">
           <span class="status-badge ${indicator}">
             ${escapeHtml(displayLabel(data.status?.indicator || "operational"))}
@@ -184,11 +184,11 @@ async function renderStatusSummary() {
       </article>
 
       <article class="status-card">
-        <span class="status-kicker">Reporting</span>
+        <span class="status-kicker">Status Page</span>
         <h3>${escapeHtml(data.page?.name || "Adovasio Status Page")}</h3>
-        <p>Incidents, maintenance, and component health are posted here.</p>
+        <p>Incidents, maintenance, and component health for hosted sites are posted here.</p>
         <div class="status-meta">
-          <span class="status-pill">Public status page</span>
+          <span class="status-pill">Public website status</span>
           <span class="status-pill">Live maintenance updates</span>
         </div>
       </article>
@@ -261,8 +261,8 @@ async function renderIncidents() {
     if (incidents.length === 0) {
       root.innerHTML = `
         <article class="status-card">
-          <h3>No active incidents</h3>
-          <p>All systems are operating normally.</p>
+          <h3>No active website issues</h3>
+          <p>Listed sites are operating normally.</p>
           <div class="status-meta">
             <span class="status-badge operational">Operational</span>
           </div>
@@ -324,8 +324,8 @@ async function renderPlannedMaintenance() {
     if (maintenance.length === 0) {
       root.innerHTML = `
         <article class="status-card">
-          <h3>No planned maintenance</h3>
-          <p>No upcoming or active maintenance windows.</p>
+          <h3>No scheduled maintenance</h3>
+          <p>No upcoming or active website maintenance windows.</p>
           <div class="status-meta">
             <span class="status-badge operational">Clear</span>
           </div>
