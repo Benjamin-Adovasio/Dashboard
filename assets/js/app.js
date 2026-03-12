@@ -70,6 +70,7 @@ function renderServiceLaunch(services) {
         <p>Refresh to try again.</p>
       </article>
     `;
+    applyReveal(root, ".status-card");
     return;
   }
 
@@ -90,6 +91,8 @@ function renderServiceLaunch(services) {
       `;
     })
     .join("");
+
+  applyReveal(root, ".service-link", 55);
 }
 
 function renderServices(services) {
@@ -105,6 +108,7 @@ function renderServices(services) {
         <p>The website directory could not be loaded.</p>
       </article>
     `;
+    applyReveal(root, ".status-card");
     return;
   }
 
@@ -135,6 +139,8 @@ function renderServices(services) {
       `;
     })
     .join("");
+
+  applyReveal(root, ".service-card", 70);
 }
 
 async function loadStatus() {
@@ -193,6 +199,7 @@ async function renderStatusSummary() {
         </div>
       </article>
     `;
+    applyReveal(root, ".status-card", 80);
   } catch (error) {
     renderStatusError(
       root,
@@ -219,6 +226,7 @@ async function renderStatusComponents() {
           <p>Component reporting is not available right now.</p>
         </article>
       `;
+      applyReveal(root, ".status-card");
       return;
     }
 
@@ -239,6 +247,7 @@ async function renderStatusComponents() {
         `;
       })
       .join("");
+    applyReveal(root, ".status-card", 55);
   } catch (error) {
     renderStatusError(
       root,
@@ -268,6 +277,7 @@ async function renderIncidents() {
           </div>
         </article>
       `;
+      applyReveal(root, ".status-card");
       return;
     }
 
@@ -291,6 +301,7 @@ async function renderIncidents() {
         `;
       })
       .join("");
+    applyReveal(root, ".status-card", 60);
   } catch (error) {
     renderStatusError(
       root,
@@ -331,6 +342,7 @@ async function renderPlannedMaintenance() {
           </div>
         </article>
       `;
+      applyReveal(root, ".status-card");
       return;
     }
 
@@ -351,6 +363,7 @@ async function renderPlannedMaintenance() {
         `;
       })
       .join("");
+    applyReveal(root, ".status-card", 60);
   } catch (error) {
     renderStatusError(
       root,
@@ -389,6 +402,19 @@ function renderStatusError(root, title, description) {
       <p>${escapeHtml(description)}</p>
     </article>
   `;
+  applyReveal(root, ".status-card");
+}
+
+function applyReveal(root, selector, step = 70) {
+  root.querySelectorAll(selector).forEach((element, index) => {
+    element.setAttribute("data-animate", "");
+
+    if (!element.style.getPropertyValue("--card-delay")) {
+      element.style.setProperty("--card-delay", `${index * step}ms`);
+    }
+  });
+
+  window.AdovasioMotion?.refresh?.(root);
 }
 
 function formatServiceHost(value) {
