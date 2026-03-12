@@ -147,27 +147,25 @@ select {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 16px;
-  border-radius: 20px;
-  background: rgba(248, 251, 255, 0.98);
-  border: 1px solid rgba(191, 219, 254, 0.42);
-  box-shadow: 0 12px 30px rgba(2, 6, 23, 0.2);
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
 }
 
 .brand-logo-frame-header {
-  min-height: 74px;
+  min-height: 0;
 }
 
 .brand-logo-frame-hero {
   position: relative;
   z-index: 1;
-  min-height: 248px;
-  padding: 28px 30px;
-  border-radius: 28px;
-  background:
-    radial-gradient(circle at top, rgba(96, 165, 250, 0.18), transparent 52%),
-    linear-gradient(180deg, rgba(248, 251, 255, 0.98), rgba(231, 238, 247, 0.94));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  min-height: 0;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
 }
 
 .brand-primary-logo {
@@ -179,10 +177,21 @@ select {
 
 .brand-primary-logo-header {
   width: clamp(230px, 25vw, 340px);
+  filter: drop-shadow(0 10px 22px rgba(2, 6, 23, 0.18));
 }
 
 .brand-primary-logo-hero {
   width: min(520px, 100%);
+  filter: drop-shadow(0 26px 50px rgba(2, 6, 23, 0.28));
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-left: auto;
 }
 
 .site-nav {
@@ -248,6 +257,10 @@ select {
 .button-primary:hover,
 .button-primary:focus-visible {
   box-shadow: 0 24px 52px rgba(37, 99, 235, 0.3);
+}
+
+.header-auth {
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.28);
 }
 
 .button-secondary,
@@ -441,6 +454,15 @@ select {
   gap: 0;
   align-items: center;
   text-align: center;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.logo-panel::before {
+  content: none;
 }
 
 .glass-panel {
@@ -1111,7 +1133,7 @@ select {
     display: none;
   }
 
-  .header-cta {
+  .header-actions {
     margin-left: auto;
   }
 
@@ -1139,7 +1161,7 @@ select {
 
   .brand-logo-frame {
     width: 100%;
-    padding: 10px 14px;
+    padding: 0;
   }
 
   .hero-section,
@@ -1165,8 +1187,12 @@ select {
   }
 
   .button,
-  .header-cta {
+  .header-actions {
     width: 100%;
+  }
+
+  .header-actions {
+    margin-left: 0;
   }
 
   .site-header {
@@ -1200,9 +1226,9 @@ select {
   }
 
   .brand-logo-frame-hero {
-    min-height: 180px;
-    padding: 20px 18px;
-    border-radius: 24px;
+    min-height: 0;
+    padding: 0;
+    border-radius: 0;
   }
 
   .brand-primary-logo-header,
