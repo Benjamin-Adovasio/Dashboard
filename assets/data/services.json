@@ -17,7 +17,7 @@
     {
       "id": "cloud",
       "name": "NextCloud",
-      "desc": "Private cloud storage and sharing",
+      "desc": "Private cloud storage",
       "url": "https://cloud.adovasio.com",
       "icon": "cloud"
     },
@@ -38,7 +38,7 @@
     {
       "id": "photos",
       "name": "Adovasio Photo Server",
-      "desc": "Photo backup and search",
+      "desc": "Photo backup",
       "url": "https://photos.adovasio.com",
       "icon": "camera"
     },
@@ -52,7 +52,7 @@
     {
       "id": "joplin",
       "name": "Adovasio Notes Server",
-      "desc": "Cross-device notes sync",
+      "desc": "Notes sync",
       "url": "https://notes.adovasio.com",
       "icon": "notes"
     },
@@ -64,6 +64,4 @@
       "icon": "energy"
     }
   ]
-,
-  "pad": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 }

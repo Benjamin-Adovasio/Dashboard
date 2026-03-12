@@ -174,7 +174,7 @@ async function renderStatusSummary() {
       <article class="status-card">
         <span class="status-kicker">Platform Status</span>
         <h3>${escapeHtml(description)}</h3>
-        <p>Current health across the Adovasio platform.</p>
+        <p>Current platform health.</p>
         <div class="status-meta">
           <span class="status-badge ${indicator}">
             ${escapeHtml(displayLabel(data.status?.indicator || "operational"))}
@@ -216,7 +216,7 @@ async function renderStatusComponents() {
       root.innerHTML = `
         <article class="status-card">
           <h3>No components listed</h3>
-          <p>Component-level reporting is not available right now.</p>
+          <p>Component reporting is not available right now.</p>
         </article>
       `;
       return;
@@ -452,4 +452,4 @@ function escapeHtml(value) {
 
 function escapeAttribute(value) {
   return escapeHtml(value);
-}/*xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx*/
+}

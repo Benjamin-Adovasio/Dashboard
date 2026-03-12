@@ -6,8 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     name="description"
-    content="Request a quote for private infrastructure and managed services from Adovasio Technology LLC."
+    content="Request a quote for secure infrastructure and managed services from Adovasio Technology LLC."
   />
+  <link rel="icon" href="/assets/images/adovasio-logo.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -69,7 +70,27 @@
     .brand {
       display: inline-flex;
       align-items: center;
+      gap: 14px;
       min-width: 0;
+    }
+
+    .brand-logo-shell {
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      padding: 5px;
+      border-radius: 18px;
+      background: rgba(248, 251, 255, 0.98);
+      border: 1px solid rgba(191, 219, 254, 0.42);
+      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.2);
+      flex: none;
+    }
+
+    .brand-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
     }
 
     .brand-copy {
@@ -210,9 +231,18 @@
   <div class="shell">
     <header class="topbar">
       <a class="brand" href="index.html">
+        <span class="brand-logo-shell">
+          <img
+            class="brand-logo"
+            src="/assets/images/adovasio-logo.svg"
+            alt="Adovasio Technology LLC logo"
+            width="42"
+            height="42"
+          />
+        </span>
         <span class="brand-copy">
           <span class="brand-name">Adovasio Technology LLC</span>
-          <span class="brand-tag">Private infrastructure and managed services</span>
+          <span class="brand-tag">Secure infrastructure and managed services</span>
         </span>
       </a>
       <a class="back-link" href="index.html">Back to homepage</a>
@@ -222,11 +252,11 @@
       <section class="intro">
         <p class="eyebrow">Request a Quote</p>
         <h1>Tell us what you need.</h1>
-        <p>Share the services, locations, or access requirements you want Adovasio to support.</p>
+        <p>Remote access, private cloud, backup, monitoring, routers, or managed support.</p>
         <ul>
-          <li>Remote access, identity, cloud, and backup</li>
-          <li>Routers, monitoring, and managed services</li>
-          <li>A direct quote for your environment</li>
+          <li>VPN, SSO, and secure access</li>
+          <li>Cloud, backup, notes, print, and Git</li>
+          <li>Remote routers and ongoing management</li>
         </ul>
       </section>
 
@@ -245,4 +275,4 @@
     </main>
   </div>
 </body>
-<!--xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx--></html>
+</html>
