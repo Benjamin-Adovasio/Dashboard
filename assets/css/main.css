@@ -103,9 +103,7 @@ select {
 }
 
 .site-header-wrap {
-  position: sticky;
-  top: 0;
-  z-index: 40;
+  position: relative;
   padding: 18px 18px 0;
 }
 
@@ -127,12 +125,6 @@ select {
     border-color 200ms ease,
     box-shadow 200ms ease,
     transform 200ms ease;
-}
-
-.site-header.is-scrolled {
-  background: rgba(2, 6, 23, 0.88);
-  border-color: rgba(148, 163, 184, 0.18);
-  box-shadow: 0 16px 36px rgba(2, 6, 23, 0.28);
 }
 
 .brand-lockup {

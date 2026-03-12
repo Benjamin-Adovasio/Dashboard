@@ -1,21 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-  setupHeaderState();
   setupRevealObserver();
 });
-
-function setupHeaderState() {
-  const header = document.getElementById("site-header");
-  if (!header) {
-    return;
-  }
-
-  const updateHeader = () => {
-    header.classList.toggle("is-scrolled", window.scrollY > 18);
-  };
-
-  updateHeader();
-  window.addEventListener("scroll", updateHeader, { passive: true });
-}
 
 function setupRevealObserver() {
   const animated = new Set();
