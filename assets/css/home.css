@@ -852,6 +852,38 @@ button {
   text-decoration: none;
 }
 
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.instagram-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at 30% 108%, #fdf497 0 14%, transparent 30%),
+    radial-gradient(circle at 10% 96%, #fd5949 0 28%, transparent 48%),
+    linear-gradient(135deg, #405de6 0%, #833ab4 34%, #c13584 58%, #e1306c 76%, #fd1d1d 100%);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+}
+
+.instagram-badge svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .site-footer a:hover,
 .site-footer a:focus-visible {
   color: #ffffff;
