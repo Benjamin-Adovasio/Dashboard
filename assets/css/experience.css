@@ -25,8 +25,6 @@
   --page-progress: 0;
   --pointer-x: 50%;
   --pointer-y: 50%;
-  --icon-arrow-ne: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 13 13 3M6 3h7v7' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  --icon-arrow-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M8 2v11M3.5 8.5 8 13l4.5-4.5' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 *,
@@ -268,11 +266,9 @@ h3 {
   height: 1em;
   flex: 0 0 auto;
   content: "";
-  background: currentColor;
+  background: url("/assets/images/arrow-ne-paper.svg") center / contain no-repeat;
   font-size: 1.15em;
   font-weight: 500;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
   transition: transform 320ms var(--ease);
 }
 
@@ -290,6 +286,10 @@ h3 {
   color: #04111a;
   background: var(--cyan);
   box-shadow: 0 12px 34px rgba(84, 201, 255, 0.18);
+}
+
+.button-primary::after {
+  background-image: url("/assets/images/arrow-ne-dark.svg");
 }
 
 .button-primary:hover {
@@ -320,6 +320,11 @@ h3 {
   transform: none;
 }
 
+.arrow-link:hover::after,
+.arrow-link:focus-visible::after {
+  background-image: url("/assets/images/arrow-ne-cyan.svg");
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -337,9 +342,7 @@ h3 {
   flex: 0 0 auto;
   content: "";
   color: var(--cyan);
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
+  background: url("/assets/images/arrow-ne-cyan.svg") center / contain no-repeat;
 }
 
 .media-fill,
@@ -538,9 +541,7 @@ picture.media-fill img {
   height: 1em;
   flex: 0 0 auto;
   content: "";
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
+  background: url("/assets/images/arrow-ne-dark.svg") center / contain no-repeat;
   transform: none;
 }
 
@@ -817,9 +818,7 @@ picture.media-fill img {
   flex: 0 0 auto;
   content: "";
   color: var(--cyan);
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-down) center / contain no-repeat;
-  mask: var(--icon-arrow-down) center / contain no-repeat;
+  background: url("/assets/images/arrow-down-cyan.svg") center / contain no-repeat;
 }
 
 .hero-path-shortcuts a:hover {
@@ -976,15 +975,18 @@ picture.media-fill img {
   width: 19px;
   height: 19px;
   content: "";
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
+  background: url("/assets/images/arrow-ne-paper.svg") center / contain no-repeat;
 }
 
 .path-card:hover .path-arrow {
   color: #06121a;
   background: var(--cyan);
   transform: rotate(45deg);
+}
+
+.path-card:hover .path-arrow::before,
+.path-card:focus-visible .path-arrow::before {
+  background-image: url("/assets/images/arrow-ne-dark.svg");
 }
 
 .path-card-residential:hover .path-arrow {
@@ -1689,9 +1691,7 @@ picture.media-fill img {
   margin-left: 12px;
   content: "";
   color: var(--cyan);
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-down) center / contain no-repeat;
-  mask: var(--icon-arrow-down) center / contain no-repeat;
+  background: url("/assets/images/arrow-down-cyan.svg") center / contain no-repeat;
 }
 
 .detail-hero h1 {
@@ -2395,9 +2395,7 @@ picture.media-fill img {
   flex: 0 0 auto;
   content: "";
   color: var(--cyan);
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
+  background: url("/assets/images/arrow-ne-cyan.svg") center / contain no-repeat;
 }
 
 .final-cta__inner {
@@ -2923,10 +2921,12 @@ picture.media-fill img {
   width: 1em;
   height: 1em;
   flex: 0 0 auto;
-  background: currentColor;
+  background: url("/assets/images/arrow-down-paper.svg") center / contain no-repeat;
   font-size: 0;
-  -webkit-mask: var(--icon-arrow-down) center / contain no-repeat;
-  mask: var(--icon-arrow-down) center / contain no-repeat;
+}
+
+.hero-scroll-link:is(:hover, :focus-visible) > span {
+  background-image: url("/assets/images/arrow-down-cyan.svg");
 }
 
 .portfolio-shell {
@@ -3296,9 +3296,7 @@ input.directory-search,
   margin-left: 8px;
   content: "";
   color: var(--cyan);
-  background: currentColor;
-  -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-  mask: var(--icon-arrow-ne) center / contain no-repeat;
+  background: url("/assets/images/arrow-ne-cyan.svg") center / contain no-repeat;
 }
 
 .empty-state,
@@ -3980,9 +3978,7 @@ html:not(.js) .coverage-rings {
     flex: 0 0 auto;
     content: "";
     color: var(--cyan);
-    background: currentColor;
-    -webkit-mask: var(--icon-arrow-ne) center / contain no-repeat;
-    mask: var(--icon-arrow-ne) center / contain no-repeat;
+    background: url("/assets/images/arrow-ne-cyan.svg") center / contain no-repeat;
     transform: none;
   }
 
