@@ -437,7 +437,7 @@ function announceResults(count) {
     ? ""
     : ` in ${getTagLabel(directoryState.filter)}`;
   const query = directoryState.query
-    ? ` matching “${directoryState.query}”`
+    ? ` matching "${directoryState.query}"`
     : "";
 
   status.textContent = `${count} ${noun}${filter}${query}.`;

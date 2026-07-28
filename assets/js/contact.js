@@ -41,7 +41,7 @@
     const data = new FormData(form);
     const customerType = clean(data.get("customerType"));
     const preferredContact = clean(data.get("preferredContact"));
-    const subject = `${customerType} inquiry — ${clean(data.get("name"))}`;
+    const subject = `${customerType} inquiry - ${clean(data.get("name"))}`;
     const body = [
       `Name: ${clean(data.get("name"))}`,
       `Email: ${clean(data.get("email"))}`,
@@ -57,7 +57,7 @@
 
     if (note) {
       note.textContent =
-        "Opening your email app. Nothing has been sent yet—review the message, then send it.";
+        "Opening your email app. Nothing has been sent yet - review the message, then send it.";
       note.dataset.state = "handoff";
     }
 

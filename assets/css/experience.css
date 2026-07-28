@@ -262,7 +262,7 @@ h3 {
 
 .button::after,
 .arrow-link::after {
-  content: "↗";
+  content: "\2197";
   font-size: 1.15em;
   font-weight: 500;
   transition: transform 320ms var(--ease);
@@ -324,7 +324,7 @@ h3 {
 }
 
 .text-link:not(:has(span))::after {
-  content: "↗";
+  content: "\2197";
   color: var(--cyan);
 }
 
@@ -522,7 +522,7 @@ picture.media-fill img {
   position: static;
   width: auto;
   height: auto;
-  content: "↗";
+  content: "\2197";
   background: transparent;
   transform: none;
 }
@@ -795,7 +795,7 @@ picture.media-fill img {
 }
 
 .hero-path-shortcuts a::after {
-  content: "↓";
+  content: "\2193";
   color: var(--cyan);
   font-size: 1.15rem;
 }
@@ -1654,7 +1654,7 @@ picture.media-fill img {
 .scroll-cue::after {
   display: inline-block;
   margin-left: 12px;
-  content: "↓";
+  content: "\2193";
   color: var(--cyan);
 }
 
@@ -2219,7 +2219,7 @@ picture.media-fill img {
 
 .mode-card li::before {
   margin-right: 9px;
-  content: "•";
+  content: "\2022";
   color: var(--cyan);
 }
 
@@ -3221,7 +3221,7 @@ input.directory-search,
 }
 .card-action::after {
   margin-left: 8px;
-  content: "↗";
+  content: "\2197";
   color: var(--cyan);
 }
 
@@ -3815,8 +3815,10 @@ html:not(.js) .coverage-rings {
     inset: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 118px max(28px, var(--gutter)) 50px;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
     visibility: hidden;
     background:
       radial-gradient(circle at 80% 18%, rgba(22, 119, 255, 0.17), transparent 28%),
@@ -3877,7 +3879,7 @@ html:not(.js) .coverage-rings {
 
   .site-nav {
     display: grid;
-    align-content: center;
+    align-content: start;
     gap: 0;
     width: 100%;
     margin: 0;
@@ -3899,7 +3901,7 @@ html:not(.js) .coverage-rings {
     position: static;
     width: auto;
     height: auto;
-    content: "↗";
+    content: "\2197";
     color: var(--cyan);
     background: transparent;
     transform: none;
@@ -3992,6 +3994,38 @@ html:not(.js) .coverage-rings {
   }
 }
 
+@media (min-width: 761px) and (max-width: 900px) {
+  .network-story,
+  .coverage-story {
+    height: auto;
+    padding-block: 110px;
+  }
+
+  .network-pin,
+  .coverage-pin,
+  .network-story__sticky {
+    position: relative;
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .network-story-copy,
+  .network-story__copy,
+  .coverage-copy {
+    position: static;
+    width: 100%;
+    max-width: none;
+  }
+
+  .network-map,
+  .home-plan {
+    right: auto;
+    bottom: auto;
+    margin-top: 0;
+  }
+}
+
 @media (max-width: 760px) {
   .section-space {
     padding-block: 90px;
@@ -4006,7 +4040,7 @@ html:not(.js) .coverage-rings {
   }
 
   .home-hero {
-    min-height: 92svh;
+    min-height: max(92svh, 640px);
   }
 
   .home-hero-inner {
@@ -4040,6 +4074,11 @@ html:not(.js) .coverage-rings {
     font-size: 0.64rem;
   }
 
+  .story-chips,
+  .coverage-labels {
+    display: none;
+  }
+
   .path-heading {
     align-items: start;
     flex-direction: column;
@@ -4053,7 +4092,7 @@ html:not(.js) .coverage-rings {
   }
 
   .path-card {
-    min-height: 53svh;
+    min-height: max(53svh, 430px);
   }
 
   .path-card h3 {
@@ -4146,7 +4185,7 @@ html:not(.js) .coverage-rings {
   }
 
   .detail-hero {
-    min-height: 92svh;
+    min-height: max(92svh, 640px);
   }
 
   .detail-hero-inner,
@@ -4156,6 +4195,10 @@ html:not(.js) .coverage-rings {
 
   .detail-hero h1 {
     font-size: clamp(3.6rem, 15vw, 6rem);
+  }
+
+  .detail-hero--business h1 {
+    font-size: clamp(2.75rem, 12vw, 3.4rem);
   }
 
   .residential-hero h1 {
@@ -4168,6 +4211,13 @@ html:not(.js) .coverage-rings {
     flex-direction: column;
   }
 
+  .detail-hero__actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .scroll-cue,
   .scroll-note {
     display: none;
   }
@@ -4215,6 +4265,8 @@ html:not(.js) .coverage-rings {
   }
 
   .network-map {
+    right: auto;
+    bottom: auto;
     min-height: 500px;
     margin-top: 0;
   }
@@ -4325,8 +4377,12 @@ html:not(.js) .coverage-rings {
     transform: none;
   }
 
-  .coverage-step:last-child,
   .coverage-step.is-active {
+    display: block;
+  }
+
+  .reduce-motion .coverage-step,
+  html:not(.js) .coverage-step {
     display: block;
   }
 
@@ -4366,12 +4422,15 @@ html:not(.js) .coverage-rings {
     padding-block: 36px;
   }
 
-  .res-service p,
-  .service-node {
+  .res-service p {
     grid-column: 2;
+    grid-row: 2;
   }
 
   .service-node {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
     width: 48px;
     height: 48px;
   }
@@ -4411,6 +4470,10 @@ html:not(.js) .coverage-rings {
     grid-template-columns: 1fr;
   }
 
+  .contact-hero > .section-shell {
+    width: min(var(--wrap), 100%);
+  }
+
   .filter-group {
     overflow-x: auto;
     padding-bottom: 3px;
@@ -4441,14 +4504,41 @@ html:not(.js) .coverage-rings {
     grid-template-columns: 1fr;
   }
 
+  input.directory-search,
+  .directory-search input,
+  .search-shell input,
+  .field input,
+  .field textarea,
+  .field select {
+    font-size: 1rem;
+  }
+
   .form-actions {
     align-items: flex-start;
     flex-direction: column;
   }
 }
 
+@media (max-width: 560px) {
+  .card-top,
+  .card-footer {
+    flex-wrap: wrap;
+    gap: 10px 14px;
+  }
+
+  .card-footer > *,
+  .footer-links a,
+  .footer-contact a,
+  .footer-meta a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
 @media (max-width: 480px) {
-  .brand-copy span {
+  .brand-copy span,
+  .brand-lockup > span > small,
+  .site-brand__name > span {
     display: none;
   }
 
@@ -4460,8 +4550,36 @@ html:not(.js) .coverage-rings {
     padding-inline: 12px;
   }
 
+  .home-hero h1 {
+    font-size: clamp(3.2rem, 16vw, 4.4rem);
+  }
+
   .path-card {
     border-radius: 26px;
+  }
+
+  .path-card-content {
+    inset-inline: 20px;
+  }
+
+  .path-card h3 {
+    font-size: clamp(2.65rem, 13vw, 3.3rem);
+  }
+
+  .story-copy h2,
+  .horizontal-story__intro h2,
+  .horizontal-intro h2 {
+    font-size: clamp(3.2rem, 16vw, 4.2rem);
+  }
+
+  .about-copy h1 {
+    font-size: clamp(3.2rem, 15.5vw, 4.2rem);
+  }
+
+  .final-cta h2,
+  .final-cta__inner h2,
+  .cta-inner h2 {
+    font-size: clamp(3.2rem, 15vw, 4.2rem);
   }
 
   .project-tile,
@@ -4472,6 +4590,7 @@ html:not(.js) .coverage-rings {
 
   .home-plan {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, minmax(96px, 1fr));
   }
 
   .plan-room:nth-child(2) {
@@ -4485,6 +4604,15 @@ html:not(.js) .coverage-rings {
   .contact-form {
     padding: 24px 18px;
     border-radius: 24px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .footer-grid .footer-brand {
+    grid-column: auto;
   }
 
   .footer-inner:not(.footer-grid) {
