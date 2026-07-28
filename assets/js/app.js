@@ -13,22 +13,22 @@ const ICONS = {
 };
 
 const ENTRY_META = {
-  shield: { label: "Access" },
-  key: { label: "Identity" },
-  cloud: { label: "Hosting" },
-  printer: { label: "Print" },
-  camera: { label: "Media" },
-  clock: { label: "Utility" },
-  notes: { label: "Workspace" },
-  energy: { label: "Monitoring" },
-  cable: { label: "Infrastructure" },
-  device: { label: "Apps" },
-  network: { label: "Deployment" }
+  shield: { label: "Access", visual: "shield" },
+  key: { label: "Identity", visual: "identity" },
+  cloud: { label: "Hosting", visual: "cloud" },
+  printer: { label: "Print", visual: "print" },
+  camera: { label: "Media", visual: "media" },
+  clock: { label: "Utility", visual: "time" },
+  notes: { label: "Workspace", visual: "workspace" },
+  energy: { label: "Monitoring", visual: "energy" },
+  cable: { label: "Infrastructure", visual: "infrastructure" },
+  device: { label: "Apps", visual: "app" },
+  network: { label: "Deployment", visual: "network" }
 };
 
 const KIND_META = {
   portal: {
-    label: "Portal",
+    label: "Platform",
     tag: "portals"
   },
   app: {
@@ -64,9 +64,15 @@ const TAG_LABELS = {
 };
 
 const DIRECTORY_FILTERS = [
-  { value: "portals", label: "Portals" },
+  { value: "portals", label: "Platforms" },
   { value: "apps", label: "Apps" }
 ];
+
+const FEATURED_ENTRY_IDS = new Set([
+  "bengpt",
+  "georgie-ai",
+  "guardian-campus-safety"
+]);
 
 const directoryState = {
   query: "",
@@ -74,11 +80,17 @@ const directoryState = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!document.getElementById("grid-directory")) {
+    return;
+  }
+
   setupDirectoryControls();
   loadDirectory();
 });
 
 async function loadDirectory() {
+  setDirectoryBusy(true);
+
   try {
     const response = await fetch("/assets/data/directory.json", {
       cache: "no-store"
@@ -105,6 +117,8 @@ async function loadDirectory() {
     renderDirectory([]);
     applyDirectoryFilters();
     refreshMotion();
+  } finally {
+    setDirectoryBusy(false);
   }
 }
 
@@ -115,6 +129,16 @@ function setupDirectoryControls() {
   if (search) {
     search.addEventListener("input", event => {
       directoryState.query = String(event.target.value || "").trim().toLowerCase();
+      applyDirectoryFilters();
+    });
+
+    search.addEventListener("keydown", event => {
+      if (event.key !== "Escape" || !search.value) {
+        return;
+      }
+
+      search.value = "";
+      directoryState.query = "";
       applyDirectoryFilters();
     });
   }
@@ -178,61 +202,85 @@ function renderDirectory(entries) {
 
   if (entries.length === 0) {
     root.innerHTML = `
-      <article class="state-card">
-        <p class="panel-label">Unavailable</p>
+      <article class="state-card directory-error" role="alert">
+        <p class="eyebrow panel-label">Unavailable</p>
         <h3>Directory unavailable</h3>
-        <p>The Adovasio directory could not be loaded right now.</p>
+        <p>The work directory could not be loaded right now.</p>
+        <a class="text-link" href="mailto:info@adovasio.com">Contact Adovasio</a>
       </article>
     `;
     return;
   }
 
   root.innerHTML = entries
-    .map(entry => renderDirectoryCard(entry))
+    .map((entry, index) => renderDirectoryCard(entry, index))
     .join("");
 }
 
-function renderDirectoryCard(entry) {
+function renderDirectoryCard(entry, index) {
   const entryMeta = resolveEntryMeta(entry);
   const icon = resolveIcon(entry.icon);
-  const href = escapeAttribute(entry.url);
+  const url = normalizeUrl(entry.url);
+  const href = escapeAttribute(url);
   const footer = resolveFooter(entry);
   const action = resolveAction(entry);
   const searchText = buildSearchText(entry, entryMeta);
   const featuredTag = entry.tags.find(tag => tag !== entry.kindTag) || entry.kindTag;
+  const isFeatured = FEATURED_ENTRY_IDS.has(entry.id);
+  const externalNote = isExternalUrl(url)
+    ? '<span class="sr-only"> (opens in a new tab)</span>'
+    : "";
+  const cardNumber = String(index + 1).padStart(2, "0");
 
   return `
     <a
-      class="directory-card"
+      class="work-card directory-card work-card--${entry.kind} work-card--${entryMeta.visual}${isFeatured ? " work-card--featured" : ""}"
       href="${href}"
-      ${buildLinkAttributes(entry.url)}
+      ${buildLinkAttributes(url)}
       data-directory-card
+      data-entry-id="${escapeAttribute(entry.id || "")}"
       data-tags="${escapeAttribute(entry.tags.join("|"))}"
       data-search="${escapeAttribute(searchText)}"
+      data-reveal
+      style="--work-index: ${index}"
     >
-      <div class="card-top">
-        <span class="card-kind">${escapeHtml(entry.kindLabel)}</span>
-        <span class="card-tag">${escapeHtml(entry.label || getTagLabel(featuredTag) || entryMeta.label)}</span>
-      </div>
-      <div class="card-body">
-        <span class="card-icon" aria-hidden="true">
+      <div class="work-card-visual card-visual" aria-hidden="true">
+        <span class="work-card-grid"></span>
+        <span class="work-card-orbit"></span>
+        <span class="card-icon work-card-icon">
           ${icon}
         </span>
-        <div>
+        <span class="work-card-number">${cardNumber}</span>
+      </div>
+
+      <div class="work-card-content">
+        <div class="card-top">
+          <span class="card-kind">${escapeHtml(entry.kindLabel)}</span>
+          <span class="card-tag">${escapeHtml(entry.label || getTagLabel(featuredTag) || entryMeta.label)}</span>
+        </div>
+        <div class="card-body">
           <h3>${escapeHtml(entry.name)}</h3>
           <p>${escapeHtml(entry.desc || "")}</p>
         </div>
-      </div>
-      <div class="card-footer">
-        <span>${escapeHtml(footer)}</span>
-        <strong class="card-action">${escapeHtml(action)}</strong>
+        <div class="card-footer">
+          <span class="card-destination">${escapeHtml(footer)}</span>
+          <strong class="card-action">
+            <span>${escapeHtml(action)}${externalNote}</span>
+            <svg aria-hidden="true" viewBox="0 0 20 20" focusable="false">
+              <path d="M5 15 15 5M7 5h8v8"></path>
+            </svg>
+          </strong>
+        </div>
       </div>
     </a>
   `;
 }
 
 function applyDirectoryFilters() {
-  const cards = Array.from(document.querySelectorAll("[data-directory-card]"));
+  const root = document.getElementById("grid-directory");
+  const cards = root
+    ? Array.from(root.querySelectorAll("[data-directory-card]"))
+    : [];
   const emptyState = document.getElementById("directory-empty");
   let visibleCount = 0;
 
@@ -256,14 +304,20 @@ function applyDirectoryFilters() {
   }
 
   setText("[data-results-count]", visibleCount);
+  setText("[data-results-label]", visibleCount === 1 ? "entry shown" : "entries shown");
+  announceResults(visibleCount);
 }
 
 function normalizeDirectoryEntry(entry, kind) {
   const kindMeta = KIND_META[kind] || KIND_META.portal;
-  const tags = normalizeTags([kindMeta.tag, ...(Array.isArray(entry.tags) ? entry.tags : [])]);
+  const source = entry && typeof entry === "object" ? entry : {};
+  const tags = normalizeTags([
+    kindMeta.tag,
+    ...(Array.isArray(source.tags) ? source.tags : [])
+  ]);
 
   return {
-    ...entry,
+    ...source,
     kind,
     kindLabel: kindMeta.label,
     kindTag: kindMeta.tag,
@@ -339,6 +393,16 @@ function isExternalUrl(url) {
   return /^https?:\/\//i.test(String(url));
 }
 
+function normalizeUrl(value) {
+  const url = String(value || "").trim();
+
+  if (/^https?:\/\//i.test(url) || url.startsWith("/")) {
+    return url;
+  }
+
+  return "#";
+}
+
 function formatHost(value) {
   try {
     return new URL(value).host;
@@ -353,8 +417,69 @@ function setText(selector, value) {
   });
 }
 
+function setDirectoryBusy(isBusy) {
+  const root = document.getElementById("grid-directory");
+
+  if (root) {
+    root.setAttribute("aria-busy", String(isBusy));
+  }
+}
+
+function announceResults(count) {
+  const status = document.getElementById("directory-status");
+
+  if (!status) {
+    return;
+  }
+
+  const noun = count === 1 ? "entry" : "entries";
+  const filter = directoryState.filter === "all"
+    ? ""
+    : ` in ${getTagLabel(directoryState.filter)}`;
+  const query = directoryState.query
+    ? ` matching “${directoryState.query}”`
+    : "";
+
+  status.textContent = `${count} ${noun}${filter}${query}.`;
+}
+
 function refreshMotion() {
   window.AdovasioMotion?.refresh?.(document.body);
+
+  const root = document.getElementById("grid-directory");
+  const elements = root
+    ? Array.from(root.querySelectorAll("[data-reveal]:not(.is-visible)"))
+    : [];
+
+  if (!elements.length) {
+    return;
+  }
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reduceMotion || !("IntersectionObserver" in window)) {
+    elements.forEach(element => element.classList.add("is-visible"));
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    },
+    {
+      rootMargin: "0px 0px -8% 0px",
+      threshold: 0.04
+    }
+  );
+
+  elements.forEach(element => observer.observe(element));
 }
 
 function escapeHtml(value) {
