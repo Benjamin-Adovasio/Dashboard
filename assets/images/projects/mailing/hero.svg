@@ -1,0 +1,59 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 600 600"
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <linearGradient id="mail-line" x1="112" y1="132" x2="490" y2="468" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A7E6FF"/>
+      <stop offset=".48" stop-color="#54C9FF"/>
+      <stop offset="1" stop-color="#1677FF"/>
+    </linearGradient>
+    <linearGradient id="mail-fill" x1="180" y1="202" x2="421" y2="414" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#54C9FF" stop-opacity=".14"/>
+      <stop offset="1" stop-color="#1677FF" stop-opacity=".025"/>
+    </linearGradient>
+    <filter id="mail-glow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g stroke="#54C9FF" stroke-width="1" opacity=".08">
+    <path d="M86 150H514M86 225H514M86 300H514M86 375H514M86 450H514"/>
+    <path d="M150 86V514M225 86V514M300 86V514M375 86V514M450 86V514"/>
+  </g>
+
+  <g stroke="url(#mail-line)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M110 224c23-66 80-110 148-121 81-13 157 20 199 79" stroke-width="2" opacity=".34"/>
+    <path d="M492 374c-27 69-92 119-170 124-78 5-149-33-188-93" stroke-width="2" opacity=".34"/>
+    <path d="M438 160l25 26-36 3M151 433l-22-32 39 1" stroke-width="2" opacity=".55"/>
+
+    <path d="M170 183h230a28 28 0 0 1 28 28v166a28 28 0 0 1-28 28H170a28 28 0 0 1-28-28V211a28 28 0 0 1 28-28Z" fill="#071923" fill-opacity=".32" stroke-width="2" opacity=".24" transform="translate(16 -15)"/>
+    <rect x="156" y="199" width="288" height="214" rx="28" fill="url(#mail-fill)" stroke-width="2.5"/>
+    <path d="m177 229 104 84a30 30 0 0 0 38 0l104-84" stroke-width="3"/>
+    <path d="m177 383 91-82M423 383l-91-82" stroke-width="2" opacity=".64"/>
+
+    <path d="M90 276h62M448 334h64" stroke-width="2.5" opacity=".72"/>
+    <path d="m136 262 16 14-16 14M464 320l-16 14 16 14" stroke-width="2.5"/>
+    <path d="M105 276c0 70 46 130 111 151M495 334c0-71-45-132-110-154" stroke-width="2" opacity=".4"/>
+
+    <circle cx="90" cy="276" r="13" fill="#0D2B3D" stroke-width="2"/>
+    <circle cx="512" cy="334" r="13" fill="#0D2B3D" stroke-width="2"/>
+    <circle cx="216" cy="427" r="11" fill="#0D2B3D" stroke-width="2"/>
+    <circle cx="385" cy="180" r="11" fill="#0D2B3D" stroke-width="2"/>
+  </g>
+
+  <g fill="#54C9FF" filter="url(#mail-glow)">
+    <circle cx="90" cy="276" r="3.5"/>
+    <circle cx="512" cy="334" r="3.5"/>
+    <circle cx="216" cy="427" r="3"/>
+    <circle cx="385" cy="180" r="3"/>
+    <circle cx="300" cy="328" r="4"/>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+{
+  "technologies": {
+    "authentik": {
+      "name": "authentik",
+      "logo": "/assets/images/brands/authentik.svg"
+    },
+    "gitea": {
+      "name": "Gitea",
+      "logo": "/assets/images/brands/gitea.svg"
+    },
+    "immich": {
+      "name": "Immich",
+      "logo": "/assets/images/brands/immich.svg"
+    },
+    "ios": {
+      "name": "iOS",
+      "logo": "/assets/images/brands/ios.svg"
+    },
+    "javascript": {
+      "name": "JavaScript",
+      "logo": "/assets/images/brands/javascript.svg"
+    },
+    "nextcloud": {
+      "name": "Nextcloud",
+      "logo": "/assets/images/brands/nextcloud.svg"
+    },
+    "ntp": {
+      "name": "NTP",
+      "logo": "/assets/images/brands/ntp.svg"
+    },
+    "on-device-ai": {
+      "name": "On-device AI",
+      "logo": "/assets/images/brands/on-device-ai.svg"
+    },
+    "open-webui": {
+      "name": "Open WebUI",
+      "logo": "/assets/images/brands/open-webui.svg"
+    },
+    "postfix-admin": {
+      "name": "Postfix Admin",
+      "logo": "/assets/images/brands/postfix-admin.svg"
+    },
+    "sophos": {
+      "name": "Sophos",
+      "logo": "/assets/images/brands/sophos.svg"
+    }
+  }
+}

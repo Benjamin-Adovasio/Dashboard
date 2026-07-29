@@ -1370,6 +1370,41 @@ picture.media-fill img {
   box-shadow: 0 0 40px rgba(84, 201, 255, 0.18);
 }
 
+.project-mark-icon,
+.project-tile-image {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 42%;
+  height: 42%;
+  transform: translate(-50%, -50%);
+}
+
+.project-mark-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.2;
+}
+
+.project-tile-image {
+  width: 116%;
+  height: 116%;
+  object-fit: contain;
+}
+
+.project-mark.has-project-image .project-mark-icon {
+  opacity: 0;
+}
+
+.project-mark.has-project-image.is-image-missing .project-mark-icon {
+  opacity: 1;
+}
+
 .project-tile h3 {
   max-width: 9ch;
   margin: auto 0 18px;
@@ -2403,6 +2438,45 @@ picture.media-fill img {
   background: url("/assets/images/arrow-ne-cyan.svg") center / contain no-repeat;
 }
 
+.business-project-card {
+  isolation: isolate;
+}
+
+.business-project-visual {
+  position: absolute;
+  z-index: -1;
+  top: 34px;
+  right: 34px;
+  display: grid;
+  width: clamp(96px, 12vw, 160px);
+  aspect-ratio: 1;
+  place-items: center;
+  opacity: 0.24;
+}
+
+.business-project-visual svg,
+.business-project-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.business-project-visual svg {
+  fill: none;
+  stroke: var(--cyan);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.1;
+}
+
+.business-project-visual.has-project-image svg {
+  display: none;
+}
+
+.business-project-visual.has-project-image.is-image-missing svg {
+  display: block;
+}
+
 .final-cta__inner {
   width: min(980px, calc(100% - (2 * var(--gutter))));
   padding-block: 110px;
@@ -3204,6 +3278,23 @@ input.directory-search,
   stroke-width: 1.25;
 }
 
+.card-icon .project-card-image {
+  position: absolute;
+  z-index: 2;
+  inset: -12%;
+  width: 124%;
+  height: 124%;
+  object-fit: contain;
+}
+
+.card-icon.has-project-image > svg {
+  opacity: 0;
+}
+
+.card-icon.has-project-image.is-image-missing > svg {
+  opacity: 1;
+}
+
 .work-card:hover .card-icon,
 .directory-card:hover .card-icon {
   background: rgba(84, 201, 255, 0.07);
@@ -3230,6 +3321,73 @@ input.directory-search,
   margin-bottom: 28px;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.technology-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+}
+
+.technology-stack li {
+  display: inline-flex;
+  min-height: 30px;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 9px 4px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  color: #aeb8c2;
+  background: rgba(255, 255, 255, 0.035);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.technology-logo {
+  position: relative;
+  display: grid;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 auto;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 50%;
+  color: var(--cyan-soft);
+  background: rgba(84, 201, 255, 0.1);
+}
+
+.technology-logo img {
+  position: absolute;
+  z-index: 1;
+  inset: 2px;
+  width: calc(100% - 4px);
+  height: calc(100% - 4px);
+  object-fit: contain;
+}
+
+.technology-mark {
+  font-size: 0.43rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.technology-stack--compact {
+  margin-top: 18px;
+  margin-bottom: 0;
+}
+
+.project-tile .technology-stack li,
+.business-project-card .technology-stack li {
+  background: rgba(5, 11, 16, 0.42);
+}
+
+.business-project-card .technology-stack {
+  position: relative;
+  z-index: 1;
 }
 
 .card-footer {
@@ -3263,6 +3421,26 @@ input.directory-search,
 .no-script-notice {
   margin: 0 0 24px;
   color: var(--muted);
+}
+
+.project-loading,
+.project-noscript {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 34px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-lg);
+  color: var(--muted);
+  text-align: center;
+}
+
+.project-noscript {
+  margin-top: 18px;
+}
+
+.project-state {
+  align-self: stretch;
+  width: 100%;
 }
 
 .cta-section {

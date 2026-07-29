@@ -342,33 +342,20 @@
         <a class="text-link" href="/portfolio.html">View the portfolio</a>
       </header>
 
-      <div class="featured-work__grid">
-        <a
-          class="work-card"
-          href="https://sso.adovasio.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-reveal
-        >
-          <span class="work-card__meta">Identity / Hosted system</span>
-          <h3>Adovasio SSO</h3>
-          <p>One secure sign-in for Adovasio services.</p>
-          <span class="work-card__action">Open project</span>
-        </a>
-
-        <a
-          class="work-card"
-          href="https://git.adovasio.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-reveal
-        >
-          <span class="work-card__meta">Development / Hosted system</span>
-          <h3>Adovasio Git</h3>
-          <p>Private code and repository hosting.</p>
-          <span class="work-card__action">Open project</span>
-        </a>
+      <div
+        class="featured-work__grid"
+        data-projects-surface="business"
+        aria-live="polite"
+        aria-busy="true"
+      >
+        <p class="project-loading">Loading systems in use…</p>
       </div>
+
+      <noscript>
+        <p class="project-noscript">
+          <a class="text-link" href="/portfolio.html">View the complete project directory</a>
+        </p>
+      </noscript>
     </section>
 
     <section class="final-cta" aria-labelledby="business-cta-title">
@@ -437,5 +424,6 @@
   </footer>
 
   <script defer src="/assets/js/site.js"></script>
+  <script defer src="/assets/js/projects.js?v=1"></script>
 </body>
 </html>

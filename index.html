@@ -307,65 +307,21 @@
           <a class="arrow-link" href="/portfolio.html">View all work</a>
         </header>
 
-        <div class="project-reel">
-          <a
-            class="project-tile"
-            href="https://apps.apple.com/us/app/georgie-ai/id6761129715"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-reveal
-          >
-            <div class="project-mark" aria-hidden="true"></div>
-            <div class="project-tile-content">
-              <div class="project-meta">
-                <span>Mobile app</span>
-                <span>01</span>
-              </div>
-              <div>
-                <h3>Georgie AI</h3>
-                <p>Published on the Apple App Store.</p>
-              </div>
-            </div>
-          </a>
-
-          <a
-            class="project-tile"
-            href="https://apps.apple.com/kz/app/guardian-campus-safety/id6762008563"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-reveal
-            style="--reveal-delay: 90ms"
-          >
-            <div class="project-tile-content">
-              <div class="project-meta">
-                <span>Mobile app</span>
-                <span>02</span>
-              </div>
-              <div>
-                <h3>Guardian Campus Safety</h3>
-                <p>A practical campus safety utility.</p>
-              </div>
-            </div>
-          </a>
-
-          <a
-            class="project-tile"
-            href="/portfolio.html"
-            data-reveal
-            style="--reveal-delay: 140ms"
-          >
-            <div class="project-tile-content">
-              <div class="project-meta">
-                <span>Hosted systems</span>
-                <span>03</span>
-              </div>
-              <div>
-                <h3>Adovasio infrastructure</h3>
-                <p>Platforms built, hosted, and maintained.</p>
-              </div>
-            </div>
-          </a>
+        <div
+          class="project-reel"
+          data-projects-surface="home"
+          data-project-limit="3"
+          aria-live="polite"
+          aria-busy="true"
+        >
+          <p class="project-loading">Loading selected work…</p>
         </div>
+
+        <noscript>
+          <p class="project-noscript">
+            <a class="arrow-link" href="/portfolio.html">View the complete project directory</a>
+          </p>
+        </noscript>
       </div>
     </section>
 
@@ -433,5 +389,6 @@
   </footer>
 
   <script defer src="/assets/js/site.js?v=1"></script>
+  <script defer src="/assets/js/projects.js?v=1"></script>
 </body>
 </html>

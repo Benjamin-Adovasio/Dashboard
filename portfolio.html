@@ -163,7 +163,7 @@
               <h2 id="work-title">Built. Published. Maintained.</h2>
             </div>
             <p class="directory-count" aria-live="polite" aria-atomic="true">
-              <strong data-results-count>11</strong>
+              <strong data-results-count>0</strong>
               <span data-results-label>entries shown</span>
             </p>
           </header>
@@ -209,9 +209,12 @@
           <div
             class="work-grid"
             id="grid-directory"
+            data-projects-surface="portfolio"
             data-directory-grid
             aria-busy="true"
-          ></div>
+          >
+            <p class="project-loading">Loading project directory…</p>
+          </div>
 
           <article class="empty-state" id="directory-empty" hidden>
             <p class="eyebrow">No matches</p>
@@ -220,74 +223,10 @@
           </article>
 
           <noscript>
-            <div class="no-script-directory">
-              <p class="no-script-notice">
-                Search and filters require JavaScript. Every destination remains available below.
-              </p>
-              <div class="work-grid work-grid-static">
-                <a class="work-card directory-card work-card--portal" href="https://vpn.adovasio.com:4445">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio VPN</h3>
-                  <p>Remote access portal</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://sso.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio SSO</h3>
-                  <p>Single sign-on portal</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://cloud.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Nextcloud</h3>
-                  <p>Files and sync</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://git.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio Git</h3>
-                  <p>Code and repo hosting</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://print.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio Print</h3>
-                  <p>Printing portal</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://photos.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio Photos</h3>
-                  <p>Photo backup and access</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://time.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Adovasio Time</h3>
-                  <p>Hosted NTP time source</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://ai.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>BenGPT</h3>
-                  <p>Self-hosted AI chatbot</p>
-                </a>
-                <a class="work-card directory-card work-card--portal" href="https://energy.adovasio.com">
-                  <span class="card-kind">Platform</span>
-                  <h3>Energy Monitoring</h3>
-                  <p>Power and device monitoring</p>
-                </a>
-                <a
-                  class="work-card directory-card work-card--app"
-                  href="https://apps.apple.com/us/app/georgie-ai/id6761129715"
-                >
-                  <span class="card-kind">App</span>
-                  <h3>Georgie AI</h3>
-                  <p>Available on the Apple App Store.</p>
-                </a>
-                <a
-                  class="work-card directory-card work-card--app"
-                  href="https://apps.apple.com/kz/app/guardian-campus-safety/id6762008563"
-                >
-                  <span class="card-kind">App</span>
-                  <h3>Guardian Campus Safety</h3>
-                  <p>Campus safety utility available on the Apple App Store.</p>
-                </a>
-              </div>
-            </div>
+            <p class="no-script-notice">
+              The interactive project directory requires JavaScript. Contact
+              <a href="mailto:info@adovasio.com">info@adovasio.com</a> for project information.
+            </p>
           </noscript>
         </div>
       </section>
@@ -336,6 +275,6 @@
   </div>
 
   <script defer src="/assets/js/site.js?v=1"></script>
-  <script defer src="/assets/js/app.js?v=16"></script>
+  <script defer src="/assets/js/projects.js?v=1"></script>
 </body>
 </html>
