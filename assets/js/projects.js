@@ -29,7 +29,12 @@
   };
 
   renderSiteFooters();
-  document.addEventListener("DOMContentLoaded", initProjectSurfaces);
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initProjectSurfaces, { once: true });
+  } else {
+    initProjectSurfaces();
+  }
 
   function renderSiteFooters() {
     const page = getCurrentPage();
@@ -178,6 +183,10 @@
           </div>
         </div>
       `;
+
+      root.querySelectorAll("[data-reveal]").forEach(element => {
+        element.classList.add("is-visible");
+      });
     });
   }
 

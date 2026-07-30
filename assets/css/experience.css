@@ -1599,6 +1599,31 @@ picture.media-fill img {
   color: var(--paper);
 }
 
+.site-footer__fallback {
+  display: flex;
+  min-height: 140px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  width: min(var(--wrap), 100%);
+  margin-inline: auto;
+}
+
+.site-footer__fallback-brand {
+  color: var(--paper);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  text-decoration: none;
+}
+
+.site-footer__fallback-link {
+  color: var(--cyan);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
 .site-footer.site-footer--mega {
   position: relative;
   overflow: hidden;
@@ -2150,6 +2175,13 @@ picture.media-fill img {
 }
 
 @media (max-width: 640px) {
+  .site-footer__fallback {
+    min-height: 180px;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+  }
+
   .mega-footer__cta-inner {
     padding-block: 112px;
   }
