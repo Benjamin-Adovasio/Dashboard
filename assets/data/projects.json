@@ -223,7 +223,7 @@
       },
       "status": "live",
       "order": 9,
-      "logo": "/assets/images/projects/georgie-ai/app-icon.svg",
+      "logo": "/assets/images/projects/georgie-ai/app-icon.svg?v=2",
       "logoShape": "mark",
       "visual": {
         "image": null,
@@ -250,7 +250,7 @@
       },
       "status": "live",
       "order": 10,
-      "logo": "/assets/images/projects/guardian-campus-safety/app-icon.svg",
+      "logo": "/assets/images/projects/guardian-campus-safety/app-icon.svg?v=2",
       "logoShape": "mark",
       "visual": {
         "image": null,

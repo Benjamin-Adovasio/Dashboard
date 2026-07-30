@@ -3764,18 +3764,24 @@ input.directory-search,
 
 .card-icon,
 .work-icon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  position: relative;
   display: grid;
-  width: clamp(110px, 16vw, 190px);
+  width: clamp(108px, 12vw, 156px);
   aspect-ratio: 1;
   place-items: center;
   border: 1px solid rgba(84, 201, 255, 0.18);
   border-radius: 50%;
   color: var(--cyan);
-  transform: translate(-50%, -58%);
   transition: transform 700ms var(--ease), background 400ms ease;
+}
+
+.card-visual-slot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  min-height: clamp(142px, 14vw, 174px);
+  flex: 0 0 auto;
+  place-items: center;
 }
 
 .card-icon::before,
@@ -3791,6 +3797,7 @@ input.directory-search,
 .work-icon svg {
   position: relative;
   z-index: 1;
+  grid-area: 1 / 1;
   width: 42px;
   height: 42px;
   fill: none;
@@ -3810,40 +3817,12 @@ input.directory-search,
 }
 
 .card-icon .project-card-logo {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  width: 64%;
-  height: 64%;
-  padding: 6px;
-  border-radius: 18px;
+  grid-area: 1 / 1;
+  width: 42px;
+  height: 42px;
   object-fit: contain;
-}
-
-.card-icon.has-project-logo {
-  top: 30%;
-}
-
-.card-icon.logo-shape--stacked .project-card-logo {
-  width: 69%;
-  height: 69%;
-}
-
-.card-icon.logo-shape--wide .project-card-logo {
-  width: 86%;
-  height: 52%;
-  padding: 14px 16px;
-  border-radius: 14px;
-}
-
-.card-icon.logo-surface--light .project-card-logo {
-  border: 1px solid rgba(5, 11, 16, 0.08);
-  background: #f7f9fb;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
-}
-
-.card-icon.logo-surface--dark .project-card-logo {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(5, 11, 16, 0.86);
 }
 
 .card-icon.has-project-image > svg {
@@ -3857,11 +3836,11 @@ input.directory-search,
 .work-card:hover .card-icon,
 .directory-card:hover .card-icon {
   background: rgba(84, 201, 255, 0.07);
-  transform: translate(-50%, -58%) scale(1.06);
+  transform: scale(1.06);
 }
 
 .card-body {
-  margin-top: auto;
+  margin-top: 0;
 }
 
 .card-body h3,
@@ -3967,6 +3946,7 @@ input.directory-search,
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
   padding-top: 20px;
   border-top: 1px solid var(--line);
   color: #79838c;
@@ -5397,11 +5377,6 @@ html:not(.js) .coverage-rings {
 
   .directory-count {
     margin: 0 4px 6px;
-  }
-
-  .card-icon.logo-shape--wide .project-card-logo {
-    width: 88%;
-    padding-inline: 10px;
   }
 
   .work-card,

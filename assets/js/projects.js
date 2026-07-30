@@ -567,13 +567,15 @@
       <div class="work-card-visual card-visual" aria-hidden="true">
         <span class="work-card-grid"></span>
         <span class="work-card-orbit"></span>
-        ${visual}
       </div>
 
       <div class="work-card-content">
         <div class="card-top">
           <span class="card-kind">${escapeHtml(project.category)}</span>
           <span class="card-tag">${escapeHtml(tag)}</span>
+        </div>
+        <div class="card-visual-slot" aria-hidden="true">
+          ${visual}
         </div>
         <div class="card-body">
           <h3>${escapeHtml(project.name)}</h3>
@@ -682,7 +684,7 @@
 
   function renderCardVisual(project, technology) {
     const logo = project.logo || technology?.logo || "";
-    const image = logo || project.visual.image;
+    const image = logo;
     const isLogo = Boolean(logo);
     const logoShape = project.logo ? project.logoShape : technology?.logoShape;
     const logoSurface = project.logo ? project.logoSurface : technology?.logoSurface;
