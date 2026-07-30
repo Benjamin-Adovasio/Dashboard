@@ -10,6 +10,7 @@
       "description": "A secure portal for remote access to Adovasio systems.",
       "category": "Networking",
       "kind": "platform",
+      "audience": "client",
       "featured": false,
       "placements": {},
       "status": "live",
@@ -30,10 +31,13 @@
       "description": "One secure sign-in for Adovasio services.",
       "category": "Business Technology",
       "kind": "platform",
+      "audience": "client",
       "featured": false,
       "placements": {
-        "business": 1
+        "business": 1,
+        "footer-client": 1
       },
+      "action": "Client Login",
       "status": "live",
       "order": 2,
       "visual": {
@@ -54,6 +58,7 @@
       "description": "A hosted Nextcloud platform for file access and synchronization.",
       "category": "Infrastructure",
       "kind": "platform",
+      "audience": "client",
       "featured": false,
       "placements": {},
       "status": "live",
@@ -77,6 +82,7 @@
       "description": "Private code and repository hosting.",
       "category": "Software",
       "kind": "platform",
+      "audience": "internal",
       "featured": false,
       "placements": {
         "business": 2
@@ -101,6 +107,7 @@
       "description": "A hosted portal for managed printing.",
       "category": "Business Technology",
       "kind": "platform",
+      "audience": "client",
       "featured": false,
       "placements": {},
       "status": "live",
@@ -121,6 +128,7 @@
       "description": "A hosted Immich platform for backing up and accessing photos.",
       "category": "Infrastructure",
       "kind": "platform",
+      "audience": "client",
       "featured": false,
       "placements": {},
       "status": "live",
@@ -143,8 +151,11 @@
       "description": "A hosted time utility backed by an NTP-disciplined UTC source.",
       "category": "Infrastructure",
       "kind": "platform",
+      "audience": "public",
       "featured": false,
-      "placements": {},
+      "placements": {
+        "footer-tools": 5
+      },
       "status": "live",
       "order": 7,
       "visual": {
@@ -166,9 +177,11 @@
       "description": "An AI chat experience powered by a self-hosted Open WebUI deployment.",
       "category": "Software",
       "kind": "platform",
+      "audience": "public",
       "featured": true,
       "placements": {
-        "home": 3
+        "home": 3,
+        "footer-tools": 4
       },
       "status": "live",
       "order": 8,
@@ -189,6 +202,7 @@
       "description": "An iOS app that uses on-device AI to recognize ingredients and generate training-aware recipes.",
       "category": "Software",
       "kind": "app",
+      "audience": "public",
       "featured": true,
       "placements": {
         "home": 1
@@ -213,6 +227,7 @@
       "description": "An iOS safety companion with emergency contacts, nearby AED locations, and first-aid guidance.",
       "category": "Software",
       "kind": "app",
+      "audience": "public",
       "featured": true,
       "placements": {
         "home": 2
@@ -233,21 +248,70 @@
       "name": "Adovasio Tools",
       "domain": "tools.adovasio.com",
       "url": "https://tools.adovasio.com",
-      "tagline": "Network and server diagnostics",
-      "description": "Web tools for public IP visibility, DNS lookup, ping, HTTP response, and TCP port testing.",
-      "category": "Networking",
+      "tagline": "Adovasio-hosted utility hub",
+      "description": "A central portal for network and server diagnostics, file conversion, PDF workflows, and other practical utilities.",
+      "category": "Tools",
       "kind": "platform",
+      "audience": "public",
       "featured": false,
-      "placements": {},
+      "placements": {
+        "footer-tools": 1
+      },
       "status": "live",
       "order": 11,
       "visual": {
         "image": "/assets/images/projects/tools/hero.svg",
-        "type": "network"
+        "type": "tools"
       },
       "technologies": [
         "javascript"
       ]
+    },
+    {
+      "id": "file-converter",
+      "slug": "file-converter",
+      "name": "File Converter",
+      "domain": "convert.adovasio.com",
+      "url": "https://convert.adovasio.com",
+      "tagline": "Private file conversion, on demand",
+      "description": "An Adovasio-hosted utility for converting common document, image, media, and archive formats.",
+      "category": "Tools",
+      "kind": "hosted application",
+      "audience": "public",
+      "featured": false,
+      "placements": {
+        "footer-tools": 2
+      },
+      "status": "live",
+      "order": 12,
+      "visual": {
+        "image": null,
+        "type": "files"
+      },
+      "technologies": []
+    },
+    {
+      "id": "pdf-tools",
+      "slug": "pdf-tools",
+      "name": "PDF Tools",
+      "domain": "pdf.adovasio.com",
+      "url": "https://pdf.adovasio.com",
+      "tagline": "Practical PDF workflows",
+      "description": "Adovasio-hosted tools for organizing, converting, compressing, and managing PDF documents.",
+      "category": "Tools",
+      "kind": "hosted application",
+      "audience": "public",
+      "featured": false,
+      "placements": {
+        "footer-tools": 3
+      },
+      "status": "live",
+      "order": 13,
+      "visual": {
+        "image": null,
+        "type": "document"
+      },
+      "technologies": []
     },
     {
       "id": "mailing",
@@ -259,10 +323,11 @@
       "description": "A secured Postfix Admin portal for managing Adovasio mail domains and users.",
       "category": "Business Technology",
       "kind": "platform",
+      "audience": "internal",
       "featured": false,
       "placements": {},
       "status": "live",
-      "order": 12,
+      "order": 14,
       "visual": {
         "image": "/assets/images/projects/mailing/hero.svg",
         "type": "mail"
@@ -281,10 +346,11 @@
       "description": "A secure sign-in gateway for protected Adovasio content.",
       "category": "Infrastructure",
       "kind": "platform",
+      "audience": "internal",
       "featured": false,
       "placements": {},
       "status": "live",
-      "order": 13,
+      "order": 15,
       "visual": {
         "image": "/assets/images/projects/index/hero.svg",
         "type": "security"
