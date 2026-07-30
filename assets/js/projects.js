@@ -77,109 +77,129 @@
 
         <div class="mega-footer__main">
           <div class="mega-footer__shell mega-footer__directory">
-            <div class="mega-footer__brand" data-reveal>
-              <a class="mega-footer__lockup" href="/" aria-label="Adovasio Technology LLC home">
-                <img
-                  src="/assets/images/adovasio-footer-mark-96.webp"
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  alt=""
-                />
-                <span>
-                  <strong>Adovasio</strong>
-                  <small>Technology LLC</small>
-                </span>
-              </a>
-              <p>Professional technology without enterprise complexity.</p>
-              <a class="mega-footer__email" href="mailto:info@adovasio.com">
-                info@adovasio.com
-              </a>
+            <div class="mega-footer__overview">
+              <div class="mega-footer__brand" data-reveal>
+                <a class="mega-footer__lockup" href="/" aria-label="Adovasio Technology LLC home">
+                  <img
+                    src="/assets/images/adovasio-footer-mark-96.webp"
+                    width="96"
+                    height="96"
+                    loading="lazy"
+                    alt=""
+                  />
+                  <span>
+                    <strong>Adovasio</strong>
+                    <small>Technology LLC</small>
+                  </span>
+                </a>
+                <p class="mega-footer__brand-copy">
+                  Professional technology without enterprise complexity.
+                </p>
+                <a class="mega-footer__email" href="mailto:info@adovasio.com">
+                  info@adovasio.com
+                </a>
+                <p class="mega-footer__copyright">
+                  <span>&copy; <span data-current-year>${year}</span> Adovasio Technology LLC</span>
+                  <span>Technology that just works.</span>
+                </p>
+              </div>
+
+              <nav class="mega-footer__group" aria-labelledby="footer-explore-title" data-reveal>
+                <h2 id="footer-explore-title">Explore Adovasio</h2>
+                <ul>
+                  <li>
+                    <a href="/business.html"${renderCurrentPage("business", page)}>Business</a>
+                  </li>
+                  <li>
+                    <a href="/residential.html"${renderCurrentPage("residential", page)}>
+                      Residential
+                    </a>
+                  </li>
+                  <li>
+                    <a href="/portfolio.html"${renderCurrentPage("portfolio", page)}>Portfolio</a>
+                  </li>
+                  <li>
+                    <a href="/about.html"${renderCurrentPage("about", page)}>About</a>
+                  </li>
+                  <li>
+                    <a href="/contact.html"${renderCurrentPage("contact", page)}>Contact</a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.instagram.com/adovasiotech/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Instagram<span class="sr-only"> (opens in a new tab)</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
             </div>
 
-            <nav class="mega-footer__group" aria-labelledby="footer-services-title" data-reveal>
-              <h2 id="footer-services-title">Services</h2>
-              <ul>
-                <li>
-                  <a href="/business.html"${renderCurrentPage("business", page)}>Business</a>
-                </li>
-                <li>
-                  <a href="/residential.html"${renderCurrentPage("residential", page)}>
-                    Residential
-                  </a>
-                </li>
-                <li><a href="${contactUrl}">Get Started</a></li>
-              </ul>
-            </nav>
+            <section class="mega-footer__ecosystem" aria-labelledby="footer-projects-title">
+              <header class="mega-footer__ecosystem-header">
+                <div>
+                  <p class="mega-footer__section-label">Portfolio directory</p>
+                  <h2 id="footer-projects-title">The complete Adovasio ecosystem.</h2>
+                </div>
+                <a class="mega-footer__all-projects" href="/portfolio.html">
+                  View full portfolio
+                  <span aria-hidden="true">↗</span>
+                </a>
+              </header>
 
-            <nav
-              class="mega-footer__group mega-footer__group--projects"
-              aria-labelledby="footer-tools-title"
-              data-reveal
-            >
-              <h2 id="footer-tools-title">Tools &amp; Platforms</h2>
-              <ul
-                class="mega-footer__project-list"
-                data-projects-surface="footer-tools"
-                data-project-limit="6"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <li class="mega-footer__loading">Loading tools…</li>
-              </ul>
-              <a class="mega-footer__all-projects" href="/portfolio.html">
-                View all projects
-                <span aria-hidden="true">↗</span>
-              </a>
-            </nav>
-
-            <nav class="mega-footer__group" aria-labelledby="footer-work-title" data-reveal>
-              <h2 id="footer-work-title">Work &amp; Company</h2>
-              <ul>
-                <li>
-                  <a href="/portfolio.html"${renderCurrentPage("portfolio", page)}>Portfolio</a>
-                </li>
-                <li><a href="/#directory">Selected Work</a></li>
-                <li>
-                  <a href="/about.html"${renderCurrentPage("about", page)}>About</a>
-                </li>
-                <li>
-                  <a href="/contact.html"${renderCurrentPage("contact", page)}>Contact</a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/adovasiotech/"
-                    target="_blank"
-                    rel="noopener noreferrer"
+              <div class="mega-footer__ecosystem-grid">
+                <nav
+                  class="mega-footer__group mega-footer__project-group"
+                  aria-labelledby="footer-tools-title"
+                >
+                  <h3 id="footer-tools-title">Tools &amp; Platforms</h3>
+                  <ul
+                    class="mega-footer__project-list"
+                    data-projects-surface="footer-projects"
+                    data-footer-project-group="tools"
+                    aria-live="polite"
+                    aria-busy="true"
                   >
-                    Instagram<span class="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+                    <li class="mega-footer__loading">Loading tools…</li>
+                  </ul>
+                </nav>
 
-            <section
-              class="mega-footer__client"
-              aria-labelledby="footer-client-title"
-              data-reveal
-            >
-              <h2 id="footer-client-title">Client Access</h2>
-              <div
-                data-projects-surface="footer-client"
-                data-project-limit="1"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <p class="mega-footer__loading">Loading secure access…</p>
+                <nav
+                  class="mega-footer__group mega-footer__project-group"
+                  aria-labelledby="footer-ios-title"
+                >
+                  <h3 id="footer-ios-title">iOS Apps</h3>
+                  <ul
+                    class="mega-footer__project-list"
+                    data-projects-surface="footer-projects"
+                    data-footer-project-group="ios"
+                    aria-live="polite"
+                    aria-busy="true"
+                  >
+                    <li class="mega-footer__loading">Loading apps…</li>
+                  </ul>
+                </nav>
+
+                <nav
+                  class="mega-footer__group mega-footer__project-group mega-footer__project-group--systems"
+                  aria-labelledby="footer-systems-title"
+                >
+                  <h3 id="footer-systems-title">Systems &amp; Infrastructure</h3>
+                  <ul
+                    class="mega-footer__project-list"
+                    data-projects-surface="footer-projects"
+                    data-footer-project-group="systems"
+                    aria-live="polite"
+                    aria-busy="true"
+                  >
+                    <li class="mega-footer__loading">Loading systems…</li>
+                  </ul>
+                </nav>
               </div>
             </section>
-          </div>
-
-          <div class="mega-footer__shell mega-footer__legal">
-            <p>
-              &copy; <span data-current-year>${year}</span> Adovasio Technology LLC
-            </p>
-            <p>Technology that just works.</p>
           </div>
         </div>
       `;
@@ -352,6 +372,12 @@
   function renderProjectSurface(root, projects, technologies) {
     const surface = root.dataset.projectsSurface;
 
+    if (surface === "footer-projects") {
+      renderFooterPortfolioGroup(root, projects, root.dataset.footerProjectGroup);
+      root.setAttribute("aria-busy", "false");
+      return;
+    }
+
     if (surface === "footer-tools" || surface === "footer-client") {
       renderFooterProjectSurface(root, projects, surface, root.dataset.projectLimit);
       root.setAttribute("aria-busy", "false");
@@ -386,6 +412,56 @@
     revealInjectedContent(root);
   }
 
+  function renderFooterPortfolioGroup(root, projects, rawGroup) {
+    const group = cleanText(rawGroup).toLowerCase();
+    const selected = projects
+      .filter(project => getFooterProjectGroup(project) === group)
+      .sort((a, b) => compareFooterGroupOrder(a, b, group));
+
+    if (!selected.length) {
+      renderFooterProjectFallback(root, "footer-projects");
+      return;
+    }
+
+    root.innerHTML = selected.map(renderFooterToolProject).join("");
+  }
+
+  function getFooterProjectGroup(project) {
+    const kind = project.kind.toLowerCase();
+
+    if (kind === "app" || project.technologies.includes("ios")) {
+      return "ios";
+    }
+
+    if (project.categoryKey === "tools" || project.audience === "public") {
+      return "tools";
+    }
+
+    return "systems";
+  }
+
+  function compareFooterGroupOrder(a, b, group) {
+    const placement = `footer-${group}`;
+    const aPlacement = a.placements[placement];
+    const bPlacement = b.placements[placement];
+    const aHasPlacement = Number.isFinite(aPlacement);
+    const bHasPlacement = Number.isFinite(bPlacement);
+
+    if (aHasPlacement || bHasPlacement) {
+      if (!aHasPlacement) {
+        return 1;
+      }
+      if (!bHasPlacement) {
+        return -1;
+      }
+      if (aPlacement !== bPlacement) {
+        return aPlacement - bPlacement;
+      }
+    }
+
+    return compareProjectOrder(a, b);
+  }
+
   function renderFooterProjectSurface(root, projects, surface, rawLimit) {
     const requiredAudience = surface === "footer-client" ? "client" : "public";
     const selected = selectPlacedProjects(
@@ -409,11 +485,15 @@
 
   function renderFooterToolProject(project) {
     const destination = project.url || `/portfolio.html#project-${slugify(project.slug)}`;
+    const action = cleanText(project.action);
 
     return `
-      <li>
+      <li${action ? ' class="mega-footer__project--action"' : ""}>
         <a href="${escapeAttribute(destination)}" ${buildLinkAttributes(destination)}>
-          <span>${escapeHtml(project.name)}</span>
+          <span class="mega-footer__project-name">
+            <span>${escapeHtml(project.name)}</span>
+            ${action ? `<small>${escapeHtml(action)}</small>` : ""}
+          </span>
           <svg aria-hidden="true" viewBox="0 0 20 20" focusable="false">
             <path d="M5 15 15 5M7 5h8v8"></path>
           </svg>
@@ -865,7 +945,8 @@
     root.setAttribute("aria-busy", "false");
 
     if (
-      root.dataset.projectsSurface === "footer-tools"
+      root.dataset.projectsSurface === "footer-projects"
+      || root.dataset.projectsSurface === "footer-tools"
       || root.dataset.projectsSurface === "footer-client"
     ) {
       renderFooterProjectFallback(root, root.dataset.projectsSurface);
