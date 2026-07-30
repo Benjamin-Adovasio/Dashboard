@@ -245,7 +245,9 @@
         id,
         name,
         logo: normalizeImagePath(value.logo),
-        mark: cleanText(value.mark) || getTechnologyMark(name)
+        mark: cleanText(value.mark) || getTechnologyMark(name),
+        logoShape: normalizeLogoShape(value.logoShape),
+        logoSurface: normalizeLogoSurface(value.logoSurface)
       });
     });
 
@@ -278,6 +280,10 @@
     const technologyIds = Array.isArray(source.technologies)
       ? source.technologies.filter(id => technologies.has(id))
       : [];
+    const requestedPrimaryTechnology = cleanText(source.primaryTechnology);
+    const primaryTechnology = technologyIds.includes(requestedPrimaryTechnology)
+      ? requestedPrimaryTechnology
+      : "";
     const category = cleanText(source.category) || "Other";
     const url = normalizeUrl(source.url);
     const domain = cleanText(source.domain) || getUrlHost(url);
@@ -302,7 +308,12 @@
       order: Number.isFinite(rawOrder) ? rawOrder : index + 1,
       action: cleanText(source.action),
       tags: normalizeTags(source.tags),
+      aliases: normalizeTags(source.aliases),
+      logo: normalizeImagePath(source.logo),
+      logoShape: normalizeLogoShape(source.logoShape),
+      logoSurface: normalizeLogoSurface(source.logoSurface),
       technologies: technologyIds,
+      primaryTechnology,
       visual: {
         type: cleanText(visualSource.type) || cleanText(visualSource.icon) || cleanText(source.icon) || "fallback",
         image: normalizeImagePath(visualSource.image || source.image)
@@ -330,6 +341,16 @@
     return Array.from(
       new Set(value.map(cleanText).filter(Boolean))
     );
+  }
+
+  function normalizeLogoShape(value) {
+    const shape = cleanText(value).toLowerCase();
+    return new Set(["mark", "stacked", "wide"]).has(shape) ? shape : "mark";
+  }
+
+  function normalizeLogoSurface(value) {
+    const surface = cleanText(value).toLowerCase();
+    return new Set(["light", "dark"]).has(surface) ? surface : "none";
   }
 
   function renderProjectSurface(root, projects, technologies) {
@@ -534,9 +555,10 @@
 
   function renderProjectCard(project, technologies, index) {
     const tag = project.tags[0] || project.kind;
-    const number = String(index + 1).padStart(2, "0");
     const searchText = buildSearchText(project, technologies);
-    const visual = renderCardVisual(project);
+    const primaryTechnology = technologies.get(project.primaryTechnology);
+    const hasLogo = Boolean(project.logo || primaryTechnology?.logo);
+    const visual = renderCardVisual(project, primaryTechnology);
     const stack = renderTechnologyStack(project, technologies);
     const copy = project.tagline || project.description;
     const destination = project.domain || project.status;
@@ -546,7 +568,6 @@
         <span class="work-card-grid"></span>
         <span class="work-card-orbit"></span>
         ${visual}
-        <span class="work-card-number">${number}</span>
       </div>
 
       <div class="work-card-content">
@@ -576,7 +597,7 @@
     return renderProjectContainer({
       project,
       tagName: project.url ? "a" : "article",
-      className: `work-card directory-card work-card--${slugify(project.kind)} work-card--${slugify(project.visual.type)}${project.featured ? " work-card--featured" : ""}`,
+      className: `work-card directory-card work-card--${slugify(project.kind)} work-card--${slugify(project.visual.type)}${hasLogo ? " work-card--has-logo" : ""}${project.featured ? " work-card--featured" : ""}`,
       attributes: `
         id="project-${escapeAttribute(slugify(project.slug))}"
         data-directory-card
@@ -659,14 +680,28 @@
     `;
   }
 
-  function renderCardVisual(project) {
-    const image = project.visual.image;
+  function renderCardVisual(project, technology) {
+    const logo = project.logo || technology?.logo || "";
+    const image = logo || project.visual.image;
+    const isLogo = Boolean(logo);
+    const logoShape = project.logo ? project.logoShape : technology?.logoShape;
+    const logoSurface = project.logo ? project.logoSurface : technology?.logoSurface;
+    const logoClasses = isLogo
+      ? ` has-project-logo logo-shape--${logoShape} logo-surface--${logoSurface}`
+      : "";
+    const imageClass = isLogo ? "project-card-logo" : "project-card-image";
 
     return `
-      <span class="card-icon work-card-icon${image ? " has-project-image" : ""}">
+      <span class="card-icon work-card-icon${image ? " has-project-image" : ""}${logoClasses}">
         ${resolveVisualIcon(project.visual.type)}
         ${image ? `
-          <img class="project-card-image" src="${escapeAttribute(image)}" alt="" loading="lazy" decoding="async" />
+          <img
+            class="${imageClass}"
+            src="${escapeAttribute(image)}"
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         ` : ""}
       </span>
     `;
@@ -687,7 +722,10 @@
       <ul class="technology-stack${variant ? ` technology-stack--${variant}` : ""}" aria-label="Technology stack">
         ${visibleItems.map(technology => `
           <li title="${escapeAttribute(technology.name)}">
-            <span class="technology-logo" aria-hidden="true">
+            <span
+              class="technology-logo technology-logo--${escapeAttribute(technology.logoShape)} technology-logo--surface-${escapeAttribute(technology.logoSurface)}"
+              aria-hidden="true"
+            >
               <span class="technology-mark">${escapeHtml(technology.mark)}</span>
               ${technology.logo ? `
                 <img src="${escapeAttribute(technology.logo)}" alt="" loading="lazy" decoding="async" />
@@ -741,9 +779,12 @@
   function setupDirectoryControls() {
     const search = document.getElementById("directory-search");
     const filters = document.getElementById("directory-tags");
+    const clear = document.querySelector("[data-search-clear]");
+    const reset = document.querySelector("[data-directory-reset]");
 
     search?.addEventListener("input", event => {
       directoryState.query = cleanText(event.target.value).toLowerCase();
+      syncSearchControl(search, clear);
       applyDirectoryFilters();
     });
 
@@ -752,9 +793,11 @@
         return;
       }
 
-      search.value = "";
-      directoryState.query = "";
-      applyDirectoryFilters();
+      clearDirectorySearch(search, clear);
+    });
+
+    clear?.addEventListener("click", () => {
+      clearDirectorySearch(search, clear);
     });
 
     filters?.addEventListener("click", event => {
@@ -763,13 +806,44 @@
         return;
       }
 
-      directoryState.filter = button.dataset.directoryFilter || "all";
-      filters.querySelectorAll("[data-directory-filter]").forEach(node => {
-        const active = node === button;
-        node.classList.toggle("is-active", active);
-        node.setAttribute("aria-pressed", String(active));
-      });
+      setDirectoryFilter(button.dataset.directoryFilter || "all", filters);
       applyDirectoryFilters();
+    });
+
+    reset?.addEventListener("click", () => {
+      setDirectoryFilter("all", filters);
+      clearDirectorySearch(search, clear);
+    });
+
+    syncSearchControl(search, clear);
+  }
+
+  function clearDirectorySearch(search, clear) {
+    if (!search) {
+      return;
+    }
+
+    search.value = "";
+    directoryState.query = "";
+    syncSearchControl(search, clear);
+    applyDirectoryFilters();
+    search.focus();
+  }
+
+  function syncSearchControl(search, clear) {
+    const hasValue = Boolean(search?.value);
+    if (clear) {
+      clear.hidden = !hasValue;
+    }
+    search?.closest("[data-search-shell]")?.classList.toggle("has-value", hasValue);
+  }
+
+  function setDirectoryFilter(value, filters = document.getElementById("directory-tags")) {
+    directoryState.filter = value || "all";
+    filters?.querySelectorAll("[data-directory-filter]").forEach(node => {
+      const active = node.dataset.directoryFilter === directoryState.filter;
+      node.classList.toggle("is-active", active);
+      node.setAttribute("aria-pressed", String(active));
     });
   }
 
@@ -789,9 +863,21 @@
         || String(card.dataset.search || "").includes(directoryState.query);
       const visible = matchesCategory && matchesQuery;
 
-      card.hidden = !visible;
       if (visible) {
+        const wasHidden = card.hidden;
+        card.hidden = false;
+        if (wasHidden) {
+          card.classList.remove("is-filter-entering");
+          window.requestAnimationFrame(() => {
+            if (!card.hidden) {
+              card.classList.add("is-filter-entering");
+            }
+          });
+        }
         visibleCount += 1;
+      } else {
+        card.hidden = true;
+        card.classList.remove("is-filter-entering");
       }
     });
 
@@ -802,6 +888,7 @@
 
     setText("[data-results-count]", visibleCount);
     setText("[data-results-label]", visibleCount === 1 ? "entry shown" : "entries shown");
+    updateDirectoryEmptyState(visibleCount);
     announceDirectoryResults(visibleCount);
   }
 
@@ -815,7 +902,8 @@
       project.kind,
       project.status,
       ...project.tags,
-      ...project.technologies.map(id => technologies.get(id)?.name)
+      ...project.aliases,
+      ...project.technologies.flatMap(id => [id, technologies.get(id)?.name])
     ]
       .filter(Boolean)
       .join(" ")
@@ -834,11 +922,46 @@
     const category = directoryState.filter === "all"
       ? ""
       : ` in ${activeFilter?.textContent.trim() || "the selected category"}`;
-    const query = directoryState.query
-      ? ` matching "${directoryState.query}"`
+    const rawQuery = document.getElementById("directory-search")?.value.trim();
+    const query = rawQuery
+      ? ` matching "${rawQuery}"`
       : "";
 
     status.textContent = `${count} ${count === 1 ? "entry" : "entries"}${category}${query}.`;
+  }
+
+  function updateDirectoryEmptyState(count) {
+    if (count > 0) {
+      return;
+    }
+
+    const title = document.querySelector("[data-empty-title]");
+    const guidance = document.querySelector("[data-empty-guidance]");
+    const rawQuery = document.getElementById("directory-search")?.value.trim();
+    const activeFilter = document.querySelector(
+      `[data-directory-filter="${escapeSelector(directoryState.filter)}"]`
+    );
+    const category = directoryState.filter === "all"
+      ? ""
+      : activeFilter?.textContent.trim();
+
+    if (title) {
+      if (rawQuery && category) {
+        title.textContent = `No projects match “${rawQuery}” in ${category}.`;
+      } else if (rawQuery) {
+        title.textContent = `No projects match “${rawQuery}”.`;
+      } else if (category) {
+        title.textContent = `No projects are listed in ${category}.`;
+      } else {
+        title.textContent = "No matching projects.";
+      }
+    }
+
+    if (guidance) {
+      guidance.textContent = rawQuery
+        ? "Try another service name, technology, or category."
+        : "Choose another category to keep exploring.";
+    }
   }
 
   function setupImageFallbacks(root) {

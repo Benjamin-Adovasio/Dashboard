@@ -19,7 +19,10 @@
         "image": null,
         "type": "security"
       },
-      "technologies": []
+      "primaryTechnology": "sophos",
+      "technologies": [
+        "sophos"
+      ]
     },
     {
       "id": "sso",
@@ -44,6 +47,7 @@
         "image": null,
         "type": "identity"
       },
+      "primaryTechnology": "authentik",
       "technologies": [
         "authentik"
       ]
@@ -51,7 +55,7 @@
     {
       "id": "cloud",
       "slug": "cloud",
-      "name": "Nextcloud",
+      "name": "Adovasio Cloud",
       "domain": "cloud.adovasio.com",
       "url": "https://cloud.adovasio.com",
       "tagline": "Files and sync",
@@ -67,6 +71,7 @@
         "image": null,
         "type": "cloud"
       },
+      "primaryTechnology": "nextcloud",
       "technologies": [
         "nextcloud",
         "authentik"
@@ -93,6 +98,7 @@
         "image": null,
         "type": "code"
       },
+      "primaryTechnology": "gitea",
       "technologies": [
         "gitea"
       ]
@@ -116,7 +122,10 @@
         "image": null,
         "type": "print"
       },
-      "technologies": []
+      "primaryTechnology": "papercut",
+      "technologies": [
+        "papercut"
+      ]
     },
     {
       "id": "photos",
@@ -137,6 +146,7 @@
         "image": null,
         "type": "media"
       },
+      "primaryTechnology": "immich",
       "technologies": [
         "immich"
       ]
@@ -170,7 +180,7 @@
     {
       "id": "bengpt",
       "slug": "bengpt",
-      "name": "BenGPT",
+      "name": "Adovasio AI",
       "domain": "ai.adovasio.com",
       "url": "https://ai.adovasio.com",
       "tagline": "Self-hosted AI chatbot",
@@ -189,6 +199,10 @@
         "image": null,
         "type": "ai"
       },
+      "aliases": [
+        "BenGPT"
+      ],
+      "primaryTechnology": "open-webui",
       "technologies": [
         "open-webui"
       ]
@@ -209,6 +223,8 @@
       },
       "status": "live",
       "order": 9,
+      "logo": "/assets/images/projects/georgie-ai/app-icon.svg",
+      "logoShape": "mark",
       "visual": {
         "image": null,
         "type": "app"
@@ -234,6 +250,8 @@
       },
       "status": "live",
       "order": 10,
+      "logo": "/assets/images/projects/guardian-campus-safety/app-icon.svg",
+      "logoShape": "mark",
       "visual": {
         "image": null,
         "type": "security"
@@ -332,6 +350,7 @@
         "image": "/assets/images/projects/mailing/hero.svg",
         "type": "mail"
       },
+      "primaryTechnology": "postfix-admin",
       "technologies": [
         "postfix-admin"
       ]
@@ -355,6 +374,7 @@
         "image": "/assets/images/projects/index/hero.svg",
         "type": "security"
       },
+      "primaryTechnology": "sophos",
       "technologies": [
         "sophos"
       ]

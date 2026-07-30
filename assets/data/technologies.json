@@ -2,47 +2,68 @@
   "technologies": {
     "authentik": {
       "name": "authentik",
-      "logo": "/assets/images/brands/authentik.svg"
+      "logo": "/assets/images/icons/portfolio/identity-access.svg",
+      "logoShape": "mark"
     },
     "gitea": {
       "name": "Gitea",
-      "logo": "/assets/images/brands/gitea.svg"
+      "logo": "/assets/images/icons/portfolio/code-repository.svg",
+      "logoShape": "mark"
     },
     "immich": {
       "name": "Immich",
-      "logo": "/assets/images/brands/immich.svg"
+      "logo": "/assets/images/icons/portfolio/photo-library.svg",
+      "logoShape": "mark"
     },
     "ios": {
       "name": "iOS",
-      "logo": "/assets/images/brands/ios.svg"
+      "logo": "/assets/images/icons/portfolio/mobile-platform.svg",
+      "logoShape": "mark",
+      "logoSurface": "light"
     },
     "javascript": {
       "name": "JavaScript",
-      "logo": "/assets/images/brands/javascript.svg"
+      "logo": "/assets/images/icons/portfolio/web-runtime.svg",
+      "logoShape": "mark"
     },
     "nextcloud": {
       "name": "Nextcloud",
-      "logo": "/assets/images/brands/nextcloud.svg"
+      "logo": "/assets/images/icons/portfolio/cloud-sync.svg",
+      "logoShape": "stacked"
     },
     "ntp": {
       "name": "NTP",
-      "logo": "/assets/images/brands/ntp.svg"
+      "logo": "/assets/images/icons/portfolio/time-sync.svg",
+      "logoShape": "mark"
     },
     "on-device-ai": {
       "name": "On-device AI",
-      "logo": "/assets/images/brands/on-device-ai.svg"
+      "logo": "/assets/images/icons/portfolio/edge-ai.svg",
+      "logoShape": "mark"
     },
     "open-webui": {
       "name": "Open WebUI",
-      "logo": "/assets/images/brands/open-webui.svg"
+      "logo": "/assets/images/icons/portfolio/ai-chat.svg",
+      "logoShape": "mark",
+      "logoSurface": "light"
+    },
+    "papercut": {
+      "name": "PaperCut",
+      "logo": "/assets/images/icons/portfolio/print-management.svg",
+      "logoShape": "wide",
+      "logoSurface": "light"
     },
     "postfix-admin": {
       "name": "Postfix Admin",
-      "logo": "/assets/images/brands/postfix-admin.svg"
+      "logo": "/assets/images/icons/portfolio/mail-infrastructure.svg",
+      "logoShape": "wide",
+      "logoSurface": "light"
     },
     "sophos": {
-      "name": "Sophos",
-      "logo": "/assets/images/brands/sophos.svg"
+      "name": "Sophos Firewall",
+      "logo": "/assets/images/icons/portfolio/network-security.svg",
+      "logoShape": "wide",
+      "logoSurface": "dark"
     }
   }
 }

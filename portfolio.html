@@ -44,7 +44,7 @@
     href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="/assets/css/experience.css?v=9" />
+  <link rel="stylesheet" href="/assets/css/experience.css?v=11" />
 
   <script>
     document.documentElement.classList.replace("no-js", "js");
@@ -162,7 +162,7 @@
               <p class="eyebrow">Apps / Platforms / Infrastructure</p>
               <h2 id="work-title">Built. Published. Maintained.</h2>
             </div>
-            <p class="directory-count" aria-live="polite" aria-atomic="true">
+            <p class="directory-count">
               <strong data-results-count>0</strong>
               <span data-results-label>entries shown</span>
             </p>
@@ -170,8 +170,13 @@
 
           <div class="directory-toolbar" data-reveal>
             <div class="directory-search">
-              <label for="directory-search">Find a project</label>
-              <div class="search-shell">
+              <div class="directory-search-heading">
+                <label for="directory-search">Search the portfolio</label>
+                <span id="directory-search-hint">
+                  Find a service by name, purpose, or underlying technology.
+                </span>
+              </div>
+              <div class="search-shell" data-search-shell>
                 <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
                   <circle cx="11" cy="11" r="6"></circle>
                   <path d="m20 20-4.2-4.2"></path>
@@ -179,28 +184,47 @@
                 <input
                   id="directory-search"
                   type="search"
-                  placeholder="Search apps and platforms"
+                  placeholder="Search projects, services, technologies..."
                   autocomplete="off"
                   spellcheck="false"
-                  aria-describedby="directory-status"
+                  enterkeyhint="search"
+                  aria-describedby="directory-search-hint directory-status"
+                  aria-controls="grid-directory"
                 />
+                <button
+                  class="search-clear"
+                  type="button"
+                  aria-label="Clear portfolio search"
+                  title="Clear search"
+                  data-search-clear
+                  hidden
+                >
+                  <svg aria-hidden="true" viewBox="0 0 20 20" focusable="false">
+                    <path d="m6 6 8 8M14 6l-8 8"></path>
+                  </svg>
+                </button>
               </div>
             </div>
 
-            <div
-              class="filter-group"
-              id="directory-tags"
-              role="group"
-              aria-label="Filter portfolio"
-            >
-              <button
-                class="filter-pill is-active"
-                type="button"
-                data-directory-filter="all"
-                aria-pressed="true"
+            <div class="directory-filter-row">
+              <span class="directory-filter-label" id="directory-filter-label">
+                Filter by category
+              </span>
+              <div
+                class="filter-group"
+                id="directory-tags"
+                role="group"
+                aria-labelledby="directory-filter-label"
               >
-                All
-              </button>
+                <button
+                  class="filter-pill is-active"
+                  type="button"
+                  data-directory-filter="all"
+                  aria-pressed="true"
+                >
+                  All
+                </button>
+              </div>
             </div>
           </div>
 
@@ -216,10 +240,19 @@
             <p class="project-loading">Loading project directory…</p>
           </div>
 
-          <article class="empty-state" id="directory-empty" hidden>
-            <p class="eyebrow">No matches</p>
-            <h3>Nothing matched that search.</h3>
-            <p>Try a different word or filter.</p>
+          <article class="empty-state directory-empty-state" id="directory-empty" hidden>
+            <span class="empty-state-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false">
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="m20 20-4.2-4.2"></path>
+              </svg>
+            </span>
+            <p class="eyebrow">No matching projects</p>
+            <h3 data-empty-title>Nothing matched that search.</h3>
+            <p data-empty-guidance>Try a different word or category.</p>
+            <button class="button button-secondary empty-state-reset" type="button" data-directory-reset>
+              Clear search and filters
+            </button>
           </article>
 
           <noscript>
@@ -242,6 +275,6 @@
   </div>
 
   <script defer src="/assets/js/site.js?v=1"></script>
-  <script defer src="/assets/js/projects.js?v=8"></script>
+  <script defer src="/assets/js/projects.js?v=10"></script>
 </body>
 </html>

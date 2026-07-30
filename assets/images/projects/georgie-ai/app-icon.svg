@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="georgie-bg" x1="8" y1="7" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0E7FAE"/>
+      <stop offset="1" stop-color="#163B65"/>
+    </linearGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="18" fill="url(#georgie-bg)"/>
+  <path d="M17 35h30c-1.2 10-6.2 15-15 15s-13.8-5-15-15Z" fill="#DDF5FF" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="2"/>
+  <path d="M24 31c0-4 3-7 8-7s8 3 8 7" fill="none" stroke="#A7E6FF" stroke-linecap="round" stroke-width="3"/>
+  <path d="M18 17h8m12 0h8M22 13v8m20-8v8M26 17h12" fill="none" stroke="#FFFFFF" stroke-linecap="round" stroke-width="3"/>
+  <path d="M48 22c.5 3.2 1.6 4.3 4.8 4.8-3.2.5-4.3 1.6-4.8 4.8-.5-3.2-1.6-4.3-4.8-4.8 3.2-.5 4.3-1.6 4.8-4.8Z" fill="#FFD166"/>
+</svg>
