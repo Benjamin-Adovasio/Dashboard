@@ -1719,6 +1719,63 @@ picture.media-fill img {
   color: var(--cyan);
 }
 
+.mega-footer__client-access {
+  min-height: 34px;
+  margin-top: 24px;
+}
+
+.mega-footer__client-login {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  border: 1px solid rgba(84, 201, 255, 0.4);
+  border-radius: 999px;
+  color: var(--cyan);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition:
+    border-color 220ms ease,
+    background 220ms ease,
+    color 220ms ease,
+    transform 220ms var(--ease);
+}
+
+.mega-footer__client-login:hover {
+  border-color: var(--cyan);
+  background: rgba(84, 201, 255, 0.08);
+  color: var(--cyan-soft);
+  transform: translateY(-1px);
+}
+
+.mega-footer__client-login-icon {
+  width: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.mega-footer__client-login-arrow {
+  transition: transform 220ms var(--ease);
+}
+
+.mega-footer__client-login:hover .mega-footer__client-login-arrow {
+  transform: translate(2px, -2px);
+}
+
+.mega-footer__client-access .mega-footer__loading {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  padding: 0;
+}
+
 .mega-footer__copyright {
   display: grid;
   gap: 8px;
@@ -1729,6 +1786,10 @@ picture.media-fill img {
   letter-spacing: 0.07em;
   line-height: 1.5;
   text-transform: uppercase;
+}
+
+.mega-footer__client-access + .mega-footer__copyright {
+  margin-top: 28px;
 }
 
 .mega-footer__group h2 {

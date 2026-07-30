@@ -66,6 +66,15 @@
               <a class="mega-footer__email" href="mailto:info@adovasio.com">
                 info@adovasio.com
               </a>
+              <div
+                class="mega-footer__client-access"
+                data-projects-surface="footer-client"
+                data-project-limit="1"
+                aria-live="polite"
+                aria-busy="true"
+              >
+                <span class="mega-footer__loading">Loading client access…</span>
+              </div>
               <p class="mega-footer__copyright">
                 <span>&copy; <span data-current-year>${year}</span> Adovasio Technology LLC</span>
                 <span>Technology that just works.</span>
@@ -383,6 +392,10 @@
   function getFooterProjectGroup(project) {
     const kind = project.kind.toLowerCase();
 
+    if (Number.isFinite(project.placements["footer-client"])) {
+      return "client";
+    }
+
     if (kind === "app" || project.technologies.includes("ios")) {
       return "ios";
     }
@@ -462,19 +475,17 @@
     const action = project.action || project.name;
 
     return `
-      <p>Secure access to the Adovasio services you use.</p>
       <a
-        class="mega-footer__client-link"
+        class="mega-footer__client-login"
         href="${escapeAttribute(destination)}"
         ${buildLinkAttributes(destination)}
       >
-        <span>
-          <strong>${escapeHtml(action)}</strong>
-          <small>${escapeHtml(project.domain || project.name)}</small>
-        </span>
-        <svg aria-hidden="true" viewBox="0 0 20 20" focusable="false">
-          <path d="M5 15 15 5M7 5h8v8"></path>
+        <svg class="mega-footer__client-login-icon" aria-hidden="true" viewBox="0 0 20 20">
+          <rect x="4.5" y="8.5" width="11" height="8" rx="2"></rect>
+          <path d="M7 8.5V6.8a3 3 0 0 1 6 0v1.7"></path>
         </svg>
+        <span>${escapeHtml(action)}</span>
+        <span class="mega-footer__client-login-arrow" aria-hidden="true">↗</span>
         ${renderExternalNote(destination)}
       </a>
     `;
@@ -483,8 +494,10 @@
   function renderFooterProjectFallback(root, surface) {
     if (surface === "footer-client") {
       root.innerHTML = `
-        <p>Need help reaching your account?</p>
-        <a class="mega-footer__fallback" href="/contact.html">Contact Adovasio</a>
+        <a class="mega-footer__client-login" href="/contact.html">
+          <span>Client Access</span>
+          <span class="mega-footer__client-login-arrow" aria-hidden="true">↗</span>
+        </a>
       `;
       return;
     }
