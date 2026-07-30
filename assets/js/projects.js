@@ -38,168 +38,122 @@
 
   function renderSiteFooters() {
     const page = getCurrentPage();
-    const contactUrl = page === "business"
-      ? "/contact.html?type=business"
-      : page === "residential"
-        ? "/contact.html?type=residential"
-        : "/contact.html";
     const year = new Date().getFullYear();
 
     document.querySelectorAll("[data-site-footer]").forEach(root => {
       root.classList.add("site-footer--mega");
-      root.setAttribute("aria-labelledby", "site-footer-title");
+      root.removeAttribute("aria-labelledby");
       root.innerHTML = `
-        <section class="mega-footer__cta" data-pointer-field>
-          <div class="mega-footer__cta-grid" aria-hidden="true"></div>
-          <div class="mega-footer__signal" aria-hidden="true">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-
-          <div class="mega-footer__shell mega-footer__cta-inner" data-reveal>
-            <p class="mega-footer__eyebrow">Ready when you are</p>
-            <div class="mega-footer__cta-layout">
-              <h2 id="site-footer-title">
-                Make technology
-                <span>the easy part.</span>
-              </h2>
-              <div class="mega-footer__cta-copy">
-                <p>
-                  Clear advice, thoughtfully built systems, and support that stays easy
-                  to understand.
-                </p>
-                <a class="button button-primary" href="${contactUrl}">Get Started</a>
-              </div>
-            </div>
-          </div>
-        </section>
-
         <div class="mega-footer__main">
           <div class="mega-footer__shell mega-footer__directory">
-            <div class="mega-footer__overview">
-              <div class="mega-footer__brand" data-reveal>
-                <a class="mega-footer__lockup" href="/" aria-label="Adovasio Technology LLC home">
-                  <img
-                    src="/assets/images/adovasio-footer-mark-96.webp"
-                    width="96"
-                    height="96"
-                    loading="lazy"
-                    alt=""
-                  />
-                  <span>
-                    <strong>Adovasio</strong>
-                    <small>Technology LLC</small>
-                  </span>
-                </a>
-                <p class="mega-footer__brand-copy">
-                  Professional technology without enterprise complexity.
-                </p>
-                <a class="mega-footer__email" href="mailto:info@adovasio.com">
-                  info@adovasio.com
-                </a>
-                <p class="mega-footer__copyright">
-                  <span>&copy; <span data-current-year>${year}</span> Adovasio Technology LLC</span>
-                  <span>Technology that just works.</span>
-                </p>
-              </div>
-
-              <nav class="mega-footer__group" aria-labelledby="footer-explore-title" data-reveal>
-                <h2 id="footer-explore-title">Explore Adovasio</h2>
-                <ul>
-                  <li>
-                    <a href="/business.html"${renderCurrentPage("business", page)}>Business</a>
-                  </li>
-                  <li>
-                    <a href="/residential.html"${renderCurrentPage("residential", page)}>
-                      Residential
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/portfolio.html"${renderCurrentPage("portfolio", page)}>Portfolio</a>
-                  </li>
-                  <li>
-                    <a href="/about.html"${renderCurrentPage("about", page)}>About</a>
-                  </li>
-                  <li>
-                    <a href="/contact.html"${renderCurrentPage("contact", page)}>Contact</a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://www.instagram.com/adovasiotech/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Instagram<span class="sr-only"> (opens in a new tab)</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-
+            <div class="mega-footer__brand" data-reveal>
+              <a class="mega-footer__lockup" href="/" aria-label="Adovasio Technology LLC home">
+                <img
+                  src="/assets/images/adovasio-footer-mark-96.webp"
+                  width="96"
+                  height="96"
+                  loading="lazy"
+                  alt=""
+                />
+                <span>
+                  <strong>Adovasio</strong>
+                  <small>Technology LLC</small>
+                </span>
+              </a>
+              <p class="mega-footer__brand-copy">
+                Professional technology without enterprise complexity.
+              </p>
+              <a class="mega-footer__email" href="mailto:info@adovasio.com">
+                info@adovasio.com
+              </a>
+              <p class="mega-footer__copyright">
+                <span>&copy; <span data-current-year>${year}</span> Adovasio Technology LLC</span>
+                <span>Technology that just works.</span>
+              </p>
             </div>
 
-            <section class="mega-footer__ecosystem" aria-labelledby="footer-projects-title">
-              <header class="mega-footer__ecosystem-header">
-                <div>
-                  <p class="mega-footer__section-label">Portfolio directory</p>
-                  <h2 id="footer-projects-title">The complete Adovasio ecosystem.</h2>
-                </div>
-                <a class="mega-footer__all-projects" href="/portfolio.html">
-                  View full portfolio
-                  <span aria-hidden="true">↗</span>
-                </a>
-              </header>
-
-              <div class="mega-footer__ecosystem-grid">
-                <nav
-                  class="mega-footer__group mega-footer__project-group"
-                  aria-labelledby="footer-tools-title"
-                >
-                  <h3 id="footer-tools-title">Tools &amp; Platforms</h3>
-                  <ul
-                    class="mega-footer__project-list"
-                    data-projects-surface="footer-projects"
-                    data-footer-project-group="tools"
-                    aria-live="polite"
-                    aria-busy="true"
+            <nav class="mega-footer__group" aria-labelledby="footer-explore-title" data-reveal>
+              <h2 id="footer-explore-title">Explore</h2>
+              <ul>
+                <li>
+                  <a href="/business.html"${renderCurrentPage("business", page)}>Business</a>
+                </li>
+                <li>
+                  <a href="/residential.html"${renderCurrentPage("residential", page)}>
+                    Residential
+                  </a>
+                </li>
+                <li>
+                  <a href="/portfolio.html"${renderCurrentPage("portfolio", page)}>Portfolio</a>
+                </li>
+                <li>
+                  <a href="/about.html"${renderCurrentPage("about", page)}>About</a>
+                </li>
+                <li>
+                  <a href="/contact.html"${renderCurrentPage("contact", page)}>Contact</a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.instagram.com/adovasiotech/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    <li class="mega-footer__loading">Loading tools…</li>
-                  </ul>
-                </nav>
+                    Instagram<span class="sr-only"> (opens in a new tab)</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
 
-                <nav
-                  class="mega-footer__group mega-footer__project-group"
-                  aria-labelledby="footer-ios-title"
-                >
-                  <h3 id="footer-ios-title">iOS Apps</h3>
-                  <ul
-                    class="mega-footer__project-list"
-                    data-projects-surface="footer-projects"
-                    data-footer-project-group="ios"
-                    aria-live="polite"
-                    aria-busy="true"
-                  >
-                    <li class="mega-footer__loading">Loading apps…</li>
-                  </ul>
-                </nav>
+            <nav
+              class="mega-footer__group mega-footer__project-group"
+              aria-labelledby="footer-tools-title"
+              data-reveal
+            >
+              <h2 id="footer-tools-title">Tools &amp; Platforms</h2>
+              <ul
+                class="mega-footer__project-list"
+                data-projects-surface="footer-projects"
+                data-footer-project-group="tools"
+                aria-live="polite"
+                aria-busy="true"
+              >
+                <li class="mega-footer__loading">Loading tools…</li>
+              </ul>
+            </nav>
 
-                <nav
-                  class="mega-footer__group mega-footer__project-group mega-footer__project-group--systems"
-                  aria-labelledby="footer-systems-title"
-                >
-                  <h3 id="footer-systems-title">Systems &amp; Infrastructure</h3>
-                  <ul
-                    class="mega-footer__project-list"
-                    data-projects-surface="footer-projects"
-                    data-footer-project-group="systems"
-                    aria-live="polite"
-                    aria-busy="true"
-                  >
-                    <li class="mega-footer__loading">Loading systems…</li>
-                  </ul>
-                </nav>
-              </div>
-            </section>
+            <nav
+              class="mega-footer__group mega-footer__project-group"
+              aria-labelledby="footer-ios-title"
+              data-reveal
+            >
+              <h2 id="footer-ios-title">iOS Apps</h2>
+              <ul
+                class="mega-footer__project-list"
+                data-projects-surface="footer-projects"
+                data-footer-project-group="ios"
+                aria-live="polite"
+                aria-busy="true"
+              >
+                <li class="mega-footer__loading">Loading apps…</li>
+              </ul>
+            </nav>
+
+            <nav
+              class="mega-footer__group mega-footer__project-group mega-footer__project-group--systems"
+              aria-labelledby="footer-systems-title"
+              data-reveal
+            >
+              <h2 id="footer-systems-title">Systems &amp; Infrastructure</h2>
+              <ul
+                class="mega-footer__project-list"
+                data-projects-surface="footer-projects"
+                data-footer-project-group="systems"
+                aria-live="polite"
+                aria-busy="true"
+              >
+                <li class="mega-footer__loading">Loading systems…</li>
+              </ul>
+            </nav>
           </div>
         </div>
       `;
