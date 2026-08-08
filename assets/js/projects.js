@@ -614,7 +614,6 @@
   }
 
   function renderHomeProject(project, technologies, index) {
-    const number = String(index + 1).padStart(2, "0");
     const copy = project.tagline || project.description;
     const body = `
       <div class="project-mark${project.visual.image ? " has-project-image" : ""}" aria-hidden="true">
@@ -626,7 +625,6 @@
       <div class="project-tile-content">
         <div class="project-meta">
           <span>${escapeHtml(project.category)}</span>
-          <span>${number}</span>
         </div>
         <div>
           <h3>${escapeHtml(project.name)}</h3>
@@ -890,6 +888,10 @@
 
     setText("[data-results-count]", visibleCount);
     setText("[data-results-label]", visibleCount === 1 ? "entry shown" : "entries shown");
+    const directoryCount = document.querySelector(".directory-count");
+    if (directoryCount) {
+      directoryCount.hidden = false;
+    }
     updateDirectoryEmptyState(visibleCount);
     announceDirectoryResults(visibleCount);
   }

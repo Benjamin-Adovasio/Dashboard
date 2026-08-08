@@ -930,20 +930,6 @@ picture.media-fill img {
   left: clamp(24px, 4vw, 60px);
 }
 
-.path-card-number {
-  display: block;
-  margin-bottom: 24px;
-  color: var(--cyan);
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.path-card-residential .path-card-number {
-  color: var(--warm-soft);
-}
-
 .path-card h3 {
   margin-bottom: 16px;
   font-size: clamp(3rem, 6vw, 6.4rem);
@@ -2574,14 +2560,8 @@ picture.media-fill img {
 .service-chapter__topline {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: var(--cyan);
-}
-
-.service-chapter__number {
-  font-size: 0.69rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
 }
 
 .service-chapter__icon {
@@ -3036,7 +3016,7 @@ picture.media-fill img {
   overflow: hidden;
   border: 1px solid rgba(242, 211, 170, 0.1);
   border-radius: 18px;
-  color: #77736c;
+  color: #8a857d;
   background: rgba(255, 255, 255, 0.018);
   font-size: 0.67rem;
   font-weight: 800;
@@ -3151,7 +3131,7 @@ picture.media-fill img {
   position: absolute;
   top: 28px;
   left: 30px;
-  color: #88552a;
+  color: #7d4b22;
   font-size: 0.67rem;
   font-weight: 800;
   letter-spacing: 0.13em;
@@ -3188,7 +3168,7 @@ picture.media-fill img {
 
 .res-service {
   display: grid;
-  grid-template-columns: 96px minmax(220px, 0.6fr) 1fr auto;
+  grid-template-columns: minmax(220px, 0.6fr) 1fr auto;
   gap: 28px;
   align-items: center;
   min-height: 170px;
@@ -3198,13 +3178,6 @@ picture.media-fill img {
 
 .res-service:last-child {
   border-bottom: 0;
-}
-
-.res-service > span:first-child {
-  color: var(--warm-soft);
-  font-size: 0.69rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
 }
 
 .res-service h3 {
@@ -3247,6 +3220,10 @@ picture.media-fill img {
   background: #d6c8b7;
 }
 
+.install-strip .eyebrow {
+  color: #6f3f18;
+}
+
 .install-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -3255,7 +3232,7 @@ picture.media-fill img {
 }
 
 .install-step {
-  padding: 34px clamp(22px, 3vw, 42px) 10px 0;
+  padding: 64px clamp(22px, 3vw, 42px) 10px 0;
   border-right: 1px solid rgba(30, 24, 18, 0.16);
 }
 
@@ -3265,15 +3242,6 @@ picture.media-fill img {
 
 .install-step:last-child {
   border-right: 0;
-}
-
-.install-step span {
-  display: block;
-  margin-bottom: 70px;
-  color: #8a5424;
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.13em;
 }
 
 .install-step h3 {
@@ -3286,7 +3254,7 @@ picture.media-fill img {
 
 .install-step p {
   max-width: 26ch;
-  color: #655c52;
+  color: #5a5046;
   line-height: 1.55;
 }
 
@@ -4200,7 +4168,7 @@ input.directory-search,
 
 .principle-card {
   min-height: 380px;
-  padding: 34px clamp(25px, 3vw, 48px) 20px 0;
+  padding: 96px clamp(25px, 3vw, 48px) 20px 0;
   border-right: 1px solid var(--line);
 }
 
@@ -4210,15 +4178,6 @@ input.directory-search,
 
 .principle-card:last-child {
   border-right: 0;
-}
-
-.principle-card span {
-  display: block;
-  margin-bottom: 140px;
-  color: var(--cyan);
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
 }
 
 .principle-card h3 {
@@ -4288,6 +4247,9 @@ input.directory-search,
 }
 
 .direct-contact a {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
   color: var(--cyan);
   font-weight: 700;
   text-decoration: none;
@@ -4654,6 +4616,16 @@ html:not(.js) .coverage-rings {
     overflow-x: auto;
     padding-bottom: 3px;
     scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 960px) {
+  .contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-intro {
+    position: static;
   }
 }
 
@@ -5155,14 +5127,14 @@ html:not(.js) .coverage-rings {
   .map-node {
     min-width: 88px;
     padding: 9px 10px;
-    font-size: 0.56rem;
+    font-size: 0.64rem;
     opacity: 0.85;
   }
 
   .network-node {
     min-width: 88px;
     padding: 9px 10px;
-    font-size: 0.56rem;
+    font-size: 0.64rem;
     opacity: 0.85;
   }
 
@@ -5221,6 +5193,7 @@ html:not(.js) .coverage-rings {
 
   .service-chapter {
     flex-basis: auto;
+    min-height: 430px;
   }
 
   .mode-split,
@@ -5282,7 +5255,7 @@ html:not(.js) .coverage-rings {
     color: #f2e3cf;
     border-color: rgba(242, 211, 170, 0.32);
     background: rgba(231, 173, 101, 0.045);
-    font-size: 0.55rem;
+    font-size: 0.64rem;
   }
 
   .plan-room::before {
@@ -5297,21 +5270,26 @@ html:not(.js) .coverage-rings {
   }
 
   .res-service {
-    grid-template-columns: 54px 1fr;
+    grid-template-columns: minmax(0, 1fr) auto;
     gap: 18px;
     min-height: 0;
     padding-block: 36px;
   }
 
+  .res-service h3 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
   .res-service p {
-    grid-column: 2;
+    grid-column: 1;
     grid-row: 2;
   }
 
   .service-node {
-    grid-column: 1;
-    grid-row: 2;
-    align-self: start;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
     width: 48px;
     height: 48px;
   }
@@ -5336,14 +5314,16 @@ html:not(.js) .coverage-rings {
     border-color: var(--line);
   }
 
+  .install-step,
+  .install-step:not(:first-child),
+  .principle-card,
+  .principle-card:not(:first-child) {
+    padding-top: 56px;
+  }
+
   .install-step:last-child,
   .principle-card:last-child {
     border-bottom: 0;
-  }
-
-  .install-step span,
-  .principle-card span {
-    margin-bottom: 64px;
   }
 
   .directory-toolbar {
@@ -5460,6 +5440,18 @@ html:not(.js) .coverage-rings {
 
   .path-card h3 {
     font-size: clamp(2.65rem, 13vw, 3.3rem);
+  }
+
+  .service-chapter {
+    min-height: 400px;
+  }
+
+  .res-service {
+    grid-template-columns: 1fr;
+  }
+
+  .service-node {
+    display: none;
   }
 
   .story-copy h2,
