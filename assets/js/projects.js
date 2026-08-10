@@ -28,167 +28,15 @@
     query: ""
   };
 
-  renderSiteFooters();
-
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initProjectSurfaces, { once: true });
   } else {
     initProjectSurfaces();
   }
 
-  function renderSiteFooters() {
-    const page = getCurrentPage();
-    const year = new Date().getFullYear();
-
-    document.querySelectorAll("[data-site-footer]").forEach(root => {
-      root.classList.add("site-footer--mega");
-      root.removeAttribute("aria-labelledby");
-      root.innerHTML = `
-        <div class="mega-footer__main">
-          <div class="mega-footer__shell mega-footer__directory">
-            <div class="mega-footer__brand" data-reveal>
-              <a class="mega-footer__lockup" href="/" aria-label="Adovasio Technology LLC home">
-                <img
-                  src="/assets/images/adovasio-footer-mark-96.webp"
-                  width="96"
-                  height="96"
-                  loading="lazy"
-                  alt=""
-                />
-                <span>
-                  <strong>Adovasio</strong>
-                  <small>Technology LLC</small>
-                </span>
-              </a>
-              <p class="mega-footer__brand-copy">
-                Professional technology without enterprise complexity.
-              </p>
-              <a class="mega-footer__email" href="mailto:info@adovasio.com">
-                info@adovasio.com
-              </a>
-              <div
-                class="mega-footer__client-access"
-                data-projects-surface="footer-client"
-                data-project-limit="1"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <span class="mega-footer__loading">Loading client access…</span>
-              </div>
-              <p class="mega-footer__copyright">
-                <span>&copy; <span data-current-year>${year}</span> Adovasio Technology LLC</span>
-                <span>Technology that just works.</span>
-              </p>
-            </div>
-
-            <nav class="mega-footer__group" aria-labelledby="footer-explore-title" data-reveal>
-              <h2 id="footer-explore-title">Explore</h2>
-              <ul>
-                <li>
-                  <a href="/business.html"${renderCurrentPage("business", page)}>Business</a>
-                </li>
-                <li>
-                  <a href="/residential.html"${renderCurrentPage("residential", page)}>
-                    Residential
-                  </a>
-                </li>
-                <li>
-                  <a href="/portfolio.html"${renderCurrentPage("portfolio", page)}>Portfolio</a>
-                </li>
-                <li>
-                  <a href="/about.html"${renderCurrentPage("about", page)}>About</a>
-                </li>
-                <li>
-                  <a href="/contact.html"${renderCurrentPage("contact", page)}>Contact</a>
-                </li>
-                <li>
-                  <a
-                    href="https://www.instagram.com/adovasiotech/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Instagram<span class="sr-only"> (opens in a new tab)</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-
-            <nav
-              class="mega-footer__group mega-footer__project-group"
-              aria-labelledby="footer-tools-title"
-              data-reveal
-            >
-              <h2 id="footer-tools-title">Tools &amp; Platforms</h2>
-              <ul
-                class="mega-footer__project-list"
-                data-projects-surface="footer-projects"
-                data-footer-project-group="tools"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <li class="mega-footer__loading">Loading tools…</li>
-              </ul>
-            </nav>
-
-            <nav
-              class="mega-footer__group mega-footer__project-group"
-              aria-labelledby="footer-ios-title"
-              data-reveal
-            >
-              <h2 id="footer-ios-title">iOS Apps</h2>
-              <ul
-                class="mega-footer__project-list"
-                data-projects-surface="footer-projects"
-                data-footer-project-group="ios"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <li class="mega-footer__loading">Loading apps…</li>
-              </ul>
-            </nav>
-
-            <nav
-              class="mega-footer__group mega-footer__project-group mega-footer__project-group--systems"
-              aria-labelledby="footer-systems-title"
-              data-reveal
-            >
-              <h2 id="footer-systems-title">Systems &amp; Infrastructure</h2>
-              <ul
-                class="mega-footer__project-list"
-                data-projects-surface="footer-projects"
-                data-footer-project-group="systems"
-                aria-live="polite"
-                aria-busy="true"
-              >
-                <li class="mega-footer__loading">Loading systems…</li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      `;
-
-      root.querySelectorAll("[data-reveal]").forEach(element => {
-        element.classList.add("is-visible");
-      });
-    });
-  }
-
-  function getCurrentPage() {
-    const page = cleanText(document.body?.dataset.page).toLowerCase();
-    if (page) {
-      return page;
-    }
-
-    const route = window.location.pathname.split("/").pop() || "home";
-    return route.replace(/\.html$/i, "") || "home";
-  }
-
-  function renderCurrentPage(target, current) {
-    return target === current ? ' aria-current="page"' : "";
-  }
-
   async function initProjectSurfaces() {
-    const roots = Array.from(document.querySelectorAll("[data-projects-surface]"));
+    const roots = Array.from(document.querySelectorAll("[data-projects-surface]"))
+      .filter(root => !root.closest("[data-shared-footer]"));
     if (!roots.length) {
       return;
     }
@@ -356,18 +204,6 @@
   function renderProjectSurface(root, projects, technologies) {
     const surface = root.dataset.projectsSurface;
 
-    if (surface === "footer-projects") {
-      renderFooterPortfolioGroup(root, projects, root.dataset.footerProjectGroup);
-      root.setAttribute("aria-busy", "false");
-      return;
-    }
-
-    if (surface === "footer-tools" || surface === "footer-client") {
-      renderFooterProjectSurface(root, projects, surface, root.dataset.projectLimit);
-      root.setAttribute("aria-busy", "false");
-      return;
-    }
-
     if (surface === "portfolio") {
       renderCategoryFilters(projects);
       renderProjectGrid(root, projects, technologies);
@@ -394,140 +230,6 @@
 
     setupImageFallbacks(root);
     revealInjectedContent(root);
-  }
-
-  function renderFooterPortfolioGroup(root, projects, rawGroup) {
-    const group = cleanText(rawGroup).toLowerCase();
-    const selected = projects
-      .filter(project => getFooterProjectGroup(project) === group)
-      .sort((a, b) => compareFooterGroupOrder(a, b, group));
-
-    if (!selected.length) {
-      renderFooterProjectFallback(root, "footer-projects");
-      return;
-    }
-
-    root.innerHTML = selected.map(renderFooterToolProject).join("");
-  }
-
-  function getFooterProjectGroup(project) {
-    const kind = project.kind.toLowerCase();
-
-    if (Number.isFinite(project.placements["footer-client"])) {
-      return "client";
-    }
-
-    if (kind === "app" || project.technologies.includes("ios")) {
-      return "ios";
-    }
-
-    if (project.categoryKey === "tools" || project.audience === "public") {
-      return "tools";
-    }
-
-    return "systems";
-  }
-
-  function compareFooterGroupOrder(a, b, group) {
-    const placement = `footer-${group}`;
-    const aPlacement = a.placements[placement];
-    const bPlacement = b.placements[placement];
-    const aHasPlacement = Number.isFinite(aPlacement);
-    const bHasPlacement = Number.isFinite(bPlacement);
-
-    if (aHasPlacement || bHasPlacement) {
-      if (!aHasPlacement) {
-        return 1;
-      }
-      if (!bHasPlacement) {
-        return -1;
-      }
-      if (aPlacement !== bPlacement) {
-        return aPlacement - bPlacement;
-      }
-    }
-
-    return compareProjectOrder(a, b);
-  }
-
-  function renderFooterProjectSurface(root, projects, surface, rawLimit) {
-    const requiredAudience = surface === "footer-client" ? "client" : "public";
-    const selected = selectPlacedProjects(
-      projects.filter(project => (
-        project.status.toLowerCase() === "live"
-        && project.audience === requiredAudience
-      )),
-      surface,
-      rawLimit
-    );
-
-    if (!selected.length) {
-      renderFooterProjectFallback(root, surface);
-      return;
-    }
-
-    root.innerHTML = surface === "footer-client"
-      ? renderFooterClientProject(selected[0])
-      : selected.map(renderFooterToolProject).join("");
-  }
-
-  function renderFooterToolProject(project) {
-    const destination = project.url || `/portfolio.html#project-${slugify(project.slug)}`;
-    const action = cleanText(project.action);
-
-    return `
-      <li${action ? ' class="mega-footer__project--action"' : ""}>
-        <a href="${escapeAttribute(destination)}" ${buildLinkAttributes(destination)}>
-          <span class="mega-footer__project-name">
-            <span>${escapeHtml(project.name)}</span>
-            ${action ? `<small>${escapeHtml(action)}</small>` : ""}
-          </span>
-          <svg aria-hidden="true" viewBox="0 0 20 20" focusable="false">
-            <path d="M5 15 15 5M7 5h8v8"></path>
-          </svg>
-          ${renderExternalNote(destination)}
-        </a>
-      </li>
-    `;
-  }
-
-  function renderFooterClientProject(project) {
-    const destination = project.url || "/contact.html";
-    const action = project.action || project.name;
-
-    return `
-      <a
-        class="mega-footer__client-login"
-        href="${escapeAttribute(destination)}"
-        ${buildLinkAttributes(destination)}
-      >
-        <svg class="mega-footer__client-login-icon" aria-hidden="true" viewBox="0 0 20 20">
-          <rect x="4.5" y="8.5" width="11" height="8" rx="2"></rect>
-          <path d="M7 8.5V6.8a3 3 0 0 1 6 0v1.7"></path>
-        </svg>
-        <span>${escapeHtml(action)}</span>
-        <span class="mega-footer__client-login-arrow" aria-hidden="true">&#8599;</span>
-        ${renderExternalNote(destination)}
-      </a>
-    `;
-  }
-
-  function renderFooterProjectFallback(root, surface) {
-    if (surface === "footer-client") {
-      root.innerHTML = `
-        <a class="mega-footer__client-login" href="/contact.html">
-          <span>Client Access</span>
-          <span class="mega-footer__client-login-arrow" aria-hidden="true">&#8599;</span>
-        </a>
-      `;
-      return;
-    }
-
-    root.innerHTML = `
-      <li>
-        <a class="mega-footer__fallback" href="/portfolio.html">Explore the portfolio</a>
-      </li>
-    `;
   }
 
   function selectPlacedProjects(projects, surface, rawLimit) {
@@ -1037,15 +739,6 @@
 
   function renderProjectError(root) {
     root.setAttribute("aria-busy", "false");
-
-    if (
-      root.dataset.projectsSurface === "footer-projects"
-      || root.dataset.projectsSurface === "footer-tools"
-      || root.dataset.projectsSurface === "footer-client"
-    ) {
-      renderFooterProjectFallback(root, root.dataset.projectsSurface);
-      return;
-    }
 
     root.innerHTML = `
       <article class="state-card project-state" role="alert">

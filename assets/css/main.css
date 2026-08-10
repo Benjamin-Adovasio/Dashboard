@@ -264,7 +264,6 @@ select {
 
 .hero-section,
 .section,
-.site-footer,
 .signal-strip {
   width: min(var(--max-width), calc(100% - 48px));
   margin: 0 auto;
@@ -1034,16 +1033,6 @@ select {
   border-color: #e0e0e0;
 }
 
-.site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 14px;
-  padding: 0 0 48px;
-  color: #666666;
-  font-size: 0.88rem;
-}
-
 @keyframes drift {
   0%,
   100% {
@@ -1130,7 +1119,6 @@ select {
 
   .hero-section,
   .section,
-  .site-footer,
   .signal-strip {
     width: min(var(--max-width), calc(100% - 24px));
   }
