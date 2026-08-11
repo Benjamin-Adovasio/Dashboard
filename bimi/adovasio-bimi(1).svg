@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps" viewBox="0 0 256 256">
+  <title>Adovasio Technology LLC</title>
+  <desc>Adovasio Technology LLC circuit A logo on a blue circular badge.</desc>
+
+  <rect x="0" y="0" width="256" height="256" fill="#FFFFFF"/>
+  <circle cx="128" cy="128" r="113" fill="#083B84"/>
+  <circle cx="128" cy="128" r="108" fill="#0B5ED7" stroke="#8BE3FF" stroke-width="2"/>
+  <circle cx="128" cy="128" r="104" fill="#064BA5" stroke="#FFFFFF" stroke-width="2"/>
+
+  <!-- Right side of the stylized A -->
+  <polygon points="137,54 151,75 178,137 158,145 124,70" fill="#F7FCFF"/>
+  <polygon points="157,166 182,166 202,214 177,214" fill="#E8F8FF"/>
+
+  <!-- Left circuit trace -->
+  <line x1="48" y1="184" x2="78" y2="102" stroke="#8BE3FF" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="48" cy="184" r="13" fill="#78D9FF"/>
+  <circle cx="78" cy="102" r="12" fill="#E7FAFF"/>
+
+  <!-- Main circuit trace forming the left side of A -->
+  <polyline points="67,207 104,111 128,48" fill="none" stroke="#EAF9FF" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="67" cy="207" r="13" fill="#EAF9FF"/>
+  <circle cx="104" cy="111" r="12" fill="#EAF9FF"/>
+  <circle cx="128" cy="48" r="13" fill="#F7FCFF"/>
+
+  <!-- Inner circuit trace -->
+  <line x1="109" y1="149" x2="134" y2="101" stroke="#EAF9FF" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="109" cy="149" r="12" fill="#DDF7FF"/>
+  <circle cx="134" cy="101" r="12" fill="#F3FCFF"/>
+
+  <!-- A crossbar circuit -->
+  <line x1="91" y1="149" x2="187" y2="149" stroke="#8BE3FF" stroke-width="11" stroke-linecap="round"/>
+  <circle cx="109" cy="149" r="13" fill="#C7F1FF"/>
+  <circle cx="187" cy="149" r="13" fill="#78D9FF"/>
+
+  <!-- Lower circuit bar -->
+  <line x1="97" y1="172" x2="170" y2="172" stroke="#EAF9FF" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="97" cy="172" r="13" fill="#EAF9FF"/>
+</svg>
