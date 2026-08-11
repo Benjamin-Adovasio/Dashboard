@@ -527,6 +527,19 @@ picture.media-fill img {
   transform-origin: left;
 }
 
+.site-nav .nav-projects {
+  color: var(--cyan);
+}
+
+.site-nav .nav-projects::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.site-nav .nav-projects[aria-current="page"] {
+  color: var(--paper);
+}
+
 .site-nav .nav-cta {
   min-height: 44px;
   padding: 0 18px;

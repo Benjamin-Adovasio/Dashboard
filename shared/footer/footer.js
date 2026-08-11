@@ -221,19 +221,26 @@
   function renderProjectLink(project) {
     const destination = project.url
       || `https://adovasio.com/portfolio.html#project-${encodeURIComponent(project.slug)}`;
-    const action = project.action
-      ? `<small>${escapeHtml(project.action)}</small>`
+    const actionLabel = project.action || (project.status !== "live" ? project.status : "");
+    const action = actionLabel
+      ? `<small>${escapeHtml(actionLabel)}</small>`
+      : "";
+    const externalAttributes = project.url
+      ? ' target="_blank" rel="noopener noreferrer"'
+      : "";
+    const externalNote = project.url
+      ? '<span class="sr-only"> (opens in a new tab)</span>'
       : "";
 
     return `
       <li${action ? ' class="mega-footer__project--action"' : ""}>
-        <a href="${escapeAttribute(destination)}" target="_blank" rel="noopener noreferrer">
+        <a href="${escapeAttribute(destination)}"${externalAttributes}>
           <span class="mega-footer__project-name">
             <span>${escapeHtml(project.name)}</span>
             ${action}
           </span>
           ${renderArrowIcon()}
-          <span class="sr-only"> (opens in a new tab)</span>
+          ${externalNote}
         </a>
       </li>
     `;

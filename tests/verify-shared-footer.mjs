@@ -58,8 +58,10 @@ const primaryMainPages = [
 primaryMainPages.forEach(page => {
   verifyConsumerPage(mainRoot, page);
   const source = read(mainRoot, page);
-  assert(source.includes('/assets/css/experience.css?v=14'), `${page} must cache-bust the refactored site CSS.`);
+  assert(source.includes('/assets/css/experience.css?v=15'), `${page} must cache-bust the refactored site CSS.`);
   assert(source.includes('/assets/js/projects.js?v=13'), `${page} must cache-bust the refactored project runtime.`);
+  assert(source.includes('class="nav-projects" href="/portfolio.html"'), `${page} must expose the emphasized Projects navigation link.`);
+  assert(!source.includes('>Portfolio</a>'), `${page} must use the Projects label in public navigation.`);
 });
 
 verifyConsumerPage(mainRoot, "time.html");
@@ -73,6 +75,27 @@ const footerScript = read(mainRoot, "shared/footer/footer.js");
 const apache = read(mainRoot, "apache/adovasio-shared-footer.conf");
 const projectPayload = JSON.parse(read(mainRoot, "assets/data/projects.json"));
 const technologyPayload = JSON.parse(read(mainRoot, "assets/data/technologies.json"));
+
+const inProgressHomeProjects = projectPayload.projects
+  .filter(project => finitePlacement(project, "home"))
+  .sort((a, b) => Number(a.placements.home) - Number(b.placements.home));
+assert(
+  JSON.stringify(inProgressHomeProjects.map(project => project.id))
+    === JSON.stringify(["sift", "billlens", "file-converter"]),
+  "The homepage must feature Sift, BillLens, and the Adovasio Tools File Converter in that order."
+);
+assert(
+  inProgressHomeProjects.every(project => String(project.status).toLowerCase() === "in progress"),
+  "Every homepage project must be marked in progress."
+);
+assert(
+  read(mainRoot, "index.html").includes("Projects in progress."),
+  "The homepage must introduce the in-progress project reel."
+);
+assert(
+  read(mainRoot, "portfolio.html").includes("<title>Projects | Adovasio Technology LLC</title>"),
+  "The project directory must use the Projects name."
+);
 
 assert(head.includes('href="/_adovasio-shared/footer/footer.css"'), "Canonical head must load canonical footer CSS.");
 assert(head.includes('src="/_adovasio-shared/footer/footer.js"'), "Canonical head must load canonical footer runtime.");
@@ -132,12 +155,23 @@ for (const group of ["tools", "ios", "systems"]) {
     /<a href="([^"]+)"[^>]*>\s*<span class="mega-footer__project-name">\s*<span>([^<]+)<\/span>/g
   )].map(([, url, name]) => ({ url, name }));
   const expectedLinks = expected.map(project => ({
-    url: escapeHtml(project.url),
+    url: escapeHtml(
+      project.url
+        || `https://adovasio.com/portfolio.html#project-${encodeURIComponent(project.slug)}`
+    ),
     name: escapeHtml(project.name)
   }));
   assert(
     JSON.stringify(staticLinks) === JSON.stringify(expectedLinks),
     `The ${group} static fallback must exactly match canonical project data without missing, reordered, or stale links.`
+  );
+}
+
+for (const project of inProgressHomeProjects) {
+  const destination = `https://adovasio.com/portfolio.html#project-${encodeURIComponent(project.slug)}`;
+  assert(
+    footer.includes(`href="${destination}"`) && footer.includes(`<span>${escapeHtml(project.name)}</span><small>in progress</small>`),
+    `The footer must expose ${project.name} as an in-progress project-directory link.`
   );
 }
 
@@ -250,9 +284,13 @@ assert(fetchCalls.map(call => call.url).includes("/_adovasio-shared/assets/data/
 assert(fetchCalls.map(call => call.url).includes("/_adovasio-shared/assets/data/technologies.json"), "Footer runtime fetched a noncanonical technology-data URL.");
 assert(fetchCalls.every(call => call.options?.cache === "no-store"), "Footer runtime must bypass stale footer-data cache entries.");
 assert(clientSurface.innerHTML.includes("https://sso.adovasio.com") && clientSurface.innerHTML.includes("Client Login"), "Footer runtime did not render canonical client access.");
-assert(toolSurface.innerHTML.includes("Adovasio Tools") && toolSurface.innerHTML.includes("Adovasio Time"), "Footer runtime did not render the canonical tools group.");
+assert(toolSurface.innerHTML.includes("Free Tools") && toolSurface.innerHTML.includes("Stratum 2 NTP Server"), "Footer runtime did not render the canonical tools group.");
 assert(iosSurface.innerHTML.includes("Georgie AI") && iosSurface.innerHTML.includes("Guardian Campus Safety"), "Footer runtime did not render the canonical iOS group.");
-assert(systemSurface.innerHTML.includes("Adovasio VPN") && systemSurface.innerHTML.includes("Adovasio Index"), "Footer runtime did not render the canonical systems group.");
+assert(iosSurface.innerHTML.includes("Sift") && iosSurface.innerHTML.includes("BillLens"), "Footer runtime omitted in-progress iOS projects.");
+assert(toolSurface.innerHTML.includes("File Converter"), "Footer runtime omitted the in-progress File Converter.");
+assert(iosSurface.innerHTML.includes("<small>in progress</small>") && toolSurface.innerHTML.includes("<small>in progress</small>"), "Footer runtime did not label in-progress projects.");
+assert(!iosSurface.innerHTML.match(/project-(?:sift|billlens)" target="_blank"/) && !toolSurface.innerHTML.match(/project-file-converter" target="_blank"/), "Footer runtime treated project-directory links as new-tab destinations.");
+assert(systemSurface.innerHTML.includes("Adovasio VPN") && systemSurface.innerHTML.includes("Index Portal"), "Footer runtime did not render the canonical systems group.");
 assert([clientSurface, toolSurface, iosSurface, systemSurface].every(surface => surface.attributes.get("aria-busy") === "false"), "Footer runtime did not clear busy state.");
 assert(currentYear.textContent === String(new Date().getFullYear()), "Footer runtime did not update the copyright year.");
 assert(revealClasses.has("is-visible"), "Footer runtime did not reveal canonical content.");

@@ -55,7 +55,7 @@
     {
       "id": "cloud",
       "slug": "cloud",
-      "name": "Adovasio Cloud",
+      "name": "Cloud Server",
       "domain": "cloud.adovasio.com",
       "url": "https://cloud.adovasio.com",
       "tagline": "Files and sync",
@@ -80,7 +80,7 @@
     {
       "id": "git",
       "slug": "git",
-      "name": "Adovasio Git",
+      "name": "Git Server",
       "domain": "git.adovasio.com",
       "url": "https://git.adovasio.com",
       "tagline": "Code and repository hosting",
@@ -154,7 +154,7 @@
     {
       "id": "time",
       "slug": "time",
-      "name": "Adovasio Time",
+      "name": "Stratum 2 NTP Server",
       "domain": "time.adovasio.com",
       "url": "https://time.adovasio.com",
       "tagline": "Hosted NTP time source",
@@ -180,17 +180,16 @@
     {
       "id": "bengpt",
       "slug": "bengpt",
-      "name": "Adovasio AI",
+      "name": "BenGPT",
       "domain": "ai.adovasio.com",
       "url": "https://ai.adovasio.com",
-      "tagline": "Self-hosted AI chatbot",
+      "tagline": "Self-hosted AI with OpenAI-compatible access",
       "description": "An AI chat experience powered by a self-hosted Open WebUI deployment.",
       "category": "Software",
       "kind": "platform",
       "audience": "public",
       "featured": true,
       "placements": {
-        "home": 3,
         "footer-tools": 4
       },
       "status": "live",
@@ -218,11 +217,9 @@
       "kind": "app",
       "audience": "public",
       "featured": true,
-      "placements": {
-        "home": 1
-      },
+      "placements": {},
       "status": "live",
-      "order": 9,
+      "order": 12,
       "logo": "/assets/images/projects/georgie-ai/app-icon.svg?v=2",
       "logoShape": "mark",
       "visual": {
@@ -245,11 +242,9 @@
       "kind": "app",
       "audience": "public",
       "featured": true,
-      "placements": {
-        "home": 2
-      },
+      "placements": {},
       "status": "live",
-      "order": 10,
+      "order": 13,
       "logo": "/assets/images/projects/guardian-campus-safety/app-icon.svg?v=2",
       "logoShape": "mark",
       "visual": {
@@ -261,13 +256,69 @@
       ]
     },
     {
+      "id": "sift",
+      "slug": "sift",
+      "name": "Sift",
+      "tagline": "An AI companion for better notes",
+      "description": "An iOS note-taking companion that uses AI to capture, organize, and revisit ideas.",
+      "category": "Software",
+      "kind": "app",
+      "audience": "public",
+      "featured": true,
+      "placements": {
+        "home": 1
+      },
+      "status": "in progress",
+      "order": 9,
+      "visual": {
+        "image": null,
+        "type": "document"
+      },
+      "aliases": [
+        "Sift App",
+        "AI note taking",
+        "notes"
+      ],
+      "technologies": [
+        "ios"
+      ]
+    },
+    {
+      "id": "billlens",
+      "slug": "billlens",
+      "name": "BillLens",
+      "tagline": "Count cash with your iPhone camera",
+      "description": "An iOS app that uses AI vision to count bills through the phone's camera.",
+      "category": "Software",
+      "kind": "app",
+      "audience": "public",
+      "featured": true,
+      "placements": {
+        "home": 2
+      },
+      "status": "in progress",
+      "order": 10,
+      "visual": {
+        "image": null,
+        "type": "media"
+      },
+      "aliases": [
+        "BillLens App",
+        "AI money counter",
+        "cash counter"
+      ],
+      "technologies": [
+        "ios"
+      ]
+    },
+    {
       "id": "tools",
       "slug": "tools",
-      "name": "Adovasio Tools",
+      "name": "Free Tools",
       "domain": "tools.adovasio.com",
       "url": "https://tools.adovasio.com",
       "tagline": "Adovasio-hosted utility hub",
-      "description": "A central portal for network and server diagnostics, file conversion, PDF workflows, and other practical utilities.",
+      "description": "A central portal for network and server diagnostics, PDF workflows, and other practical utilities.",
       "category": "Tools",
       "kind": "platform",
       "audience": "public",
@@ -276,7 +327,7 @@
         "footer-tools": 1
       },
       "status": "live",
-      "order": 11,
+      "order": 14,
       "visual": {
         "image": "/assets/images/projects/tools/hero.svg",
         "type": "tools"
@@ -289,19 +340,18 @@
       "id": "file-converter",
       "slug": "file-converter",
       "name": "File Converter",
-      "domain": "convert.adovasio.com",
-      "url": "https://convert.adovasio.com",
-      "tagline": "Private file conversion, on demand",
-      "description": "An Adovasio-hosted utility for converting common document, image, media, and archive formats.",
+      "tagline": "File conversion coming to Free Tools",
+      "description": "A browser-based tool in development for converting common documents, images, media, and archives within tools.adovasio.com.",
       "category": "Tools",
-      "kind": "hosted application",
+      "kind": "feature",
       "audience": "public",
-      "featured": false,
+      "featured": true,
       "placements": {
+        "home": 3,
         "footer-tools": 2
       },
-      "status": "live",
-      "order": 12,
+      "status": "in progress",
+      "order": 11,
       "visual": {
         "image": null,
         "type": "files"
@@ -324,7 +374,7 @@
         "footer-tools": 3
       },
       "status": "live",
-      "order": 13,
+      "order": 15,
       "visual": {
         "image": null,
         "type": "document"
@@ -334,7 +384,7 @@
     {
       "id": "mailing",
       "slug": "mailing",
-      "name": "Adovasio Mailing",
+      "name": "Adovasio Hosted Email",
       "domain": "mailing.adovasio.com",
       "url": "https://mailing.adovasio.com",
       "tagline": "Mail domain administration",
@@ -345,7 +395,7 @@
       "featured": false,
       "placements": {},
       "status": "live",
-      "order": 14,
+      "order": 16,
       "visual": {
         "image": "/assets/images/projects/mailing/hero.svg",
         "type": "mail"
@@ -358,7 +408,7 @@
     {
       "id": "index",
       "slug": "index",
-      "name": "Adovasio Index",
+      "name": "Index Portal",
       "domain": "index.adovasio.com",
       "url": "https://index.adovasio.com",
       "tagline": "Secure sign-in gateway",
@@ -369,7 +419,7 @@
       "featured": false,
       "placements": {},
       "status": "live",
-      "order": 15,
+      "order": 17,
       "visual": {
         "image": "/assets/images/projects/index/hero.svg",
         "type": "security"
