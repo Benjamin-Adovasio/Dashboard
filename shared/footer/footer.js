@@ -116,7 +116,9 @@
         .sort((a, b) => compareGroupOrder(a, b, group));
 
       if (selected.length) {
-        surface.innerHTML = selected.map(renderProjectLink).join("");
+        surface.innerHTML = group === "tools"
+          ? renderToolSections(selected)
+          : selected.map(renderProjectLink).join("");
       }
     });
   }
@@ -150,6 +152,8 @@
         action: cleanText(value.action),
         audience: PROJECT_AUDIENCES.has(rawAudience) ? rawAudience : "internal",
         categoryKey: slugify(cleanText(value.category) || "Other"),
+        footerDetail: cleanText(value.footerDetail),
+        footerLabel: cleanText(value.footerLabel),
         kind: (cleanText(value.kind) || "Project").toLowerCase(),
         order: toFiniteNumber(value.order, index + 1),
         placements: normalizePlacements(value.placements),
@@ -218,12 +222,46 @@
       || a.name.localeCompare(b.name);
   }
 
+  function renderToolSections(projects) {
+    const sections = [
+      {
+        title: "Free Tools",
+        description: "Dedicated apps plus utilities built into tools.adovasio.com.",
+        projects: projects.filter(project => project.categoryKey === "tools")
+      },
+      {
+        title: "Other Platforms",
+        description: "",
+        projects: projects.filter(project => project.categoryKey !== "tools")
+      }
+    ];
+
+    return sections
+      .filter(section => section.projects.length)
+      .map(section => `
+        <li class="mega-footer__project-section">
+          <div class="mega-footer__project-section-heading">
+            <h3>${escapeHtml(section.title)}</h3>
+            ${section.description ? `<p>${escapeHtml(section.description)}</p>` : ""}
+          </div>
+          <ul class="mega-footer__project-sublist">
+            ${section.projects.map(renderProjectLink).join("")}
+          </ul>
+        </li>
+      `)
+      .join("");
+  }
+
   function renderProjectLink(project) {
     const destination = project.url
       || `https://adovasio.com/portfolio.html#project-${encodeURIComponent(project.slug)}`;
+    const label = project.footerLabel || project.name;
     const actionLabel = project.action || (project.status !== "live" ? project.status : "");
     const action = actionLabel
       ? `<small>${escapeHtml(actionLabel)}</small>`
+      : "";
+    const detail = project.footerDetail
+      ? `<span class="mega-footer__project-detail">${escapeHtml(project.footerDetail)}</span>`
       : "";
     const externalAttributes = project.url
       ? ' target="_blank" rel="noopener noreferrer"'
@@ -236,7 +274,8 @@
       <li${action ? ' class="mega-footer__project--action"' : ""}>
         <a href="${escapeAttribute(destination)}"${externalAttributes}>
           <span class="mega-footer__project-name">
-            <span>${escapeHtml(project.name)}</span>
+            <span>${escapeHtml(label)}</span>
+            ${detail}
             ${action}
           </span>
           ${renderArrowIcon()}

@@ -317,8 +317,8 @@
       "name": "Free Tools",
       "domain": "tools.adovasio.com",
       "url": "https://tools.adovasio.com",
-      "tagline": "Adovasio-hosted utility hub",
-      "description": "A central portal for network and server diagnostics, PDF workflows, and other practical utilities.",
+      "tagline": "Free utilities for files, PDFs, networks, and servers",
+      "description": "A central portal with built-in network and server diagnostics plus dedicated File Converter and PDF Tools workspaces.",
       "category": "Tools",
       "kind": "platform",
       "audience": "public",
@@ -326,6 +326,8 @@
       "placements": {
         "footer-tools": 1
       },
+      "footerLabel": "Network & Server Tools",
+      "footerDetail": "tools.adovasio.com",
       "status": "live",
       "order": 14,
       "visual": {
@@ -340,17 +342,20 @@
       "id": "file-converter",
       "slug": "file-converter",
       "name": "File Converter",
-      "tagline": "File conversion coming to Free Tools",
-      "description": "A browser-based tool in development for converting common documents, images, media, and archives within tools.adovasio.com.",
+      "domain": "convert.adovasio.com",
+      "url": "https://convert.adovasio.com",
+      "tagline": "Convert common files in one focused workspace",
+      "description": "An Adovasio-hosted tool for converting common documents, images, media, archives, and other file formats.",
       "category": "Tools",
-      "kind": "feature",
+      "kind": "hosted application",
       "audience": "public",
       "featured": true,
       "placements": {
         "home": 3,
         "footer-tools": 2
       },
-      "status": "in progress",
+      "footerDetail": "convert.adovasio.com",
+      "status": "live",
       "order": 11,
       "visual": {
         "image": null,
@@ -373,6 +378,7 @@
       "placements": {
         "footer-tools": 3
       },
+      "footerDetail": "pdf.adovasio.com",
       "status": "live",
       "order": 15,
       "visual": {

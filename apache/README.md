@@ -2,7 +2,7 @@
 
 The files in `../shared/footer/` are the single source of truth for the
 Adovasio footer. Apache exposes them through the same internal URL namespace on
-all five vhosts and expands the two SSI directives embedded in each HTML page.
+all six vhosts and expands the two SSI directives embedded in each HTML page.
 
 This is a one-time server setup. Footer HTML, CSS, JavaScript, project data, and
 image changes under the `Main-Site` checkout are read directly on the next
@@ -10,7 +10,7 @@ request and do not require changes or deployments in the consumer repositories.
 
 ## Install
 
-1. Edit the five `Define` paths at the top of
+1. Edit the six `Define` paths at the top of
    `adovasio-shared-footer.conf` so they point to the live Git checkouts.
 2. Enable the required Apache modules:
 
@@ -41,11 +41,12 @@ curl -fsS https://index.adovasio.com/ | grep -F 'data-shared-footer'
 curl -fsS https://soc.adovasio.com/ | grep -F 'data-shared-footer'
 curl -fsS https://time.adovasio.com/ | grep -F 'data-shared-footer'
 curl -fsS https://tools.adovasio.com/ | grep -F 'data-shared-footer'
+curl -fsS https://connect.adovasio.com/ | grep -F 'data-shared-footer'
 ```
 
 The browser response must contain the expanded `<footer>` and must not contain
 the literal `<!--#include ... -->` directive. A request to
-`/_adovasio-shared/footer/footer.css` on any of the five hosts should return the
+`/_adovasio-shared/footer/footer.css` on any of the six hosts should return the
 same canonical file.
 
 ## Security and caching

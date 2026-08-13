@@ -76,21 +76,32 @@ const apache = read(mainRoot, "apache/adovasio-shared-footer.conf");
 const projectPayload = JSON.parse(read(mainRoot, "assets/data/projects.json"));
 const technologyPayload = JSON.parse(read(mainRoot, "assets/data/technologies.json"));
 
-const inProgressHomeProjects = projectPayload.projects
+const homeProjects = projectPayload.projects
   .filter(project => finitePlacement(project, "home"))
   .sort((a, b) => Number(a.placements.home) - Number(b.placements.home));
 assert(
-  JSON.stringify(inProgressHomeProjects.map(project => project.id))
+  JSON.stringify(homeProjects.map(project => project.id))
     === JSON.stringify(["sift", "billlens", "file-converter"]),
-  "The homepage must feature Sift, BillLens, and the Adovasio Tools File Converter in that order."
+  "The homepage must feature Sift, BillLens, and File Converter in that order."
+);
+const inProgressHomeProjects = homeProjects.filter(
+  project => String(project.status).toLowerCase() === "in progress"
 );
 assert(
-  inProgressHomeProjects.every(project => String(project.status).toLowerCase() === "in progress"),
-  "Every homepage project must be marked in progress."
+  JSON.stringify(inProgressHomeProjects.map(project => project.id)) === JSON.stringify(["sift", "billlens"]),
+  "Only Sift and BillLens should remain in progress on the homepage."
+);
+const fileConverter = homeProjects.find(project => project.id === "file-converter");
+assert(
+  fileConverter?.status === "live"
+    && fileConverter.domain === "convert.adovasio.com"
+    && fileConverter.url === "https://convert.adovasio.com",
+  "File Converter must be live at convert.adovasio.com."
 );
 assert(
-  read(mainRoot, "index.html").includes("Projects in progress."),
-  "The homepage must introduce the in-progress project reel."
+  read(mainRoot, "index.html").includes("Featured work")
+    && read(mainRoot, "index.html").includes("Current projects."),
+  "The homepage must use a status-neutral heading for its mixed project reel."
 );
 assert(
   read(mainRoot, "portfolio.html").includes("<title>Projects | Adovasio Technology LLC</title>"),
@@ -149,9 +160,11 @@ for (const group of ["tools", "ios", "systems"]) {
   const expected = projectPayload.projects
     .filter(project => groupFor(project) === group)
     .sort((a, b) => compareGroup(a, b, group));
-  const groupMatch = footer.match(new RegExp(`data-footer-project-group="${group}"[\\s\\S]*?</ul>`));
-  assert(groupMatch, `Canonical footer is missing the ${group} project group.`);
-  const staticLinks = [...groupMatch[0].matchAll(
+  const groupStart = footer.indexOf(`data-footer-project-group="${group}"`);
+  const groupEnd = footer.indexOf("</nav>", groupStart);
+  assert(groupStart >= 0 && groupEnd > groupStart, `Canonical footer is missing the ${group} project group.`);
+  const groupMarkup = footer.slice(groupStart, groupEnd);
+  const staticLinks = [...groupMarkup.matchAll(
     /<a href="([^"]+)"[^>]*>\s*<span class="mega-footer__project-name">\s*<span>([^<]+)<\/span>/g
   )].map(([, url, name]) => ({ url, name }));
   const expectedLinks = expected.map(project => ({
@@ -159,11 +172,24 @@ for (const group of ["tools", "ios", "systems"]) {
       project.url
         || `https://adovasio.com/portfolio.html#project-${encodeURIComponent(project.slug)}`
     ),
-    name: escapeHtml(project.name)
+    name: escapeHtml(project.footerLabel || project.name)
   }));
   assert(
     JSON.stringify(staticLinks) === JSON.stringify(expectedLinks),
     `The ${group} static fallback must exactly match canonical project data without missing, reordered, or stale links.`
+  );
+}
+
+assert(
+  footer.includes("<h3>Free Tools</h3>")
+    && footer.includes("Dedicated apps plus utilities built into tools.adovasio.com.")
+    && footer.includes("<h3>Other Platforms</h3>"),
+  "The footer must distinguish the Free Tools family from other platforms."
+);
+for (const domain of ["tools.adovasio.com", "convert.adovasio.com", "pdf.adovasio.com"]) {
+  assert(
+    footer.includes(`<span class="mega-footer__project-detail">${domain}</span>`),
+    `The Free Tools footer group must identify ${domain}.`
   );
 }
 
@@ -285,10 +311,13 @@ assert(fetchCalls.map(call => call.url).includes("/_adovasio-shared/assets/data/
 assert(fetchCalls.every(call => call.options?.cache === "no-store"), "Footer runtime must bypass stale footer-data cache entries.");
 assert(clientSurface.innerHTML.includes("https://sso.adovasio.com") && clientSurface.innerHTML.includes("Client Login"), "Footer runtime did not render canonical client access.");
 assert(toolSurface.innerHTML.includes("Free Tools") && toolSurface.innerHTML.includes("Stratum 2 NTP Server"), "Footer runtime did not render the canonical tools group.");
+assert(toolSurface.innerHTML.includes("Network &amp; Server Tools") && toolSurface.innerHTML.includes("Dedicated apps plus utilities built into tools.adovasio.com."), "Footer runtime did not explain the built-in Free Tools utilities.");
+assert(toolSurface.innerHTML.includes("https://convert.adovasio.com/") && toolSurface.innerHTML.includes("convert.adovasio.com"), "Footer runtime did not link the live File Converter.");
+assert(toolSurface.innerHTML.includes("https://pdf.adovasio.com/") && toolSurface.innerHTML.includes("pdf.adovasio.com"), "Footer runtime did not group PDF Tools under Free Tools.");
 assert(iosSurface.innerHTML.includes("Georgie AI") && iosSurface.innerHTML.includes("Guardian Campus Safety"), "Footer runtime did not render the canonical iOS group.");
 assert(iosSurface.innerHTML.includes("Sift") && iosSurface.innerHTML.includes("BillLens"), "Footer runtime omitted in-progress iOS projects.");
-assert(toolSurface.innerHTML.includes("File Converter"), "Footer runtime omitted the in-progress File Converter.");
-assert(iosSurface.innerHTML.includes("<small>in progress</small>") && toolSurface.innerHTML.includes("<small>in progress</small>"), "Footer runtime did not label in-progress projects.");
+assert(toolSurface.innerHTML.includes("File Converter"), "Footer runtime omitted the live File Converter.");
+assert(iosSurface.innerHTML.includes("<small>in progress</small>") && !toolSurface.innerHTML.includes("<small>in progress</small>"), "Footer runtime must limit in-progress labels to unfinished projects.");
 assert(!iosSurface.innerHTML.match(/project-(?:sift|billlens)" target="_blank"/) && !toolSurface.innerHTML.match(/project-file-converter" target="_blank"/), "Footer runtime treated project-directory links as new-tab destinations.");
 assert(systemSurface.innerHTML.includes("Adovasio VPN") && systemSurface.innerHTML.includes("Index Portal"), "Footer runtime did not render the canonical systems group.");
 assert([clientSurface, toolSurface, iosSurface, systemSurface].every(surface => surface.attributes.get("aria-busy") === "false"), "Footer runtime did not clear busy state.");
@@ -303,6 +332,7 @@ for (const token of [
   "ADOVASIO_SOC_ROOT",
   "ADOVASIO_TIME_ROOT",
   "ADOVASIO_TOOLS_ROOT",
+  "ADOVASIO_CONNECT_ROOT",
   'Alias "/_adovasio-shared/footer/"',
   'Alias "/_adovasio-shared/assets/"',
   "Options +IncludesNOEXEC",
@@ -325,7 +355,8 @@ const siblingContracts = [
   { directory: "Index", pages: ["index.html"] },
   { directory: "SOC-Dashboard", pages: ["index.html"] },
   { directory: "time-server", pages: ["index.html"] },
-  { directory: "webtools", pages: ["index.html", "ip.html", "dns.html", "ping.html", "http.html", "port.html"] }
+  { directory: "webtools", pages: ["index.html", "ip.html", "dns.html", "ping.html", "http.html", "port.html"] },
+  { directory: "VPN-Portal-Website", pages: ["public/index.html", "public/setup/index.html", "public/help/index.html"] }
 ];
 
 const siblingsPresent = siblingContracts.every(contract => fs.existsSync(path.join(workspaceRoot, contract.directory)));
@@ -352,4 +383,4 @@ if (siblingsPresent) {
   });
 }
 
-console.log(`Verified the canonical footer, ${mainPages.length} Main-Site pages${siblingsPresent ? ", and all 9 consumer pages" : ""}.`);
+console.log(`Verified the canonical footer, ${mainPages.length} Main-Site pages${siblingsPresent ? ", and all 12 consumer pages" : ""}.`);
